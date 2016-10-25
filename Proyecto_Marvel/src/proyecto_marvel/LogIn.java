@@ -39,7 +39,7 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel2.setText("PASSWORD");
 
-        jButton1.setText("ACEPTAR");
+        jButton1.setText("INGRESAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
