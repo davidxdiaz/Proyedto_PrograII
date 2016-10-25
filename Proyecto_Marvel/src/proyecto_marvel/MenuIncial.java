@@ -27,23 +27,23 @@ public class MenuIncial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        logIn = new javax.swing.JButton();
+        crearPlayer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("LOG IN");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logIn.setText("LOG IN");
+        logIn.setToolTipText("");
+        logIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                logInActionPerformed(evt);
             }
         });
 
-        jButton2.setText("CREAR PLAYER");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        crearPlayer.setText("CREAR PLAYER");
+        crearPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                crearPlayerActionPerformed(evt);
             }
         });
 
@@ -55,32 +55,32 @@ public class MenuIncial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(jButton2))
+                        .addComponent(crearPlayer))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(120, 120, 120)
-                        .addComponent(jButton1)))
+                        .addComponent(logIn)))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jButton1)
+                .addComponent(logIn)
                 .addGap(29, 29, 29)
-                .addComponent(jButton2)
+                .addComponent(crearPlayer)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInActionPerformed
         new LogIn().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_logInActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void crearPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearPlayerActionPerformed
+        new SignUp().setVisible(true);
+    }//GEN-LAST:event_crearPlayerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,7 +118,7 @@ public class MenuIncial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton crearPlayer;
+    private javax.swing.JButton logIn;
     // End of variables declaration//GEN-END:variables
 }
