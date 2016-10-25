@@ -32,6 +32,8 @@ public class Player {
     }
     
     //Funciones
+    
+    //Funcion que agrega jugadores
     public static void add(String user, String pass, int pts,int cB,int cM)
    {
       if (pass.equals(""))
@@ -41,4 +43,32 @@ public class Player {
       numUsuarios++;
       player[numUsuarios] = new Player(user, pass, pts,cB,cM);
    }
+    
+    //Funcion que verifica si el usuario existe
+    public static Player existe(String user)
+   {
+      Player p = null;
+      boolean exist = false;
+
+      for (Player player : player)
+      {
+         if (player != null)
+         {
+            if (user.equals(player.getUsername()))
+            {
+               p = player;
+               break;
+            }
+         }
+      }
+      return p;
+   }
+    //Funcion que valida el password
+    public static Player validarPass(String pass){
+        
+    }
+    
+    public String getUsername(){
+        return username;
+    }
 }
