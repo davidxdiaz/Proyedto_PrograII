@@ -103,25 +103,28 @@ public class SignUp extends javax.swing.JFrame {
         Player logIn = Player.existe(txtUsername.getText());
         if(logIn==null)//Usuario no existe
         {
-            if(validarPass(txtPass.getText(),0)==5){
+            System.out.println("Usuario disponible");
+            if(txtPass.getText().length()==5){
+                System.out.println("Password Valida");
                 Player newPlayer = new Player(txtUsername.getText(),txtPass.getText(), 0,0,0);
                 Player.add(newPlayer.getUsername(), newPlayer.getPassword(), newPlayer.getPts(),newPlayer.getCBuenos(),newPlayer.getCMalos());
                
                 
-                System.out.println("LOGGED PLAYER: " + newPlayer);
+                System.out.println("LOGGED PLAYER: " + newPlayer.getUsername());
+                new MenuPrincipal().setVisible(true);
                 
             }
+            else{
+                System.out.println("Password no Valido");
+            }
+             
                 
         }
+        else{
+            System.out.println("Usuario no disponible");
+        }
     }//GEN-LAST:event_btnOkActionPerformed
-    //Funcion recursiva que recorre el password
-    private int validarPass(String pass,int cont){
-        if(cont<6){
-            pass.substring(cont, 1);
-            return validarPass(pass,cont+1);
-        }    
-        return cont;
-    }
+    
     /**
      * @param args the command line arguments
      */
