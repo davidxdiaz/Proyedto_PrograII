@@ -65,7 +65,7 @@ public class Player {
       loggedPlayer = player;
    }
     //Funcion que verifica que losd atos del usuario esten correctos
-    public static Player verify(String user, String pass)
+    public static Player verificar(String user, String pass)
    {
       Player p = null;
       boolean exists = false;

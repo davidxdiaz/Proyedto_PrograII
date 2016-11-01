@@ -113,6 +113,7 @@ public class SignUp extends javax.swing.JFrame {
                 System.out.println("LOGGED PLAYER: " + newPlayer.getUsername());
                 dispose();
                 new MenuPrincipal().setVisible(true);
+                dispose();
                 
             }
             else{
