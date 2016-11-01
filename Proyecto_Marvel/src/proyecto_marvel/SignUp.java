@@ -47,7 +47,7 @@ public class SignUp extends javax.swing.JFrame {
             .addGap(0, 8, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Username");
 
@@ -109,8 +109,9 @@ public class SignUp extends javax.swing.JFrame {
                 Player newPlayer = new Player(txtUsername.getText(),txtPass.getText(), 0,0,0);
                 Player.add(newPlayer.getUsername(), newPlayer.getPassword(), newPlayer.getPts(),newPlayer.getCBuenos(),newPlayer.getCMalos());
                
-                
+                Player.setLoggedPlayer(newPlayer);
                 System.out.println("LOGGED PLAYER: " + newPlayer.getUsername());
+                dispose();
                 new MenuPrincipal().setVisible(true);
                 
             }

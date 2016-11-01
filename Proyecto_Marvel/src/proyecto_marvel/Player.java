@@ -21,6 +21,7 @@ public class Player {
     private static Player player[]= new Player[10];
     private static int numUsuarios = -1;
     private static int maxUsuarios = 10;
+    private static Player loggedPlayer;
     
     //Constructor
     public Player(String username,String password,int puntos,int contBuenos,int contMalos){
@@ -56,6 +57,12 @@ public class Player {
          }
       }
       return p;
+   }
+    public static Player getLoggedPlayer(){
+      return loggedPlayer;
+   }
+    public static void setLoggedPlayer(Player player){
+      loggedPlayer = player;
    }
     //Funcion que verifica que losd atos del usuario esten correctos
     public static Player verify(String user, String pass)

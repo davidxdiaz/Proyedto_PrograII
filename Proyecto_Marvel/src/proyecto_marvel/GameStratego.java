@@ -34,7 +34,7 @@ public class GameStratego extends javax.swing.JFrame {
         btnpalyer1.setSize(200, 50);
         btnpalyer1.setText("Player1");
         btnpalyer1.setForeground(Color.BLUE);
-        btnpalyer1.setFont(Font.getFont(Tahoma));
+        
         
         
         this.add(btnpalyer1, BorderLayout.BEFORE_FIRST_LINE);

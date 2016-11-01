@@ -75,10 +75,12 @@ public class MenuIncial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInActionPerformed
+        dispose();
         new LogIn().setVisible(true);
     }//GEN-LAST:event_logInActionPerformed
 
     private void crearPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearPlayerActionPerformed
+        dispose();
         new SignUp().setVisible(true);
     }//GEN-LAST:event_crearPlayerActionPerformed
 
