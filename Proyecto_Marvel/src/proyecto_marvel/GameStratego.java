@@ -7,8 +7,10 @@ package proyecto_marvel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -26,6 +28,21 @@ public class GameStratego extends javax.swing.JFrame {
         this.add(panelTablero,BorderLayout.CENTER);
         this.setResizable(false);
         tablero();
+        
+        JButton btnpalyer1=new JButton();
+        btnpalyer1.setVisible(true);
+        btnpalyer1.setSize(200, 50);
+        btnpalyer1.setText("Player1");
+        btnpalyer1.setForeground(Color.BLUE);
+        btnpalyer1.setFont(Font.getFont(Tahoma));
+        
+        
+        this.add(btnpalyer1, BorderLayout.BEFORE_FIRST_LINE);
+        
+        
+      
+               
+              
         
         
     }
