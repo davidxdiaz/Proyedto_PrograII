@@ -46,16 +46,6 @@ public class GameStratego extends javax.swing.JFrame {
         this.setResizable(false);
         tablero();
         
-        
-        
-        this.add(btnpalyer1, BorderLayout.BEFORE_FIRST_LINE);
-        
-        
-      
-               
-              
-        
-        
     }
     
     
