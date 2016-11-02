@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -17,12 +18,28 @@ import javax.swing.JPanel;
  * @author ANDY ESCOBAR 007
  */
 public class GameStratego extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form GameStratego
      */
     public GameStratego() {
+        /* 
+        this.setUndecorated(true); Remueve la barra "Hace que no podas cerrar la
+                                   ventana con la x o que la podas mover.
+        
+        */
+        this.setAlwaysOnTop(true);
+        this.setVisible(true);
         initComponents();
+        //Full Screen
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        
+        int xSize = (int) tk.getScreenSize().getWidth();
+        int ySize = (int) tk.getScreenSize().getHeight();
+        
+        this.setSize(xSize,ySize);
+        //Cierre de full Screen
+        
         this.setLocationRelativeTo(null);
         panelTablero.setSize(500, 700);
         this.add(panelTablero,BorderLayout.CENTER);
@@ -136,6 +153,7 @@ public class GameStratego extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
