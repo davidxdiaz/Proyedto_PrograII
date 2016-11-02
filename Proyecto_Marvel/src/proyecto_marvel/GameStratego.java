@@ -46,12 +46,6 @@ public class GameStratego extends javax.swing.JFrame {
         this.setResizable(false);
         tablero();
         
-        JButton btnpalyer1=new JButton();
-        btnpalyer1.setVisible(true);
-        btnpalyer1.setSize(200, 50);
-        btnpalyer1.setText("Player1");
-        btnpalyer1.setForeground(Color.BLUE);
-        
         
         
         this.add(btnpalyer1, BorderLayout.BEFORE_FIRST_LINE);
