@@ -95,7 +95,7 @@ public class LogIn extends javax.swing.JFrame {
                 passw += c;
             }
 
-            Player login = Player.verify(txtName.getText(), passw);
+            Player login = Player.verificar(txtName.getText(), passw);
             if (login != null)
             {
                 Player.setLoggedPlayer(login);

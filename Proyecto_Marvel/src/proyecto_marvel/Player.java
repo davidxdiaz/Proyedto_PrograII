@@ -17,7 +17,7 @@ public class Player {
     private int contBuenos=0;
     private int contMalos=0;
     
-    //Variable Global
+    //Variables Global
     private static Player player[]= new Player[10];
     private static int numUsuarios = -1;
     private static int maxUsuarios = 10;

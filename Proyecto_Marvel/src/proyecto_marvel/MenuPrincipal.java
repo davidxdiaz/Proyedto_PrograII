@@ -27,22 +27,42 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnStratego = new javax.swing.JButton();
+        btnConfig = new javax.swing.JButton();
+        btnPerfil = new javax.swing.JButton();
+        btnUniverso = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(100, 100));
 
-        jButton1.setText("STRATEGO – MARVEL HEROES!");
+        btnStratego.setText("STRATEGO – MARVEL HEROES!");
+        btnStratego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStrategoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("CONFIGURACION");
+        btnConfig.setText("CONFIGURACION");
+        btnConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("MI PERFIL");
+        btnPerfil.setText("MI PERFIL");
+        btnPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerfilActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("UNIVERSO MARVEL");
+        btnUniverso.setText("UNIVERSO MARVEL");
+        btnUniverso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUniversoActionPerformed(evt);
+            }
+        });
 
         btnCerrar.setText("CERRAR SESION");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -59,15 +79,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
-                        .addComponent(jButton3))
+                        .addComponent(btnPerfil))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(84, 84, 84)
-                        .addComponent(jButton1))
+                        .addComponent(btnStratego))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4))))
+                            .addComponent(btnConfig)
+                            .addComponent(btnUniverso))))
                 .addContainerGap(92, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -78,13 +98,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jButton1)
+                .addComponent(btnStratego)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnConfig)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnPerfil)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnUniverso)
                 .addGap(18, 18, 18)
                 .addComponent(btnCerrar)
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -98,6 +118,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         dispose();
         new MenuIncial().setVisible(true);
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
+        new Configuracion().setVisible(true);
+    }//GEN-LAST:event_btnConfigActionPerformed
+
+    private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
+        new MiPerfil().setVisible(true);
+    }//GEN-LAST:event_btnPerfilActionPerformed
+
+    private void btnUniversoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUniversoActionPerformed
+        new UniversoMarvel().setVisible(true);
+    }//GEN-LAST:event_btnUniversoActionPerformed
+
+    private void btnStrategoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStrategoActionPerformed
+        new GameStratego().setVisible(true);
+    }//GEN-LAST:event_btnStrategoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,9 +172,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnConfig;
+    private javax.swing.JButton btnPerfil;
+    private javax.swing.JButton btnStratego;
+    private javax.swing.JButton btnUniverso;
     // End of variables declaration//GEN-END:variables
 }
