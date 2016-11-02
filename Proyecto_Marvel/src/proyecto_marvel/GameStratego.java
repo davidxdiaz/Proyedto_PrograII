@@ -9,7 +9,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -18,6 +21,7 @@ import javax.swing.JPanel;
  * @author ANDY ESCOBAR 007
  */
 public class GameStratego extends javax.swing.JFrame {
+    JButton square[][]=new JButton[10][10];
     
     /**
      * Creates new form GameStratego
@@ -31,6 +35,9 @@ public class GameStratego extends javax.swing.JFrame {
         this.setAlwaysOnTop(true);
         this.setVisible(true);
         initComponents();
+        
+        JButton square[][]=new JButton[10][10];
+        
         //Full Screen
         Toolkit tk = Toolkit.getDefaultToolkit();
         
@@ -45,6 +52,7 @@ public class GameStratego extends javax.swing.JFrame {
         this.add(panelTablero,BorderLayout.CENTER);
         this.setResizable(false);
         tablero();
+        OcultarVillanos();
         
     }
     
@@ -54,20 +62,43 @@ public class GameStratego extends javax.swing.JFrame {
     
     private void tablero(){
         
-        JButton square[][]=new JButton[10][10];
+        
         panelTablero.setLayout(new GridLayout(10,10));
         for (int x=0;x<square.length;x++ ){
             for (int y=0;y<square[x].length;y++){
                 JButton btn=new JButton();
                 btn.setName(x+"");
+                
                 btn.setText(x+" , "+y);
+               
                 square[x][y]=btn;
+                
                 panelTablero.add(square[x][y]);
             }
+            
         }
-    }  
+        OcultarVillanos();// Probando  
+    }
+    
+    
+    //Agreado Funcion ocultar cartas villano
+    public void OcultarVillanos(){
+        ImageIcon ovillain=new ImageIcon("src/Imagenes/cardsVillain.png");
+        
+        for (int x=0;x<4;x++ ){
+            for (int y=0;y<square[x].length;y++){
+                Icon icono=new ImageIcon(ovillain.getImage().getScaledInstance(square[x][y].getWidth(),square[x][y].getHeight(),Image.SCALE_DEFAULT));
+                square[x][y].setIcon(icono);
+           
+          
+            }
+        }
+    }
     
    
+   
+    
+    
     
             
 
