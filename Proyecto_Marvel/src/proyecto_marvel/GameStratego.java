@@ -8,6 +8,7 @@ package proyecto_marvel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -53,6 +54,10 @@ public class GameStratego extends javax.swing.JFrame {
         this.setResizable(false);
         tablero();
         OcultarVillanos();
+ 
+        
+        
+        
         
     }
     
@@ -69,15 +74,15 @@ public class GameStratego extends javax.swing.JFrame {
                 JButton btn=new JButton();
                 btn.setName(x+"");
                 
-                btn.setText(x+" , "+y);
+                //btn.setText(x+" , "+y);
                
                 square[x][y]=btn;
+                
                 
                 panelTablero.add(square[x][y]);
             }
             
         }
-        OcultarVillanos();// Probando  
     }
     
     
@@ -87,7 +92,9 @@ public class GameStratego extends javax.swing.JFrame {
         
         for (int x=0;x<4;x++ ){
             for (int y=0;y<square[x].length;y++){
-                Icon icono=new ImageIcon(ovillain.getImage().getScaledInstance(square[x][y].getWidth(),square[x][y].getHeight(),Image.SCALE_DEFAULT));
+                ImageIcon icono=new ImageIcon(ovillain.getImage().getScaledInstance(
+                        panelTablero.getWidth()/11,panelTablero.getHeight()/10,
+                        Image.SCALE_DEFAULT));
                 square[x][y].setIcon(icono);
            
           
