@@ -56,6 +56,7 @@ public class GameStratego extends javax.swing.JFrame {
         this.setResizable(false);
         tablero();
         OcultarVillanos();
+        villano = getImage("/src/Imagenes/cardsVillain.png");
         
     }
     
@@ -75,13 +76,14 @@ public class GameStratego extends javax.swing.JFrame {
                 btn.setText(x+" , "+y);
                
                 square[x][y]=btn;
+                square[x][y].setIcon(villano);
                 
                 panelTablero.add(square[x][y]);
             }
             
         }
-        villano = getImage("src/Imagenes/cardsVillain.png");
-        OcultarVillanos();// Probando  
+        
+        
     }
     
     
@@ -216,15 +218,17 @@ public class GameStratego extends javax.swing.JFrame {
     private javax.swing.JPanel panelTablero;
     // End of variables declaration//GEN-END:variables
 
-    private static ImageIcon getImage(String path) {
-         try
+    private static ImageIcon getImage(String path)
+   {
+      try
       {
          Image image = ImageIO.read(GameStratego.class.getResource(path));
          Image image_resize = image.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
          return new ImageIcon(image_resize);
       } catch (IOException e)
       {
+         e.printStackTrace();
       }
       return null;
-    }
+   }
 }
