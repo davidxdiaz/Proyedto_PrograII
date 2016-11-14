@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author David
@@ -16,6 +18,7 @@ public class SignUp extends javax.swing.JFrame {
      */
     public SignUp() {
         initComponents();
+        this.setLocationRelativeTo(null); //CENTRA EL JFRAME EN LA PANTALLA
     }
 
     /**
@@ -103,7 +106,7 @@ public class SignUp extends javax.swing.JFrame {
         Player logIn = Player.existe(txtUsername.getText());
         if(logIn==null)//Usuario no existe
         {
-            System.out.println("Usuario disponible");
+            JOptionPane.showConfirmDialog(null,"Usuario disponible");
             if(txtPass.getText().length()==5){
                 System.out.println("Password Valida");
                 Player newPlayer = new Player(txtUsername.getText(),txtPass.getText(), 0,0,0);
@@ -117,7 +120,7 @@ public class SignUp extends javax.swing.JFrame {
                 
             }
             else{
-                System.out.println("Password no Valido");
+                JOptionPane.showConfirmDialog(null,"Password no Valido");
             }
              
                 
