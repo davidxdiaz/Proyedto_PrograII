@@ -12,10 +12,12 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -23,6 +25,7 @@ import javax.swing.JPanel;
  */
 public class GameStratego extends javax.swing.JFrame {
     JButton square[][]=new JButton[10][10];
+    private static ImageIcon villano;
     
     /**
      * Creates new form GameStratego
@@ -54,10 +57,14 @@ public class GameStratego extends javax.swing.JFrame {
         this.setResizable(false);
         tablero();
         OcultarVillanos();
+<<<<<<< HEAD
  
         
         
         
+=======
+        villano = getImage("/src/Imagenes/cardsVillain.png");
+>>>>>>> origin/master
         
     }
     
@@ -77,26 +84,39 @@ public class GameStratego extends javax.swing.JFrame {
                 //btn.setText(x+" , "+y);
                
                 square[x][y]=btn;
+                square[x][y].setIcon(villano);
                 
                 
                 panelTablero.add(square[x][y]);
             }
             
         }
+<<<<<<< HEAD
+=======
+        
+        
+>>>>>>> origin/master
     }
     
     
     //Agreado Funcion ocultar cartas villano
     public void OcultarVillanos(){
-        ImageIcon ovillain=new ImageIcon("src/Imagenes/cardsVillain.png");
+        //ImageIcon ovillain=new ImageIcon("src/Imagenes/cardsVillain.png");
         
         for (int x=0;x<4;x++ ){
+<<<<<<< HEAD
             for (int y=0;y<square[x].length;y++){
                 ImageIcon icono=new ImageIcon(ovillain.getImage().getScaledInstance(
                         panelTablero.getWidth()/11,panelTablero.getHeight()/10,
                         Image.SCALE_DEFAULT));
                 square[x][y].setIcon(icono);
            
+=======
+            for (int y=0;y<10;y++){
+                //Icon icono=new ImageIcon(ovillain.getImage().getScaledInstance(square[x][y].getWidth(),square[x][y].getHeight(),Image.SCALE_DEFAULT));
+                //square[x][y].setIcon(icono);
+                square[x][y].setIcon(villano);
+>>>>>>> origin/master
           
             }
         }
@@ -218,4 +238,18 @@ public class GameStratego extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel panelTablero;
     // End of variables declaration//GEN-END:variables
+
+    private static ImageIcon getImage(String path)
+   {
+      try
+      {
+         Image image = ImageIO.read(GameStratego.class.getResource(path));
+         Image image_resize = image.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
+         return new ImageIcon(image_resize);
+      } catch (IOException e)
+      {
+         e.printStackTrace();
+      }
+      return null;
+   }
 }
