@@ -107,13 +107,9 @@ public class SignUp extends javax.swing.JFrame {
         if(logIn==null)//Usuario no existe
         {
             JOptionPane.showConfirmDialog(null,"Usuario disponible");
-            if(txtPass.getText().length()==5){
+            if(txtPass.getText().length()>5){
                 System.out.println("Password Valida");
-                Player newPlayer = new Player(txtUsername.getText(),txtPass.getText(), 0,0,0);
-                Player.add(newPlayer.getUsername(), newPlayer.getPassword(), newPlayer.getPts(),newPlayer.getCBuenos(),newPlayer.getCMalos());
-               
-                Player.setLoggedPlayer(newPlayer);
-                System.out.println("LOGGED PLAYER: " + newPlayer.getUsername());
+                Player.add(txtUsername.getText(), txtPass.getText());
                 dispose();
                 new MenuPrincipal().setVisible(true);
                 dispose();

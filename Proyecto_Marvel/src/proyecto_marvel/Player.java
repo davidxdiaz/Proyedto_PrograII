@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author David
@@ -13,51 +15,41 @@ public class Player {
     //Atributos
     private String username;
     private String password;
-    private int puntos=0;
-    private int contBuenos=0;
-    private int contMalos=0;
+    private int puntos;
+    static ArrayList<Player> players=new ArrayList<>();
     
     //Variables Global
-    private static Player player[]= new Player[10];
-    private static int numUsuarios = -1;
-    private static int maxUsuarios = 10;
+   
     private static Player loggedPlayer;
     
     //Constructor
-    public Player(String username,String password,int puntos,int contBuenos,int contMalos){
+    public Player(String username,String password){
         this.username = username;
         this.password = password;
-        this.puntos = puntos;
-        this.contBuenos = contBuenos;
-        this.contMalos = contMalos;
+        this.puntos = 0;
+       
     }
     
     //Funciones
     
     //Funcion que agrega jugadores
-    public static void add(String user, String pass, int pts,int cB,int cM)
-   {
-      
-      numUsuarios++;
-      player[numUsuarios] = new Player(user, pass, pts,cB,cM);
+    public static void add(String user, String pass){
+        players.add(new Player(user, pass));
+ 
    }
     
     //Funcion que verifica si el usuario existe
-    public static Player existe(String user)
-   {
-      Player p = null;
-      for (Player player : player){
-         if (player != null)
-         {
-            if (user.equals(player.getUsername()))
-            {
-               p = player;
-               break;
+    public static Player existe(String user){
+        for (Player player : players){
+            if (player != null){
+                if (user.equals(player.username)){
+                    return player;
+                }
             }
-         }
-      }
-      return p;
-   }
+        }
+        return null;
+    }
+    
     public static Player getLoggedPlayer(){
       return loggedPlayer;
    }
@@ -65,39 +57,29 @@ public class Player {
       loggedPlayer = player;
    }
     //Funcion que verifica que losd atos del usuario esten correctos
-    public static Player verificar(String user, String pass)
-   {
-      Player p = null;
-      boolean exists = false;
-
-      for (Player player : player)
-      {
-         if (player != null)
-         {
-            if (user.equals(player.getUsername()) && pass.equals(player.getPassword()))
-            {
-               p = player;
-               break;
+    public static Player verificar(String user, String pass){
+        for (Player player : players){
+            if (player != null){
+                if (user.equals(player.username) && pass.equals(player.password)){
+                    return player;
+                }
             }
-         }
-      }
-      return p;
-   }
+        }
+        return null;
+    }
     
-    public String getUsername(){
-        return username;
+    public void addPuntos(){
+        puntos+=3;
+        
     }
-    public String getPassword(){
-        return password;
+    
+    public void elimiarCuenta(String user, String pass){
+        players.remove(players.indexOf(verificar(user, pass)));
+        
     }
-    public int getPts(){
-        return puntos;
-    }
-    public int getCBuenos(){
-        return contBuenos;
-    }
-    public int getCMalos(){
-        return contMalos;
-    }
+        
+        
     
 }
+    
+    
