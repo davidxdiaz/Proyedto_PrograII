@@ -17,6 +17,7 @@ public class Player {
     private String username;
     private String password;
     private int puntos,playersActivos=0,playersHistoricos=0;
+    int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
     static ArrayList<Player> players=new ArrayList<>();
     static ArrayList<String>partidas;
     
