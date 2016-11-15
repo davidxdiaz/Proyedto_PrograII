@@ -56,7 +56,7 @@ public class Player {
     public static void setLoggedPlayer(Player player){
       loggedPlayer = player;
    }
-    //Funcion que verifica que losd atos del usuario esten correctos
+    //Funcion que verifica que los datos del usuario esten correctos
     public static Player verificar(String user, String pass){
         for (Player player : players){
             if (player != null){

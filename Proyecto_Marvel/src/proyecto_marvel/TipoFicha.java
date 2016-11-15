@@ -10,7 +10,7 @@ package proyecto_marvel;
  * @author David
  */
 public enum TipoFicha {
-    HEREO,VILLANO;
+    HEROE,VILLANO;
     public int r1,r2,r3,r4,r5;
     public static int rango;
     TipoFicha(){

@@ -15,8 +15,9 @@ public abstract class Ficha {
     
     public boolean comer(){
         if(GameStratego.turno==true){
-            if()
+            //if()
         }
+        return true;
     }
 
     public int getRango() {
