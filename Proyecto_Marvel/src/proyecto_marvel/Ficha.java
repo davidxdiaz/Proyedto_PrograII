@@ -16,6 +16,10 @@ public abstract class Ficha {
     public boolean comer(){
         if(GameStratego.turno==true){
             //if()
+            GameStratego.turno=false;
+            
+        }else{
+            GameStratego.turno=true;
         }
         return true;
     }
