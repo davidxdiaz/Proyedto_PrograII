@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author David
@@ -16,6 +18,7 @@ public class LogIn extends javax.swing.JFrame {
      */
     public LogIn() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -104,8 +107,8 @@ public class LogIn extends javax.swing.JFrame {
                 System.out.println("LOGGED PLAYER: " + Player.getLoggedPlayer());
             } else
             {
-                System.out.println(" Usuario y contraseña incorrectos.\n"
-                                + "Debe crear el usuario o intentar con otro usuario y contraseña Error");
+                JOptionPane.showConfirmDialog(null," Usuario y contraseña incorrectos.\n"
+                                + "Debe crear el usuario o intentar con otro usuario y contraseña");
             }
        
     }//GEN-LAST:event_jButton1ActionPerformed
