@@ -6,6 +6,7 @@
 package proyecto_marvel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -15,8 +16,9 @@ public class Player {
     //Atributos
     private String username;
     private String password;
-    private int puntos;
+    private int puntos,playersActivos=0,playersHistoricos=0;
     static ArrayList<Player> players=new ArrayList<>();
+    static ArrayList<String>partidas;
     
     //Variables Global
    
@@ -27,6 +29,9 @@ public class Player {
         this.username = username;
         this.password = password;
         this.puntos = 0;
+        playersActivos+=1;
+        playersHistoricos+=1;
+        partidas=new ArrayList<>();
        
     }
     
@@ -75,13 +80,23 @@ public class Player {
     
     public void elimiarCuenta(String user, String pass){
         players.remove(players.indexOf(verificar(user, pass)));
-        
+        playersActivos-=1;
     }
     
     public void cambiarPassword(String user, String pass,String nuevapass){
         verificar(user, pass).setPassword(nuevapass);
         
     }
+    public void ultimasPartidas(TipoFicha m,boolean n, String rival){
+        Calendar actual=Calendar.getInstance();
+        String resultado="DERROTA";  
+        if (n){
+            resultado="VICTORIA";
+        }
+        partidas.add(actual.toString()+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
+    }
+    
+    
 
     public String getUsername() {
         return username;
