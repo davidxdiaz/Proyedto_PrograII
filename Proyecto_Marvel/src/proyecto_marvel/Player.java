@@ -16,7 +16,8 @@ public class Player {
     //Atributos
     private String username;
     private String password;
-    private int puntos,playersActivos=0,playersHistoricos=0;
+    private int puntos;
+    int playersActivos=0,playersHistoricos=0;
     int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
     static ArrayList<Player> players=new ArrayList<>();
     static ArrayList<String>partidas;
@@ -30,10 +31,12 @@ public class Player {
         this.username = username;
         this.password = password;
         this.puntos = 0;
+        
         playersActivos+=1;
         playersHistoricos+=1;
+ 
         partidas=new ArrayList<>();
-       
+        
     }
     
     //Funciones
@@ -41,7 +44,7 @@ public class Player {
     //Funcion que agrega jugadores
     public static void add(String user, String pass){
         players.add(new Player(user, pass));
- 
+        
    }
     
     //Funcion que verifica si el usuario existe
@@ -75,8 +78,7 @@ public class Player {
     }
     
     public void addPuntos(){
-        puntos+=3;
-        
+        this.puntos+=3;
     }
     
     public void elimiarCuenta(String user, String pass){
