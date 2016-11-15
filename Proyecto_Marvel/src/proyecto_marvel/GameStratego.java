@@ -25,6 +25,9 @@ import javax.imageio.ImageIO;
 public class GameStratego extends javax.swing.JFrame {
     JButton square[][]=new JButton[10][10];
     private static ImageIcon villano;
+    //Si turno es true entonces toca el turno del jugador 1 "HEREO" y si es 
+    //falso es el turno del jugador 2 "VILLANO
+    public static boolean turno=true;
     
     /**
      * Creates new form GameStratego
