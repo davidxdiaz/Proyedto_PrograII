@@ -77,6 +77,38 @@ public class Player {
         players.remove(players.indexOf(verificar(user, pass)));
         
     }
+    
+    public void cambiarPassword(String user, String pass,String nuevapass){
+        verificar(user, pass).setPassword(nuevapass);
+        
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+    
+    
+    
         
         
     
