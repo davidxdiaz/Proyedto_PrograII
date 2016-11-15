@@ -11,7 +11,7 @@ package proyecto_marvel;
  */
 public enum TipoFicha {
     HEROE,VILLANO;
-    public int r1,r2,r3,r4,r5;
+    public int r1,r2,r3,r4,r5, r6, r7, r8, r9, r10;
     public static int rango;
     TipoFicha(){
         r1=1;
@@ -19,6 +19,12 @@ public enum TipoFicha {
         r3=3;
         r4=4;
         r5=5;
+        r6=6;
+        r7=7;
+        r8=8;
+        r9=9;
+        r10=10;
+                
     }
 
     public int getR1() {
