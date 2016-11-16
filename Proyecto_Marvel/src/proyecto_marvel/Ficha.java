@@ -15,7 +15,6 @@ public abstract class Ficha {
     protected int rango;
     protected TipoFicha ficha;
     protected ImageIcon imagen;
-    protected ImageIcon imgocultar;
     protected String nombreficha;
     
     
@@ -26,7 +25,7 @@ public abstract class Ficha {
         
     }
     
-    public boolean comer(){
+   /* public boolean comer(){
         if(GameStratego.turno==true){
             //if()
             GameStratego.turno=false;
@@ -35,7 +34,7 @@ public abstract class Ficha {
             GameStratego.turno=true;
         }
         return true;
-    }
+    }*/
 
     public int getRango() {
         return rango;
