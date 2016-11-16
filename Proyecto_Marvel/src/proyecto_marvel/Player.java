@@ -5,6 +5,7 @@
  */
 package proyecto_marvel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -35,19 +36,27 @@ public class Player {
         playersActivos+=1;
         playersHistoricos+=1;
  
-        partidas=new ArrayList<>();
-        
+        partidas=new ArrayList<>();        
     }
     
     //Funciones
     
-    //Funcion que agrega jugadores
+   /**
+    * FUNCION QUE PERMITE REGISTRA UN NUEVO USUARIO
+    * 
+    * @param user Nnombre del Usuario 
+    * @param pass Contraseña
+    */
     public static void add(String user, String pass){
         players.add(new Player(user, pass));
         
    }
     
-    //Funcion que verifica si el usuario existe
+/***
+ * 
+ * @param user Nombre del Usuario a Bbuscar
+ * @return Retorna el Objeto donde se encuentra el Usuario
+ */
     public static Player existe(String user){
         for (Player player : players){
             if (player != null){
@@ -77,26 +86,53 @@ public class Player {
         return null;
     }
     
+    
+    /**
+     * FUNCION QUE ADICIONA 3 PUNTOS AL PLAYER GANADOR
+     */
     public void addPuntos(){
         this.puntos+=3;
     }
     
+    
+    /**
+     * FUNCION QUE ELIMINA LA CUENTA DEL USUARIO
+     * @param user NOMBRE DEL USUARIO
+     * @param pass CONTRASEÑA 
+     */
     public void elimiarCuenta(String user, String pass){
         players.remove(players.indexOf(verificar(user, pass)));
         playersActivos-=1;
     }
     
+    
+    /**
+     * FUNCION QUE PERMITE CAMBIAR LA CONTRASEÑA DEL USUARIO
+     * @param user  NOMBRE DEL USUARIO
+     * @param pass  CONTRASEÑA ACTUAL
+     * @param nuevapass NUEVA CONTRASEÑA
+     */
     public void cambiarPassword(String user, String pass,String nuevapass){
         verificar(user, pass).setPassword(nuevapass);
         
     }
+    
+    /**
+     * Funcion que adiciona un juego a mi arreglo de partidas
+     * @param m TIPO DE FICHA CON QUE JUGUE
+     * @param n Obtine el resultado del juego true=Gane,false=perdi
+     * @param rival Nombre del rival con quien me enfrente
+     * 
+     * Obtiene la fecha actual 
+     */
     public void ultimasPartidas(TipoFicha m,boolean n, String rival){
         Calendar actual=Calendar.getInstance();
+        SimpleDateFormat formato =new SimpleDateFormat("dd-mm-yyyy hh:mm:ss a");
         String resultado="DERROTA";  
         if (n){
             resultado="VICTORIA";
         }
-        partidas.add(actual.toString()+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
+        partidas.add(formato.format(actual)+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
     }
     
     
@@ -124,11 +160,10 @@ public class Player {
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
+
     
     
-    
-        
-        
+             
     
 }
     
