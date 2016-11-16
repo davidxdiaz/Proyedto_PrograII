@@ -135,6 +135,12 @@ public class Player {
         }
         partidas.add(formato.format(actual)+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
     }
+    /**
+     * 
+     * @param nomb NOMBRE DEL USUARIO
+     * @param pass CONTRASEÑA
+     * @return RETORNA TRUE SI EL USUARIO Y CONTRASEÑA ES CORRECTA,SINO  RETURNA FALSE
+     */
     
     public boolean verificarCuenta(String nomb, String pass){
         for(Player player:players){
@@ -174,7 +180,49 @@ public class Player {
     }
 
     
+    /**
+     * ESTA ES UN FUNCION ORDENAR EL RAKING DE LOS JUGADORES 
+     * @param args 
+     */
+    public static void main(String[] args) {
+        players.add(new Player("andy", "password"));
+        players.get(0).addPuntos();
+        players.get(0).addPuntos();
+        
+        players.add(new Player("hola", "password"));
+        players.get(1).addPuntos();
+        players.get(1).addPuntos();
+        players.get(1).addPuntos();
+        players.get(1).addPuntos();
+        players.add(new Player("hey", "password"));
+        players.get(2).addPuntos();
+        players.get(2).addPuntos();
+        players.get(2).addPuntos();
+        
+        System.out.println(players.size());
+        for(Player play:players){
+            System.out.println(play.username);
+        }
+        
+        Player.rankingPlayers();
+        for(Player play:players){
+            System.out.println(play.username+" "+play.puntos);
+        }
+        
+    }
     
+    public static void rankingPlayers(){
+        Player aux;
+        for(int i=0;i<players.size()-1;i++){
+            for(int j=0;j<players.size()-i-1;j++){
+                if(players.get(j+1).puntos>players.get(j).puntos){
+                    aux=players.get(j+1);
+                    players.set(j+1,players.get(j));
+                    players.set(j,aux);
+                }
+            }
+        }
+    }
              
     
 }
