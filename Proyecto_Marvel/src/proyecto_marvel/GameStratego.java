@@ -10,7 +10,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.imageio.ImageIO;
 
 /**
@@ -24,6 +23,8 @@ public final class GameStratego extends javax.swing.JFrame {
    // public static boolean turno=true;
     
     CasillasMarvel celda[][]=new CasillasMarvel[10][10];
+    CasillasMarvel btn1,btn2;
+    
     
     /**
      * Creates new form GameStratego
@@ -36,7 +37,7 @@ public final class GameStratego extends javax.swing.JFrame {
         */
         
         initComponents();
-        
+ 
         this.setAlwaysOnTop(true);
         this.setVisible(true);
         this.setResizable(false);
@@ -56,6 +57,8 @@ public final class GameStratego extends javax.swing.JFrame {
         panelTablero.setSize(500, 700);
         
         tablero();
+       
+        
         //OcultarVillanos();
        // villano = getImage("/src/Imagenes/cardsVillain.png");
     }
@@ -225,5 +228,6 @@ public final class GameStratego extends javax.swing.JFrame {
       }
       return null;
    }
+    
 
 }
