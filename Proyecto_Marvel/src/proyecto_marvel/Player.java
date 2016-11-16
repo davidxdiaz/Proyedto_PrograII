@@ -54,7 +54,7 @@ public class Player {
     
 /***
  * 
- * @param user Nombre del Usuario a Bbuscar
+ * @param user Nombre del Usuario a Buscar
  * @return Retorna el Objeto donde se encuentra el Usuario
  */
     public static Player existe(String user){
@@ -75,6 +75,7 @@ public class Player {
       loggedPlayer = player;
    }
     //Funcion que verifica que los datos del usuario esten correctos
+    
     public static Player verificar(String user, String pass){
         for (Player player : players){
             if (player != null){
@@ -135,7 +136,7 @@ public class Player {
         partidas.add(formato.format(actual)+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
     }
     
-    public boolean verificarUsuario(String nomb, String pass){
+    public boolean verificarCuenta(String nomb, String pass){
         for(Player player:players){
             if (nomb.equals(player.username)){
                 if(pass.equals(player.password)){
