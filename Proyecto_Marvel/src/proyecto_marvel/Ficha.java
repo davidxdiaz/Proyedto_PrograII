@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author David
@@ -12,6 +14,17 @@ package proyecto_marvel;
 public abstract class Ficha {
     protected int rango;
     protected TipoFicha ficha;
+    protected ImageIcon imagen;
+    protected ImageIcon imgocultar;
+    protected String nombreficha;
+    
+    
+    public Ficha(TipoFicha ficha, int rango, ImageIcon imagen){
+        this.ficha= ficha;
+        this.rango= rango;
+        this.imagen= imagen;
+        
+    }
     
     public boolean comer(){
         if(GameStratego.turno==true){
