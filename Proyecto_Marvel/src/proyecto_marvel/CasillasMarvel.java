@@ -33,7 +33,7 @@ public class CasillasMarvel extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(""+x+" "+y);
+        System.out.println(""+x+" "+y+" "+  (ficha==null? "No hay niguna ficha" :"ficha"));
     }
 
    

@@ -18,11 +18,12 @@ import javax.imageio.ImageIO;
  * @author ANDY ESCOBAR 007
  */
 public final class GameStratego extends javax.swing.JFrame {
-    JButton square[][]=new JButton[10][10];
-    private static ImageIcon villano;
+    //private static ImageIcon villano;
     //Si turno es true entonces toca el turno del jugador 1 "HEREO" y si es 
     //falso es el turno del jugador 2 "VILLANO
-    public static boolean turno=true;
+   // public static boolean turno=true;
+    
+    CasillasMarvel celda[][]=new CasillasMarvel[10][10];
     
     /**
      * Creates new form GameStratego
@@ -35,12 +36,13 @@ public final class GameStratego extends javax.swing.JFrame {
         */
         
         initComponents();
+        
+        this.setAlwaysOnTop(true);
         this.setVisible(true);
         this.setResizable(false);
-        this.setAlwaysOnTop(true);
         
         
-        CasillasMarvel[][] celda=new CasillasMarvel[10][10];
+        
         
         //Full Screen
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -55,14 +57,15 @@ public final class GameStratego extends javax.swing.JFrame {
         
         tablero();
         //OcultarVillanos();
-        villano = getImage("/src/Imagenes/cardsVillain.png");
+       // villano = getImage("/src/Imagenes/cardsVillain.png");
     }
+    
     
     public void tablero(){
         panelTablero.setLayout(new GridLayout(10,10));
-        for (int x=0;x<square.length;x++ ){
-            for (int y=0;y<square[x].length;y++){
-                square[x][y]=new CasillasMarvel(x, y, null);
+        for (int x=0;x<celda.length;x++ ){
+            for (int y=0;y<celda[x].length;y++){
+                celda[x][y]=new CasillasMarvel(x, y, null);
                 //JButton btn=new JButton();
                 //btn.setName(x+"");
                 
@@ -72,7 +75,7 @@ public final class GameStratego extends javax.swing.JFrame {
                // square[x][y].setIcon(villano);
                 
                 
-                panelTablero.add(square[x][y]);
+                panelTablero.add(celda[x][y]);
             }
         }
     }
