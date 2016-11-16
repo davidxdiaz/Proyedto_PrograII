@@ -135,6 +135,17 @@ public class Player {
         partidas.add(formato.format(actual)+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
     }
     
+    public boolean verificarUsuario(String nomb, String pass){
+        for(Player player:players){
+            if (nomb.equals(player.username)){
+                if(pass.equals(player.password)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     
 
     public String getUsername() {
