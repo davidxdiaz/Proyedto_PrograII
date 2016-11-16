@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author ANDY ESCOBAR 007
  */
-public class CasillasMarvel extends JButton implements ActionListener{
+public class CasillasMarvel extends JButton{
     
     public int x,y;
     Ficha ficha;
@@ -28,34 +28,13 @@ public class CasillasMarvel extends JButton implements ActionListener{
         this.y = y;
         this.ficha = ficha;
         this.primerClick=primerClick;
-        this.addActionListener(this);
+        //this.addActionListener(this);
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(primerClick==1){
-            System.out.print("SEGUNDO CLICK");
-            int newPosicionx=x;
-            int newPosiciony=y;
-            System.out.println(" "+newPosicionx+"  "+newPosiciony);
-            if (primerPosicionx==newPosicionx && primerPosiciony==newPosiciony){
-                System.out.println("No puede elegir la mismas cordenada");
-            }
-            else{
-                primerClick=0;
-            }
-            
-        }
-        else{
-            System.out.println("Primer Click");
-            primerClick=1;
-            System.out.println(" "+x+" "+y+" "+  (ficha==null? "No hay niguna ficha" :"ficha"));
-            primerPosicionx=x;
-            primerPosiciony=y;
-        }
-    }
-    
 
    
 }
+    
+
+   
+

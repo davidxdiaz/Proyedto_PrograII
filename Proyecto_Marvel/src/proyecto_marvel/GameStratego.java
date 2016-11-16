@@ -8,6 +8,8 @@ package proyecto_marvel;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
@@ -16,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author ANDY ESCOBAR 007
  */
-public final class GameStratego extends javax.swing.JFrame {
+public final class GameStratego extends javax.swing.JFrame implements ActionListener {
     //private static ImageIcon villano;
     //Si turno es true entonces toca el turno del jugador 1 "HEREO" y si es 
     //falso es el turno del jugador 2 "VILLANO
@@ -69,6 +71,7 @@ public final class GameStratego extends javax.swing.JFrame {
         for (int x=0;x<celda.length;x++ ){
             for (int y=0;y<celda[x].length;y++){
                 celda[x][y]=new CasillasMarvel(x, y, null);
+                celda[x][y].addActionListener(this);
                 //JButton btn=new JButton();
                 //btn.setName(x+"");
                 
@@ -228,6 +231,12 @@ public final class GameStratego extends javax.swing.JFrame {
       }
       return null;
    }
+
+    
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+       
+    }
     
 
 }
