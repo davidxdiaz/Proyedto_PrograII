@@ -5,25 +5,19 @@
  */
 package proyecto_marvel;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 
 /**
  *
  * @author ANDY ESCOBAR 007
  */
-public class GameStratego extends javax.swing.JFrame {
+public final class GameStratego extends javax.swing.JFrame {
     JButton square[][]=new JButton[10][10];
     private static ImageIcon villano;
     //Si turno es true entonces toca el turno del jugador 1 "HEREO" y si es 
@@ -39,11 +33,14 @@ public class GameStratego extends javax.swing.JFrame {
                                    ventana con la x o que la podas mover.
         
         */
-        this.setAlwaysOnTop(true);
-        this.setVisible(true);
-        initComponents();
         
-        JButton square[][]=new JButton[10][10];
+        initComponents();
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setAlwaysOnTop(true);
+        
+        
+        CasillasMarvel[][] celda=new CasillasMarvel[10][10];
         
         //Full Screen
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -54,12 +51,10 @@ public class GameStratego extends javax.swing.JFrame {
         this.setSize(xSize,ySize);
         //Cierre de full Screen
         
-        this.setLocationRelativeTo(null);
         panelTablero.setSize(500, 700);
-        this.add(panelTablero,BorderLayout.CENTER);
-        this.setResizable(false);
+        
         tablero();
-        OcultarVillanos();
+        //OcultarVillanos();
         villano = getImage("/src/Imagenes/cardsVillain.png");
     }
     
@@ -67,13 +62,14 @@ public class GameStratego extends javax.swing.JFrame {
         panelTablero.setLayout(new GridLayout(10,10));
         for (int x=0;x<square.length;x++ ){
             for (int y=0;y<square[x].length;y++){
-                JButton btn=new JButton();
-                btn.setName(x+"");
+                square[x][y]=new CasillasMarvel(x, y, null);
+                //JButton btn=new JButton();
+                //btn.setName(x+"");
                 
                 //btn.setText(x+" , "+y);
                
-                square[x][y]=btn;
-                square[x][y].setIcon(villano);
+               // square[x][y]=btn;
+               // square[x][y].setIcon(villano);
                 
                 
                 panelTablero.add(square[x][y]);
@@ -81,7 +77,7 @@ public class GameStratego extends javax.swing.JFrame {
         }
     }
     //Agreado Funcion ocultar cartas villano
-    public void OcultarVillanos(){
+    /*public void OcultarVillanos(){
         ImageIcon ovillain=new ImageIcon("src/Imagenes/cardsVillain.png");
         for (int x=0;x<4;x++){
             for (int y=0;y<square[x].length;y++){
@@ -97,6 +93,7 @@ public class GameStratego extends javax.swing.JFrame {
             }
         }
     }
+    */
     
    
  
@@ -215,6 +212,7 @@ public class GameStratego extends javax.swing.JFrame {
    {
       try
       {
+         
          Image image = ImageIO.read(GameStratego.class.getResource(path));
          Image image_resize = image.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
          return new ImageIcon(image_resize);
