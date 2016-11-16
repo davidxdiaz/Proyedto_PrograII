@@ -7,7 +7,7 @@ package proyecto_marvel;
 
 /**
  *
- * @author David
+ * @authores David Miguel
  */
 public enum TipoFicha {
     HEROE,VILLANO;
@@ -42,15 +42,33 @@ public enum TipoFicha {
     public int getR4() {
         return r4;
     }
-
+    
     public int getR5() {
         return r5;
+    }
+
+    public int getR6() {
+        return r6;
+    }
+
+    public int getR7() {
+        return r7;
+    }
+
+    public int getR8() {
+        return r8;
+    }
+
+    public int getR9() {
+        return r9;
+    }
+
+    public int getR10() {
+        return r10;
     }
 
     public static int getRango() {
         return rango;
     }
-    
-   
-    
+        
 }
