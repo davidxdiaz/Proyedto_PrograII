@@ -198,6 +198,11 @@ public class Player {
         players.get(2).addPuntos();
         players.get(2).addPuntos();
         players.get(2).addPuntos();
+        players.add(new Player("player", "password"));
+        players.get(3).addPuntos();
+        players.get(3).addPuntos();
+        players.get(3).addPuntos();
+        players.get(3).addPuntos();
         
         System.out.println(players.size());
         for(Player play:players){
@@ -205,8 +210,10 @@ public class Player {
         }
         
         Player.rankingPlayers();
+        int pos=0;
         for(Player play:players){
-            System.out.println(play.username+" "+play.puntos);
+            pos+=1;
+            System.out.println(pos+". "+play.username+" "+play.puntos);
         }
         
     }
