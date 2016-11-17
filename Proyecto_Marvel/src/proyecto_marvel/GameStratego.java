@@ -27,22 +27,20 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
    // public static boolean turno=true;
     
     CasillasMarvel celda[][]=new CasillasMarvel[10][10];
-    CasillasMarvel btn1,btn2;
     CasillasMarvel primerCasilla=null,segundaCasilla=null;
     boolean turnplayerHeore=true, primerclic=false;
+    /**
+     * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMIDO
+     */
     int cVillanosR1=0,cVillanosR2=0,cVillanosR3=0,cVillanosR4=0,cVillanosR5=0;
     int cVillanosR6=0,cVillanosR7=0,cVillanosR8=0,cVillanosR9=0,cVillanosR10=0;
     
-    
+    /**
+     * VARIABLE QUE CUENTA LA CANTIDA DE HEROE QUE ME HA COMIDO
+     */
     int cHeroesR1=0,cHeroesR2=0,cHeroesR3=0,cHeroesR4=0,
        cHeroesR5=0,cHeroesR6=0,cHeroesR7=0,cHeroesR8=0,cHeroesR9=0,cHeroesR10=0;
-    
-    
-    int pActualX=0,pActualY=0, pNewX=0,PNewY=0;
-    
-    
-    
-    
+   
     /**
      * Creates new form GameStratego
      */
@@ -58,29 +56,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         this.setVisible(true);
         this.setResizable(false);
         
-        
-        
-        
-        //Full Screen
-        //Toolkit tk = Toolkit.getDefaultToolkit();
-        
-        ///int xSize = (int) tk.getScreenSize().getWidth();
-        //int ySize = (int) tk.getScreenSize().getHeight();
-        
-        //this.setSize(xSize,ySize);
-        //Cierre de full Screen
-        
         panelTablero.setSize(500, 700);
-        
-        tablero();
+        tablero(); //IMPLEMENTA EL TABLERO EN PANTALLA
   
-       
-        
-        //OcultarVillanos();
-       // villano = getImage("/src/Imagenes/cardsVillain.png");
     }
     
-    
+  /**
+   * FUNCION QUE IMPLEMENTA LAS CASILLAS DE TABLERO
+   */  
     public void tablero(){
  
         panelTablero.setLayout(new GridLayout(10,10));
@@ -96,11 +79,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }
     }
     
-
-    
-   
- 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -186,24 +164,15 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GameStratego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GameStratego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GameStratego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GameStratego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GameStratego().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(new RunnableImpl());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -220,9 +189,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
          Image image = ImageIO.read(GameStratego.class.getResource(path));
          Image image_resize = image.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
          return new ImageIcon(image_resize);
-      } catch (IOException e)
-      {
-         e.printStackTrace();
+      } catch (IOException e){
+          e.getMessage();
       }
       return null;
    }
@@ -297,6 +265,17 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         }
             JOptionPane.showConfirmDialog(null, "Movimiento no valido, porfavor intenete de nuevo");
+    }
+
+    private static class RunnableImpl implements Runnable {
+
+        public RunnableImpl() {
+        }
+
+        @Override
+        public void run() {
+            new GameStratego().setVisible(true);
+        }
     }
 }
 
