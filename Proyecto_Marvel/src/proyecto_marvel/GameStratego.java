@@ -255,9 +255,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     for (CasillasMarvel[] celda1 : celda) {
                         for (CasillasMarvel objeto : celda1) {
                             if (e.getSource().equals(objeto)) {
+                                if(primerCasilla.equals(objeto)){
+                                    System.err.println("Usted a hecho clic en la misma cordenada");
+                                }else{
+                                System.out.println("Segundo Clic\n"+objeto.x+""+objeto.y);
                                 segundaCasilla=objeto;
+                                primerclic=false;
                                 validarMovimiento(primerCasilla,segundaCasilla);
-                                System.out.println(objeto.x+""+objeto.y);
+                                }
                             }
                         }
                     }
@@ -269,11 +274,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     for (CasillasMarvel[] celda1 : celda) {
                         for (CasillasMarvel objeto : celda1) {
                             if (e.getSource().equals(objeto)) {
+                                System.out.println("Primer Clic");
+                                System.out.println(objeto.x+""+objeto.y);
                                primerCasilla= objeto;
                             }
                         }
                     }
                 }
+                
             }
         }
         else{
