@@ -13,12 +13,16 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 /**
  *
  * @author ANDY ESCOBAR 007
  */
-public final class GameStratego extends javax.swing.JFrame implements ActionListener {
+public final class GameStratego extends javax.swing.JFrame implements ActionListener{
+    
+    
     //private static ImageIcon villano;
     //Si turno es true entonces toca el turno del jugador 1 "HEREO" y si es 
     //falso es el turno del jugador 2 "VILLANO
@@ -26,6 +30,18 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     CasillasMarvel celda[][]=new CasillasMarvel[10][10];
     CasillasMarvel btn1,btn2;
+    boolean turnplayer=true, primerclic=false;
+    int cVillanosR1=0,cVillanosR2=0,cVillanosR3=0,cVillanosR4=0,cVillanosR5=0;
+    int cVillanosR6=0,cVillanosR7=0,cVillanosR8=0,cVillanosR9=0,cVillanosR10=0;
+    
+    
+    int cHeroesR1=0,cHeroesR2=0,cHeroesR3=0,cHeroesR4=0,
+       cHeroesR5=0,cHeroesR6=0,cHeroesR7=0,cHeroesR8=0,cHeroesR9=0,cHeroesR10=0;
+    
+    
+    int pActualX=0,pActualY=0, pNewX=0,PNewY=0;
+    
+    
     
     
     /**
@@ -39,7 +55,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         */
         
         initComponents();
- 
+        this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
         this.setVisible(true);
         this.setResizable(false);
@@ -59,6 +75,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         panelTablero.setSize(500, 700);
         
         tablero();
+  
        
         
         //OcultarVillanos();
@@ -67,24 +84,20 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     
     public void tablero(){
+ 
         panelTablero.setLayout(new GridLayout(10,10));
-        for (int x=0;x<celda.length;x++ ){
-            for (int y=0;y<celda[x].length;y++){
-                celda[x][y]=new CasillasMarvel(x, y, null);
-                celda[x][y].addActionListener(this);
-                //JButton btn=new JButton();
-                //btn.setName(x+"");
+        for (int i=0;i<celda.length;i++ ){
+            for (int e=0;e<celda[i].length;e++){
                 
-                //btn.setText(x+" , "+y);
-               
-               // square[x][y]=btn;
-               // square[x][y].setIcon(villano);
+                celda[i][e]=new CasillasMarvel(i, e, null);
+                celda[i][e].addActionListener(this);
                 
-                
-                panelTablero.add(celda[x][y]);
+                panelTablero.add(celda[i][e]);
             }
         }
     }
+    
+
     //Agreado Funcion ocultar cartas villano
     /*public void OcultarVillanos(){
         ImageIcon ovillain=new ImageIcon("src/Imagenes/cardsVillain.png");
@@ -205,6 +218,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new GameStratego().setVisible(true);
             }
@@ -232,11 +246,20 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
       return null;
    }
 
-    
     @Override
-    public void actionPerformed(ActionEvent ae) {
-       
-    }
-    
-
+    public void actionPerformed(ActionEvent e) {
+        if(primerclic){
+            
+            System.out.println("SEGUNDO CLIC");
+            System.out.println("Posiciones de origen "+((CasillasMarvel)e.getSource()));
+            System.out.println("Posiciones nuevas: ");
+            primerclic=false;
+        }
+        else{
+            primerclic=true;
+            System.out.println("PRIMER CLIC");
+        }
+    } 
 }
+
+

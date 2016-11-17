@@ -5,10 +5,7 @@
  */
 package proyecto_marvel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,18 +15,17 @@ public class CasillasMarvel extends JButton{
     
     public int x,y;
     Ficha ficha;
-    byte clic=0;
-    int primerClick=0;
-    int primerPosicionx=0;
-    int primerPosiciony=0;
-
+   
     public CasillasMarvel(int x, int y, Ficha ficha) {
         this.x = x;
         this.y = y;
         this.ficha = ficha;
-        this.primerClick=primerClick;
-        //this.addActionListener(this);
+  
     }
+
+
+
+    
 
 
    
