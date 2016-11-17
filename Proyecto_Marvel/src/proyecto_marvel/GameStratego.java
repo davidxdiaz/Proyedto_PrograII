@@ -55,7 +55,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setAlwaysOnTop(true);
         this.setVisible(true);
         this.setResizable(false);
         
@@ -98,24 +97,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
     
 
-    //Agreado Funcion ocultar cartas villano
-    /*public void OcultarVillanos(){
-        ImageIcon ovillain=new ImageIcon("src/Imagenes/cardsVillain.png");
-        for (int x=0;x<4;x++){
-            for (int y=0;y<square[x].length;y++){
-                ImageIcon icono=new ImageIcon(ovillain.getImage().getScaledInstance(
-                        panelTablero.getWidth()/11,panelTablero.getHeight()/10,
-                        Image.SCALE_DEFAULT));
-                square[x][y].setIcon(icono);
-            }
-            for (int y=0;y<10;y++){
-                //Icon icono=new ImageIcon(ovillain.getImage().getScaledInstance(square[x][y].getWidth(),square[x][y].getHeight(),Image.SCALE_DEFAULT));
-                //square[x][y].setIcon(icono);
-                square[x][y].setIcon(villano);
-            }
-        }
-    }
-    */
     
    
  
@@ -256,7 +237,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                         for (CasillasMarvel objeto : celda1) {
                             if (e.getSource().equals(objeto)) {
                                 if(primerCasilla.equals(objeto)){
-                                    System.err.println("Usted a hecho clic en la misma cordenada");
+                                    JOptionPane.showMessageDialog(null,"Usted a hecho clic en la misma cordenada");
                                 }else{
                                 System.out.println("Segundo Clic\n"+objeto.x+""+objeto.y);
                                 segundaCasilla=objeto;
