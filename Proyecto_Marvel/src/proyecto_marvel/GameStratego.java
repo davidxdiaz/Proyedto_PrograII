@@ -7,14 +7,12 @@ package proyecto_marvel;
 
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,7 +28,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     CasillasMarvel celda[][]=new CasillasMarvel[10][10];
     CasillasMarvel btn1,btn2;
-    boolean turnplayer=true, primerclic=false;
+    CasillasMarvel primerCasilla=null,segundaCasilla=null;
+    boolean turnplayerHeore=true, primerclic=false;
     int cVillanosR1=0,cVillanosR2=0,cVillanosR3=0,cVillanosR4=0,cVillanosR5=0;
     int cVillanosR6=0,cVillanosR7=0,cVillanosR8=0,cVillanosR9=0,cVillanosR10=0;
     
@@ -64,12 +63,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         
         
         //Full Screen
-        Toolkit tk = Toolkit.getDefaultToolkit();
+        //Toolkit tk = Toolkit.getDefaultToolkit();
         
-        int xSize = (int) tk.getScreenSize().getWidth();
-        int ySize = (int) tk.getScreenSize().getHeight();
+        ///int xSize = (int) tk.getScreenSize().getWidth();
+        //int ySize = (int) tk.getScreenSize().getHeight();
         
-        this.setSize(xSize,ySize);
+        //this.setSize(xSize,ySize);
         //Cierre de full Screen
         
         panelTablero.setSize(500, 700);
@@ -90,6 +89,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             for (int e=0;e<celda[i].length;e++){
                 
                 celda[i][e]=new CasillasMarvel(i, e, null);
+                celda[i][e].setName(i+""+e);
                 celda[i][e].addActionListener(this);
                 
                 panelTablero.add(celda[i][e]);
@@ -248,18 +248,71 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(primerclic){
-            
-            System.out.println("SEGUNDO CLIC");
-            System.out.println("Posiciones de origen "+((CasillasMarvel)e.getSource()));
-            System.out.println("Posiciones nuevas: ");
-            primerclic=false;
+        if(turnplayerHeore){
+          
+            if(primerclic){
+                if(e.getSource() instanceof CasillasMarvel){
+                    for (CasillasMarvel[] celda1 : celda) {
+                        for (CasillasMarvel objeto : celda1) {
+                            if (e.getSource().equals(objeto)) {
+                                segundaCasilla=objeto;
+                                validarMovimiento(primerCasilla,segundaCasilla);
+                                System.out.println(objeto.x+""+objeto.y);
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                primerclic=true;
+                if(e.getSource() instanceof CasillasMarvel){
+                    for (CasillasMarvel[] celda1 : celda) {
+                        for (CasillasMarvel objeto : celda1) {
+                            if (e.getSource().equals(objeto)) {
+                               primerCasilla= objeto;
+                            }
+                        }
+                    }
+                }
+            }
         }
         else{
-            primerclic=true;
-            System.out.println("PRIMER CLIC");
+            turnplayerHeore=true;
+            
         }
-    } 
+            
+    }
+
+    private void validarMovimiento(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
+        if(primerCasilla.ficha!=null){
+            if(segundaCasilla.ficha == null|| segundaCasilla.ficha!=primerCasilla.ficha){
+                moverPieza(primerCasilla,segundaCasilla);
+                
+            }
+            
+        }
+    }
+
+    private void moverPieza(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
+        if (primerCasilla.x==segundaCasilla.x){
+            int pos=primerCasilla.y;
+            if ((pos+1)>=pos||(pos-1)<=pos){
+                segundaCasilla.ficha=primerCasilla.ficha;
+                primerCasilla.ficha=null;
+            }  
+        }else if(primerCasilla.y==segundaCasilla.y){
+            int pos=primerCasilla.x;
+            if ((pos+1)>=pos||(pos-1)<=pos){
+                segundaCasilla.ficha=primerCasilla.ficha;
+                primerCasilla.ficha=null;
+            }
+        }
+            JOptionPane.showConfirmDialog(null, "Movimiento no valido, porfavor intenete de nuevo");
+    }
 }
+
+
+        
+
 
 

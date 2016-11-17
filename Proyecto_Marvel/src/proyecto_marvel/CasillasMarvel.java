@@ -5,7 +5,10 @@
  */
 package proyecto_marvel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,6 +16,7 @@ import javax.swing.JButton;
  */
 public class CasillasMarvel extends JButton{
     
+    boolean turnplayerHeroe;
     public int x,y;
     Ficha ficha;
    
@@ -20,14 +24,32 @@ public class CasillasMarvel extends JButton{
         this.x = x;
         this.y = y;
         this.ficha = ficha;
+       // this.addActionListener(this);
   
+    }
+    
+    
+/*
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(getName());
+       
+    }
+
+    public void setName(int x, int y){
+        setText(x+""+y);
+    }
+    
+    @Override
+    public String getName(){
+     return String.valueOf(x)+String.valueOf(y);   
     }
 
 
 
     
 
-
+*/
    
 }
     
