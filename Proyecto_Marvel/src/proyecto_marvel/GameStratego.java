@@ -30,8 +30,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     Ficha heroes[][]=new FichasHeroes[4][10];
     CasillasMarvel primerCasilla=null,segundaCasilla=null;
     boolean turnplayerHeore=true, primerclic=false;
-    TipoFicha fichaContraria= turnplayerHeore? TipoFicha.VILLANO:TipoFicha.HEROE;
-    TipoFicha miTipoFicha = turnplayerHeore? TipoFicha.HEROE:TipoFicha.VILLANO;
+    TipoFicha fichaContraria= (turnplayerHeore? TipoFicha.VILLANO:TipoFicha.HEROE);
+    TipoFicha miTipoFicha = (turnplayerHeore? TipoFicha.HEROE:TipoFicha.VILLANO);
     /**
      * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMIDO
      */
@@ -267,9 +267,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void validarMovimiento(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
-            if(segundaCasilla.ficha == null|| segundaCasilla.ficha.ficha!=miTipoFicha){
-                moverPieza(primerCasilla,segundaCasilla);
-            }
+        if(segundaCasilla.ficha == null|| segundaCasilla.ficha.ficha!=miTipoFicha){
+            moverPieza(primerCasilla,segundaCasilla);
+        }
 
             
         
