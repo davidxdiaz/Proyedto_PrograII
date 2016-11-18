@@ -30,6 +30,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     Ficha heroes[][]=new FichasHeroes[4][10];
     CasillasMarvel primerCasilla=null,segundaCasilla=null;
     boolean turnplayerHeore=true, primerclic=false;
+    TipoFicha fichaContraria= turnplayerHeore? TipoFicha.VILLANO:TipoFicha.HEROE;
+    TipoFicha miTipoFicha = turnplayerHeore? TipoFicha.HEROE:TipoFicha.VILLANO;
     /**
      * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMIDO
      */
@@ -218,7 +220,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                                 }
                                 if(primerCasilla.equals(objeto)){
                                     JOptionPane.showMessageDialog(null,"Usted a hecho clic en la misma cordenada");
-                                }else{
+                                    
+                                }
+                                else{
                                 System.out.println("Segundo Clic\n"+objeto.x+""+objeto.y+" "+tipo);
                                 segundaCasilla=objeto;
                                 primerclic=false;
@@ -227,33 +231,32 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             }
                         }
                     }
-                }
+                }  
             }
             else{
                 
                 if(e.getSource() instanceof CasillasMarvel){
                     for (CasillasMarvel[] celda1 : celda) {
                         for (CasillasMarvel objeto : celda1) {
+                            String tipo=null;
                             if (e.getSource().equals(objeto)) {
                                 if(objeto.ficha!=null){
                                     primerclic=true;
-                                    String tipo=null;
                                     System.out.println("Primer Clic");
                                     if(objeto.ficha instanceof FichasHeroes){
                                       tipo="HEROE";  
                                     }
                                     System.out.println(objeto.x+""+objeto.y+" "+tipo);
-                                   primerCasilla= objeto;
+                                    primerCasilla= objeto;
                                 }
                                 else{
+                                    System.out.println(objeto.x+""+objeto.y+" "+tipo);
                                     JOptionPane.showMessageDialog(null, "Selecione una ficha porfavor");
-                            }
-                               
+                                }
                             }
                         }
                     }
                 }
-                
             }
         }
         else{
@@ -264,10 +267,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void validarMovimiento(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
-            if(segundaCasilla.ficha == null|| segundaCasilla.ficha!=primerCasilla.ficha){
+            if(segundaCasilla.ficha == null|| segundaCasilla.ficha.ficha!=miTipoFicha){
                 moverPieza(primerCasilla,segundaCasilla);
-                
             }
+
             
         
     }
