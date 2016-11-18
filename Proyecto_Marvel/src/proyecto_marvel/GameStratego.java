@@ -27,6 +27,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
    // public static boolean turno=true;
     
     CasillasMarvel celda[][]=new CasillasMarvel[10][10];
+    Ficha heroes[][]=new FichasHeroes[4][10];
     CasillasMarvel primerCasilla=null,segundaCasilla=null;
     boolean turnplayerHeore=true, primerclic=false;
     /**
@@ -57,7 +58,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         this.setResizable(false);
         
         panelTablero.setSize(500, 700);
-        tablero(); //IMPLEMENTA EL TABLERO EN PANTALLA
+        obtenerHeroes();
+        tablero(); //IMPLEMENTA EL TABLERO EN PANTALLA\
+        
   
     }
     
@@ -65,12 +68,17 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
    * FUNCION QUE IMPLEMENTA LAS CASILLAS DE TABLERO
    */  
     public void tablero(){
+        
  
         panelTablero.setLayout(new GridLayout(10,10));
         for (int i=0;i<celda.length;i++ ){
             for (int e=0;e<celda[i].length;e++){
-                
-                celda[i][e]=new CasillasMarvel(i, e, null);
+                if(i<heroes.length &&e<heroes[i].length){                
+                celda[i][e]=new CasillasMarvel(i, e, heroes[i][e]);
+                }
+                else{
+                    celda[i][e]=new CasillasMarvel(i, e, null);
+                }
                 celda[i][e].setName(i+""+e);
                 celda[i][e].addActionListener(this);
                 
@@ -204,10 +212,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     for (CasillasMarvel[] celda1 : celda) {
                         for (CasillasMarvel objeto : celda1) {
                             if (e.getSource().equals(objeto)) {
+                                String tipo=null;
+                                if(objeto.ficha instanceof FichasHeroes){
+                                    tipo="HEROE";
+                                }
                                 if(primerCasilla.equals(objeto)){
                                     JOptionPane.showMessageDialog(null,"Usted a hecho clic en la misma cordenada");
                                 }else{
-                                System.out.println("Segundo Clic\n"+objeto.x+""+objeto.y);
+                                System.out.println("Segundo Clic\n"+objeto.x+""+objeto.y+" "+tipo);
                                 segundaCasilla=objeto;
                                 primerclic=false;
                                 validarMovimiento(primerCasilla,segundaCasilla);
@@ -218,14 +230,25 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 }
             }
             else{
-                primerclic=true;
+                
                 if(e.getSource() instanceof CasillasMarvel){
                     for (CasillasMarvel[] celda1 : celda) {
                         for (CasillasMarvel objeto : celda1) {
                             if (e.getSource().equals(objeto)) {
-                                System.out.println("Primer Clic");
-                                System.out.println(objeto.x+""+objeto.y);
-                               primerCasilla= objeto;
+                                if(objeto.ficha!=null){
+                                    primerclic=true;
+                                    String tipo=null;
+                                    System.out.println("Primer Clic");
+                                    if(objeto.ficha instanceof FichasHeroes){
+                                      tipo="HEROE";  
+                                    }
+                                    System.out.println(objeto.x+""+objeto.y+" "+tipo);
+                                   primerCasilla= objeto;
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null, "Selecione una ficha porfavor");
+                            }
+                               
                             }
                         }
                     }
@@ -241,13 +264,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void validarMovimiento(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
-        if(primerCasilla.ficha!=null){
             if(segundaCasilla.ficha == null|| segundaCasilla.ficha!=primerCasilla.ficha){
                 moverPieza(primerCasilla,segundaCasilla);
                 
             }
             
-        }
+        
     }
 
     private void moverPieza(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
@@ -264,7 +286,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 primerCasilla.ficha=null;
             }
         }
-            JOptionPane.showConfirmDialog(null, "Movimiento no valido, porfavor intenete de nuevo");
+        else{
+            JOptionPane.showMessageDialog(null, "Movimiento no valido, porfavor intenete de nuevo");
+        }
     }
 
     private static class RunnableImpl implements Runnable {
@@ -277,7 +301,23 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             new GameStratego().setVisible(true);
         }
     }
+    
+    
+    public void obtenerHeroes(){
+        for (int cont1=0;cont1<heroes.length;cont1++){
+            for(int cont2=0;cont2<heroes[cont1].length;cont2++){
+                if(cont2>2||2<heroes[cont1].length-2){
+                    heroes[cont1][cont2]=new FichasHeroes(2);
+                }
+                if(heroes[cont1][cont2]==null){
+                    heroes[cont1][cont2]=new FichasHeroes(1);
+                }
+                
+            }
+        }
+    }
 }
+
 
 
         

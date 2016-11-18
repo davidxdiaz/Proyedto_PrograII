@@ -5,6 +5,7 @@
  */
 package proyecto_marvel;
 
+import java.net.URL;
 import javax.swing.ImageIcon;
 
 /**
@@ -16,12 +17,12 @@ public abstract class Ficha {
     protected TipoFicha ficha;
     protected ImageIcon imagen;
     protected String nombreficha;
+    protected URL url;
     
-    
-    public Ficha(TipoFicha ficha, int rango, ImageIcon imagen){
+    public Ficha(TipoFicha ficha, int rango){
         this.ficha= ficha;
         this.rango= rango;
-        this.imagen= imagen;
+      
         
     }
     
