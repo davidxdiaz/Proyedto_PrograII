@@ -5,6 +5,7 @@
  */
 package proyecto_marvel;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -62,6 +63,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         panelTablero.setSize(500, 700);
         obtenerHeroes();
         tablero(); //IMPLEMENTA EL TABLERO EN PANTALLA\
+        pintarZonaSegura();
+        
         
   
     }
@@ -75,11 +78,13 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         panelTablero.setLayout(new GridLayout(10,10));
         for (int i=0;i<celda.length;i++ ){
             for (int e=0;e<celda[i].length;e++){
-                if(i<heroes.length &&e<heroes[i].length){                
-                celda[i][e]=new CasillasMarvel(i, e, heroes[i][e]);
+                if(i<heroes.length &&e<heroes[i].length){ 
+                    celda[i][e]=new CasillasMarvel(i, e, heroes[i][e]);
+                    celda[i][e].setText("HR"+i+" "+e);
                 }
                 else{
                     celda[i][e]=new CasillasMarvel(i, e, null);
+                    
                 }
                 celda[i][e].setName(i+""+e);
                 celda[i][e].addActionListener(this);
@@ -276,21 +281,55 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void moverPieza(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
+        
+        int scx=segundaCasilla.x,scy=segundaCasilla.y; //COORDENADAS DE LA SEGUNDO BOTON O CASILA
+        if(scx==4 ||scx==5){
+            if(scy==2||scy==3||scy==6||scy==7){
+                JOptionPane.showMessageDialog(null, "!NO PUEDE MOVER ESTA PIEZA A LA ZONA PROHIBIDA");
+                return;
+            }
+        }
         if (primerCasilla.x==segundaCasilla.x){
             int pos=primerCasilla.y;
-            if ((pos+1)>=pos||(pos-1)<=pos){
+            int s=segundaCasilla.y;
+            if ((s+1)>=pos &&(s-1)<=pos){
                 segundaCasilla.ficha=primerCasilla.ficha;
+                segundaCasilla.setText(primerCasilla.getText());
+                primerCasilla.setText(null);
                 primerCasilla.ficha=null;
-            }  
-        }else if(primerCasilla.y==segundaCasilla.y){
-            int pos=primerCasilla.x;
-            if ((pos+1)>=pos||(pos-1)<=pos){
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Movimiento no valido, esta Ficha no se puede mover mas 2 posciones");
+            }
+        }
+        else if(primerCasilla.y==segundaCasilla.y){
+            int h=primerCasilla.x;
+            int s=segundaCasilla.x;
+            if ((s+1)>=h &&(s-1)<=h){
                 segundaCasilla.ficha=primerCasilla.ficha;
+                segundaCasilla.setText(primerCasilla.getText());
+                primerCasilla.setText(null);
                 primerCasilla.ficha=null;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Movimiento no valido, esta Ficha no se puede mover mas 2 posciones");
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "Movimiento no valido, porfavor intenete de nuevo");
+        }
+    }
+        
+    
+
+    private void pintarZonaSegura() {
+        for(int y=4;y<=5;y++){
+            for (int x=2;x<=3;x++){
+                celda[y][x].setBackground(Color.YELLOW);     
+            }
+            for(int z=6;z<=7;z++){
+                celda[y][z].setBackground(Color.magenta);
+            }
         }
     }
 
@@ -307,18 +346,18 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     
     public void obtenerHeroes(){
-        for (int cont1=0;cont1<heroes.length;cont1++){
-            for(int cont2=0;cont2<heroes[cont1].length;cont2++){
-                if(cont2>2||2<heroes[cont1].length-2){
-                    heroes[cont1][cont2]=new FichasHeroes(2);
+        for (Ficha[] heroe : heroes) {
+            for (int cont2 = 0; cont2 < heroe.length; cont2++) {
+                if (cont2>2 || 2 < heroe.length - 2) {
+                    heroe[cont2] = new FichasHeroes(2);
                 }
-                if(heroes[cont1][cont2]==null){
-                    heroes[cont1][cont2]=new FichasHeroes(1);
+                if (heroe[cont2] == null) {
+                    heroe[cont2] = new FichasHeroes(1);
                 }
-                
             }
         }
     }
+    
 }
 
 

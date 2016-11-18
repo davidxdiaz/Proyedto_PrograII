@@ -104,12 +104,15 @@ public class SignUp extends javax.swing.JFrame {
     
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         Player logIn = Player.existe(txtUsername.getText());
+        String nomUsuario=txtUsername.getText();
+        String password=txtPassword.getText();
         if(logIn==null)//Usuario no existe
         {
-            JOptionPane.showConfirmDialog(null,"Usuario disponible");
-            if(txtPassword.getText().length()==5){
+            
+            if(password.length()==5){
                 System.out.println("Password Valida");
-                Player.add(txtUsername.getText(), txtPassword.getText());
+                Player.add(nomUsuario, password);
+                JOptionPane.showConfirmDialog(null,"Usuario registrado correctamente");
                 dispose();
                 new MenuPrincipal().setVisible(true);
                 dispose();
@@ -122,7 +125,9 @@ public class SignUp extends javax.swing.JFrame {
                 
         }
         else{
-            System.out.println("Usuario no disponible");
+            JOptionPane.showMessageDialog(null,"Ya existe un Usuario con este nombre,\n porfavor intente con otro");
+            txtUsername.setText(null);
+            txtPassword.setText(null);
         }
     }//GEN-LAST:event_btnOkActionPerformed
     
