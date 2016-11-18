@@ -107,7 +107,7 @@ public class LogIn extends javax.swing.JFrame {
                 System.out.println("LOGGED PLAYER: " + Player.getLoggedPlayer());
             } else
             {
-                JOptionPane.showConfirmDialog(null," Usuario y contraseña incorrectos.\n"
+                JOptionPane.showConfirmDialog(null," Usuario y/o contraseña incorrectos.\n"
                                 + "Debe crear el usuario o intentar con otro usuario y contraseña");
             }
        
