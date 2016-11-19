@@ -224,7 +224,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                                     tipo="HEROE";
                                 }
                                 if(primerCasilla.equals(objeto)){
-                                    JOptionPane.showMessageDialog(null,"Usted a hecho clic en la misma cordenada");
+                                    JOptionPane.showMessageDialog(null,"Usted a hecho click en la misma cordenada");
                                     
                                 }
                                 else{
@@ -247,7 +247,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             if (e.getSource().equals(objeto)) {
                                 if(objeto.ficha!=null){
                                     primerclic=true;
-                                    System.out.println("Primer Clic");
+                                    System.out.println("Primer Click");
                                     if(objeto.ficha instanceof FichasHeroes){
                                       tipo="HEROE";  
                                     }
@@ -299,7 +299,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 primerCasilla.ficha=null;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Movimiento no valido, esta Ficha no se puede mover mas 2 posciones");
+                JOptionPane.showMessageDialog(null, "Movimiento no valido, esta Ficha no se puede mover mas 2 posiciones");
             }
         }
         else if(primerCasilla.y==segundaCasilla.y){
@@ -312,11 +312,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 primerCasilla.ficha=null;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Movimiento no valido, esta Ficha no se puede mover mas 2 posciones");
+                JOptionPane.showMessageDialog(null, "Movimiento no valido, esta Ficha no se puede mover mas 2 posiciones");
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Movimiento no valido, porfavor intenete de nuevo");
+            JOptionPane.showMessageDialog(null, "Movimiento no valido, porfavor intente de nuevo");
         }
     }
         

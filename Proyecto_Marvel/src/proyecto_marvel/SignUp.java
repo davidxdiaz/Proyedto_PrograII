@@ -50,8 +50,6 @@ public class SignUp extends javax.swing.JFrame {
             .addGap(0, 8, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         jLabel1.setText("Username");
 
         jLabel2.setText("Password");
@@ -129,6 +127,14 @@ public class SignUp extends javax.swing.JFrame {
             txtUsername.setText(null);
             txtPassword.setText(null);
         }
+        
+       /* try{
+           MiPerfil.lblUser.setText(nomUsuario.getText());  
+        }catch(NullPointerException e){
+            System.err.println("Error");
+        }*/
+       
+        
     }//GEN-LAST:event_btnOkActionPerformed
     
     /**
