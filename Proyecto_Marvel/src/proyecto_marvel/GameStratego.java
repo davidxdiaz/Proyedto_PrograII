@@ -50,11 +50,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
      * Creates new form GameStratego
      */
     public GameStratego() {
-        /* 
-        this.setUndecorated(true); Remueve la barra "Hace que no podas cerrar la
-                                   ventana con la x o que la podas mover.
-        
-        */
+      
         
         initComponents();
         this.setLocationRelativeTo(null);
