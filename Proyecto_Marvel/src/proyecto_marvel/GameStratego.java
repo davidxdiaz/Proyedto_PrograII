@@ -28,6 +28,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     boolean turnoPlayerHeroes=true, primerclic=false;
     TipoFicha fichaContraria= turnoPlayerHeroes?TipoFicha.VILLANO:TipoFicha.HEROE;
     TipoFicha miTipoFicha = turnoPlayerHeroes? TipoFicha.HEROE:TipoFicha.VILLANO;
+    int turno=1; 
+    String turnoplayer=(turno==1?"HEROES":"VILANOS");
     
     /**
      * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMID
@@ -61,6 +63,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         obtenerVillanos();
         tablero(); //IMPLEMENTA EL TABLERO EN PANTALLA\
         pintarZonaSegura();
+        lblTurno.setText("TURNO: "+turnoplayer);
         
         
   
@@ -235,9 +238,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        turn=turnoPlayerHeroes?"HEROES":"VILLANOS";
-        lblTurno.setText("TURNO "+turn);
-        if(turnoPlayerHeroes){
+        //turn=turnoPlayerHeroes?"HEROES":"VILLANOS";
+       
+       // if(turnoPlayerHeroes){
           
             if(primerclic){
                 if(e.getSource() instanceof CasillasMarvel){
@@ -246,6 +249,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             if (e.getSource().equals(objeto)) {
                                 segundaCasilla=objeto;
                                 validarSegundoClic(primerCasilla,segundaCasilla);
+                                turno++;
+                                if (turno>2){
+                                    turno=1;
+                                }
+                                turnoplayer= turno==1?"HEROES":"VILLANOS";
+                                lblTurno.setText("TURNO "+turnoplayer);
                             }
                         }
                     }
@@ -264,11 +273,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     }
                 }
             }
-        }
-        else{
-            turnoPlayerHeroes=true;
+        //}
+        //else{
+           // turnoPlayerHeroes=true;
             
-        }
+       // }
             
     }
 
