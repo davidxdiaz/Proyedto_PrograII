@@ -20,21 +20,17 @@ import javax.swing.JOptionPane;
  * @author ANDY ESCOBAR 007
  */
 public final class GameStratego extends javax.swing.JFrame implements ActionListener{
-    
-    
-    //private static ImageIcon villano;
-    //Si turno es true entonces toca el turno del jugador 1 "HEREO" y si es 
-    //falso es el turno del jugador 2 "VILLANO
-   // public static boolean turno=true;
-    
+        
     CasillasMarvel celda[][]=new CasillasMarvel[10][10];
     Ficha heroes[][]=new FichasHeroes[4][10];
+    Ficha villanos[][]=new FichasVillanos[4][10];
     CasillasMarvel primerCasilla=null,segundaCasilla=null;
-    boolean turnplayerHeore=true, primerclic=false;
-    TipoFicha fichaContraria= (turnplayerHeore? TipoFicha.VILLANO:TipoFicha.HEROE);
-    TipoFicha miTipoFicha = (turnplayerHeore? TipoFicha.HEROE:TipoFicha.VILLANO);
+    boolean turnoPlayerHeroes=true, primerclic=false;
+    TipoFicha fichaContraria= turnoPlayerHeroes?TipoFicha.VILLANO:TipoFicha.HEROE;
+    TipoFicha miTipoFicha = turnoPlayerHeroes? TipoFicha.HEROE:TipoFicha.VILLANO;
+    
     /**
-     * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMIDO
+     * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMID
      */
     int cVillanosR1=0,cVillanosR2=0,cVillanosR3=0,cVillanosR4=0,cVillanosR5=0;
     int cVillanosR6=0,cVillanosR7=0,cVillanosR8=0,cVillanosR9=0,cVillanosR10=0;
@@ -44,6 +40,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
      */
     int cHeroesR1=0,cHeroesR2=0,cHeroesR3=0,cHeroesR4=0,
        cHeroesR5=0,cHeroesR6=0,cHeroesR7=0,cHeroesR8=0,cHeroesR9=0,cHeroesR10=0;
+    
+    
+    
+    String turn=turnoPlayerHeroes?"HEROES":"VILLANOS";
+       
    
     /**
      * Creates new form GameStratego
@@ -59,9 +60,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
-        
         panelTablero.setSize(500, 700);
         obtenerHeroes();
+        obtenerVillanos();
         tablero(); //IMPLEMENTA EL TABLERO EN PANTALLA\
         pintarZonaSegura();
         
@@ -81,8 +82,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 if(i<heroes.length &&e<heroes[i].length){ 
                     celda[i][e]=new CasillasMarvel(i, e, heroes[i][e]);
                     celda[i][e].setText("HR"+i+" "+e);
+                }else if(i>5){
+                    celda[i][e]=new CasillasMarvel(i, e, villanos[i-6][e]);
+                    celda[i][e].setText("VILLAINS"+i+e);
                 }
-                else{
+                else{ 
                     celda[i][e]=new CasillasMarvel(i, e, null);
                     
                 }
@@ -90,6 +94,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 celda[i][e].addActionListener(this);
                 
                 panelTablero.add(celda[i][e]);
+        
             }
         }
     }
@@ -106,6 +111,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         panelTablero = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lblTurno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -126,21 +132,36 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(java.awt.SystemColor.textHighlight);
         jLabel1.setText("Player 1");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(java.awt.SystemColor.textHighlight);
         jLabel2.setText("Player 2");
+
+        lblTurno.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTurno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTurno.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                lblTurnoPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(197, 197, 197))
         );
@@ -148,20 +169,25 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(325, 325, 325)
-                        .addComponent(jLabel2)
-                        .addGap(203, 203, 203))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(126, 126, 126))))
+                .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(325, 325, 325)
+                .addComponent(jLabel2)
+                .addGap(203, 203, 203))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblTurnoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblTurnoPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblTurnoPropertyChange
 
     /**
      * @param args the command line arguments
@@ -193,6 +219,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel lblTurno;
     private javax.swing.JPanel panelTablero;
     // End of variables declaration//GEN-END:variables
 
@@ -212,27 +239,17 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(turnplayerHeore){
+        turn=turnoPlayerHeroes?"HEROES":"VILLANOS";
+        lblTurno.setText("TURNO "+turn);
+        if(turnoPlayerHeroes){
           
             if(primerclic){
                 if(e.getSource() instanceof CasillasMarvel){
                     for (CasillasMarvel[] celda1 : celda) {
                         for (CasillasMarvel objeto : celda1) {
                             if (e.getSource().equals(objeto)) {
-                                String tipo=null;
-                                if(objeto.ficha instanceof FichasHeroes){
-                                    tipo="HEROE";
-                                }
-                                if(primerCasilla.equals(objeto)){
-                                    JOptionPane.showMessageDialog(null,"Usted a hecho clic en la misma cordenada");
-                                    
-                                }
-                                else{
-                                System.out.println("Segundo Clic\n"+objeto.x+""+objeto.y+" "+tipo);
                                 segundaCasilla=objeto;
-                                primerclic=false;
-                                validarMovimiento(primerCasilla,segundaCasilla);
-                                }
+                                validarSegundoClic(primerCasilla,segundaCasilla);
                             }
                         }
                     }
@@ -243,21 +260,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 if(e.getSource() instanceof CasillasMarvel){
                     for (CasillasMarvel[] celda1 : celda) {
                         for (CasillasMarvel objeto : celda1) {
-                            String tipo=null;
-                            if (e.getSource().equals(objeto)) {
-                                if(objeto.ficha!=null){
-                                    primerclic=true;
-                                    System.out.println("Primer Clic");
-                                    if(objeto.ficha instanceof FichasHeroes){
-                                      tipo="HEROE";  
-                                    }
-                                    System.out.println(objeto.x+""+objeto.y+" "+tipo);
-                                    primerCasilla= objeto;
-                                }
-                                else{
-                                    System.out.println(objeto.x+""+objeto.y+" "+tipo);
-                                    JOptionPane.showMessageDialog(null, "Selecione una ficha porfavor");
-                                }
+                            if (e.getSource().equals(objeto)){
+                                primerCasilla= objeto;
+                                validarPrimerClic(primerCasilla);
                             }
                         }
                     }
@@ -265,7 +270,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         }
         else{
-            turnplayerHeore=true;
+            turnoPlayerHeroes=true;
             
         }
             
@@ -320,8 +325,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }
     }
         
-    
-
     private void pintarZonaSegura() {
         for(int y=4;y<=5;y++){
             for (int x=2;x<=3;x++){
@@ -329,6 +332,58 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
             for(int z=6;z<=7;z++){
                 celda[y][z].setBackground(Color.magenta);
+            }
+        }
+    }
+
+    private void validarPrimerClic(CasillasMarvel primerCasilla) {
+         String tipo=null;
+        if(primerCasilla.ficha!=null){
+           
+            primerclic=true;
+            System.out.println("Primer Clic");
+            if(primerCasilla.ficha instanceof FichasHeroes){
+                tipo="HEROE";  
+            }
+            System.out.println(primerCasilla.x+""+primerCasilla.y+" "+tipo);
+                                    
+            }
+            else{
+                System.out.println(primerCasilla.x+""+primerCasilla.y+" "+tipo);
+                JOptionPane.showMessageDialog(null, "Selecione una ficha porfavor");
+        }
+    }
+
+    private void validarSegundoClic(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
+        CasillasMarvel objeto=segundaCasilla;
+        String tipo=null;
+        if(objeto.ficha instanceof FichasHeroes){
+            tipo="HEROE";
+        }
+        if(primerCasilla.equals(objeto)){
+            JOptionPane.showMessageDialog(null,"Usted a hecho clic en la misma cordenada");
+        }
+        else{
+            System.out.println("Segundo Clic\n"+objeto.x+""+objeto.y+" "+tipo);
+            primerclic=false;
+            
+            validarMovimiento(primerCasilla,segundaCasilla);
+            
+        }
+    }
+
+    private void obtenerVillanos() {
+        for (int cont1=0;cont1<villanos.length;cont1++){
+            for(int cont2=0; cont2<villanos[cont1].length;cont2++){
+                if (cont1<2) {
+                   villanos[cont1][cont2] = new FichasVillanos(2);
+                }else if(cont1<4){
+                    villanos[cont1][cont2]=new FichasVillanos(4);
+                }
+                if (villanos[cont1][cont2] == null) {
+                    villanos[cont1][cont2] = new FichasVillanos(1);
+                }
+                
             }
         }
     }
