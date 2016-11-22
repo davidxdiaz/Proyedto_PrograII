@@ -30,6 +30,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     TipoFicha miTipoFicha = turnoPlayerHeroes? TipoFicha.HEROE:TipoFicha.VILLANO;
     int turno=1; 
     String turnoplayer=(turno==1?"HEROES":"VILANOS");
+    private String playertwo;
     
     /**
      * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMID
@@ -73,6 +74,33 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
    * FUNCION QUE IMPLEMENTA LAS CASILLAS DE TABLERO
    */  
     public void tablero(){
+        do
+        {
+         playertwo = JOptionPane.showInputDialog(null, "Ingrese jugador 2");
+
+         if (playertwo == null)
+         {
+            return;
+         }
+
+         if ("".equals(playertwo))
+         {
+            JOptionPane.showMessageDialog(null, "El jugador no puede estar vacio");
+            continue;
+         }
+
+         if ((Player.existe(playertwo) != null) && !playertwo.equals(Player.getLoggedPlayer().getUsername()))
+         {
+            break;
+         } else
+         {
+            JOptionPane.showMessageDialog(null, "El jugador no existe o ingreselo correctamente");
+            continue;
+         }
+
+       } while (true);
+        lblPlayerOne.setText(Player.getLoggedPlayer().getUsername());
+        lblPlayerTwo.setText(playertwo);
         
  
         panelTablero.setLayout(new GridLayout(10,10));
@@ -108,8 +136,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void initComponents() {
 
         panelTablero = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblPlayerOne = new javax.swing.JLabel();
+        lblPlayerTwo = new javax.swing.JLabel();
         lblTurno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -130,13 +158,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             .addGap(0, 607, Short.MAX_VALUE)
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(java.awt.SystemColor.textHighlight);
-        jLabel1.setText("Player 1");
+        lblPlayerOne.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblPlayerOne.setText("Player 1");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setForeground(java.awt.SystemColor.textHighlight);
-        jLabel2.setText("Player 2");
+        lblPlayerTwo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblPlayerTwo.setText("Player 2");
 
         lblTurno.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTurno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -155,8 +181,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)))
+                            .addComponent(lblPlayerOne)
+                            .addComponent(lblPlayerTwo)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -174,9 +200,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 .addGap(35, 35, 35)
                 .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblPlayerOne)
                 .addGap(325, 325, 325)
-                .addComponent(jLabel2)
+                .addComponent(lblPlayerTwo)
                 .addGap(203, 203, 203))
         );
 
@@ -216,8 +242,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblPlayerOne;
+    private javax.swing.JLabel lblPlayerTwo;
     public javax.swing.JLabel lblTurno;
     private javax.swing.JPanel panelTablero;
     // End of variables declaration//GEN-END:variables
