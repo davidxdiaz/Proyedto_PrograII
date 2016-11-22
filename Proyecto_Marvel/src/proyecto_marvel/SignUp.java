@@ -111,8 +111,10 @@ public class SignUp extends javax.swing.JFrame {
             
             if(password.length()==5){
                 System.out.println("Password Valida");
-                Player.add(nomUsuario, password);
+                Player newPlayer = new Player(txtUsername.getText(), password);
+                Player.add(newPlayer.getUsername(), newPlayer.getPassword());
                 JOptionPane.showConfirmDialog(null,"Usuario registrado correctamente");
+                Player.setLoggedPlayer(newPlayer);
                 dispose();
                 new MenuPrincipal().setVisible(true);
                 dispose();
