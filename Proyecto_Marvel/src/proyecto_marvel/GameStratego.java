@@ -14,6 +14,7 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import jdk.nashorn.internal.ir.BreakNode;
 
 /**
  *
@@ -238,10 +239,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //turn=turnoPlayerHeroes?"HEROES":"VILLANOS";
-       
-       // if(turnoPlayerHeroes){
-          
+ 
             if(primerclic){
                 if(e.getSource() instanceof CasillasMarvel){
                     for (CasillasMarvel[] celda1 : celda) {
@@ -249,12 +247,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             if (e.getSource().equals(objeto)) {
                                 segundaCasilla=objeto;
                                 validarSegundoClic(primerCasilla,segundaCasilla);
-                                turno++;
-                                if (turno>2){
-                                    turno=1;
-                                }
-                                turnoplayer= turno==1?"HEROES":"VILLANOS";
-                                lblTurno.setText("TURNO "+turnoplayer);
+                                cambiarTurno();
+                                
                             }
                         }
                     }
@@ -267,18 +261,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                         for (CasillasMarvel objeto : celda1) {
                             if (e.getSource().equals(objeto)){
                                 primerCasilla= objeto;
-                                validarPrimerClic(primerCasilla);
+                                validarPrimerClic(primerCasilla);                                     
                             }
                         }
                     }
                 }
             }
-        //}
-        //else{
-           // turnoPlayerHeroes=true;
-            
-       // }
-            
     }
 
     private void validarMovimiento(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
@@ -343,19 +331,22 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
     private void validarPrimerClic(CasillasMarvel primerCasilla) {
          String tipo=null;
-        if(primerCasilla.ficha!=null){
-           
+        if(primerCasilla.ficha!=null &&primerCasilla.ficha.ficha==miTipoFicha){
+            
             primerclic=true;
             System.out.println("Primer Clic");
             if(primerCasilla.ficha instanceof FichasHeroes){
                 tipo="HEROE";  
             }
+            else if(primerCasilla.ficha instanceof FichasVillanos){
+                tipo="VILLANO";
+            }
             System.out.println(primerCasilla.x+""+primerCasilla.y+" "+tipo);
                                     
             }
-            else{
-                System.out.println(primerCasilla.x+""+primerCasilla.y+" "+tipo);
-                JOptionPane.showMessageDialog(null, "Selecione una ficha porfavor");
+        else {
+            System.out.println(primerCasilla.x+""+primerCasilla.y+" "+tipo);
+            JOptionPane.showMessageDialog(null, "Selecione una ficha porfavor tuya porfavor");
         }
     }
 
@@ -364,7 +355,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         String tipo=null;
         if(objeto.ficha instanceof FichasHeroes){
             tipo="HEROE";
-        }
+        }else if(objeto.ficha instanceof FichasVillanos)
+            tipo="VILLANOS";
         if(primerCasilla.equals(objeto)){
             JOptionPane.showMessageDialog(null,"Usted a hecho clic en la misma cordenada");
         }
@@ -391,6 +383,17 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 
             }
         }
+    }
+
+    private void cambiarTurno() {
+        turno++;
+        if (turno>2){
+           turno=1;
+        }
+        turnoplayer= turno==1?"HEROES":"VILLANOS";
+        lblTurno.setText("TURNO "+turnoplayer);
+        fichaContraria= turno==1?TipoFicha.VILLANO:TipoFicha.HEROE;
+        miTipoFicha = turno==1? TipoFicha.HEROE:TipoFicha.VILLANO;
     }
 
     private static class RunnableImpl implements Runnable {
