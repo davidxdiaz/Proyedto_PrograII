@@ -133,7 +133,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUniversoActionPerformed
 
     private void btnStrategoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStrategoActionPerformed
-        new GameStratego().setVisible(true);
+        new Opciones().setVisible(true);
     }//GEN-LAST:event_btnStrategoActionPerformed
 
     /**

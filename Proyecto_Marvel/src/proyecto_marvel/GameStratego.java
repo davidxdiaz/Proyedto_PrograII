@@ -403,6 +403,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void formularioInicial() {
+        
+        
+        
+        
         do{
             playertwo = JOptionPane.showInputDialog(null, "Ingrese jugador 2");
             if (playertwo == null){
@@ -419,8 +423,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 continue;
             }
         } while (true);
-        lblPlayerOne.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
-        lblPlayerTwo.setText(playertwo.toUpperCase());
+        if(Opciones.op==true){
+            lblPlayerOne.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
+            lblPlayerTwo.setText(playertwo.toUpperCase());
+        }
+        else{
+            lblPlayerOne.setText(playertwo.toUpperCase());
+            lblPlayerTwo.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
+        }
     }
 
     private String infoTipoFicha(CasillasMarvel objeto) {
