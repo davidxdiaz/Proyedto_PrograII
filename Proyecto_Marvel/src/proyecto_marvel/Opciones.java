@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+import java.util.Locale;
+
 /**
  *
  * @author David
@@ -16,6 +18,7 @@ public class Opciones extends javax.swing.JFrame {
      */
     public Opciones() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -42,7 +45,7 @@ public class Opciones extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         optH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        optH.setText("Hereos");
+        optH.setText("Héroes");
         optH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optHActionPerformed(evt);
@@ -79,14 +82,14 @@ public class Opciones extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Toledo", 0, 36)); // NOI18N
-        jLabel1.setText("Eliga una opcion");
+        jLabel1.setText("Elije tu bando");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(19, 19, 19))
             .addGroup(layout.createSequentialGroup()
