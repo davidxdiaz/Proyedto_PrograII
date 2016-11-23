@@ -420,7 +420,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 break;
             } else{
                 JOptionPane.showMessageDialog(null, "El jugador no existe o ingreselo correctamente");
-                continue;
             }
         } while (true);
         if(Opciones.op==true){
