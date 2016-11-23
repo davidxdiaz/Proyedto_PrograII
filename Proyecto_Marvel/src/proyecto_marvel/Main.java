@@ -6,7 +6,6 @@
 package proyecto_marvel;
 
 /**
- *
  * @author David
  */
 public class Main {
