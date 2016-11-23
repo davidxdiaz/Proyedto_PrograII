@@ -5,7 +5,6 @@
  */
 package proyecto_marvel;
 
-import java.net.URL;
 import javax.swing.ImageIcon;
 
 /**
@@ -13,12 +12,18 @@ import javax.swing.ImageIcon;
  * @author Miguel Paz
  */
 public class FichasHeroes extends Ficha {
-    private ImageIcon imgocultar,imagen;
-    public FichasHeroes arrayheroes[][]= new FichasHeroes[4][10];
     
-    public FichasHeroes(int rango) {
-        super(TipoFicha.HEROE, rango);
-        imagen=new ImageIcon(".png");
+    public FichasHeroes arrayheroes[][]= new FichasHeroes[4][10];
+    public ImageIcon imagenHeroe; 
+    String nombre;
+    
+    public FichasHeroes(int rango,String nom) {
+        super(TipoFicha.HEROE, rango,nom);
+        this.nombre=nom;
+    }
+
+    public ImageIcon getImagenHeroe() {
+        return imagenHeroe;
     }
     
 }

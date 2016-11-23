@@ -24,7 +24,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     /**
      * Variables Globales
      */    
+    String cap="Capitán América";
     ImageIcon icono=new ImageIcon("src/Imagenes/cardsVillain.png");
+    ImageIcon iconoH=new ImageIcon("src/Imagenes/Heroes/"+cap+".png");
     CasillasMarvel celda[][]=new CasillasMarvel[10][10];
     Ficha heroes[][]=new FichasHeroes[4][10];
     Ficha villanos[][]=new FichasVillanos[4][10];
@@ -35,6 +37,18 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     int turno=1; 
     String turnoplayer=(turno==1?"HEROES":"VILANOS");
     private String playertwo;
+    
+    
+    
+    
+    String nomHeroes[]={"Nightcrowler","Elektra","Dr. Strange","Phoenix","Storm","Ice Man","SpiderGirl",
+        "Gambit","Colossus","Beast","Giant Man","She Hulk","Emma Frost",
+        "Thing","Blade","Punisher","Ghost Rider",
+        "Invisible Woman","Cyclops","Human Torch","Thor",
+        "Iron Man","Hulk","Silver Surfers","Daredevil",
+        "Namor","Wolverine","SpiderMan",
+        "Nick Fury","Profesor X",
+        "Capitán América","Mr. Fantastic","Black Widow"};
     
     /**
      * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMID
@@ -76,6 +90,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 if(i<heroes.length &&e<heroes[i].length){ 
                     celda[i][e]=new CasillasMarvel(i, e, heroes[i][e]);
                     celda[i][e].setText("HR"+i+" "+e);
+                    celda[i][e].setIcon(iconoH);
                 }else if(i>5){
                     celda[i][e]=new CasillasMarvel(i, e, villanos[i-6][e]);
                     celda[i][e].setText("VILLAINS"+i+e);
@@ -441,6 +456,18 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }return tipo;
     }
 
+    private int posicionAleatoria(int min,int max) {
+        int numero=(int)(Math.random()*max)+min;
+        return numero;
+    }
+
+
+    private ImageIcon obtenerImagen(Ficha img) {
+        String dir=(String)(img.nombreficha);
+        ImageIcon icoimg= new ImageIcon("src/Imagenes/Heroes/"+dir+".png");
+        return icoimg;
+    }
+
 
 
     private static class RunnableImpl implements Runnable {
@@ -456,18 +483,146 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     
     public void obtenerHeroes(){
+        
+      /*
+        
+        int f=0,pos=0;
+        int c=posicionAleatoria(1,8);
+        heroes[f][c]=new FichasHeroes(0,"Planet Earth");
+        heroes[f][c+1]=new FichasHeroes(0,"Nova Blast");
+        heroes[f][c-1]=new FichasHeroes(0,"Nova Blast");
+        heroes[f+1][c]=new FichasHeroes(0,"Nova Blast");
+        f+=1;
+        ///////////////////
+        if(f==2){
+            int f1,c2;
+            f1=posicionAleatoria(0,1);
+            c2=posicionAleatoria(0,9);
+            while(heroes[f1][c2].ficha!=null){
+                f1=posicionAleatoria(0,1);
+                c2=posicionAleatoria(0,9);  
+            }
+            heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
+            
+            while(heroes[f1][c2].ficha!=null){
+                f1=posicionAleatoria(0,1);
+                c2=posicionAleatoria(0,9);  
+            }
+            heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
+            f+=1;
+        }
+        if (f==3){
+            int f2,c2;
+            f2=posicionAleatoria(0,3);
+            c2=posicionAleatoria(0,9);
+            while(pos<8){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,1);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(2,nomHeroes[pos]);
+                pos+=1;
+            }
+            while(pos<13){
+                f2=3;
+                c2=posicionAleatoria(0,9);
+                while(heroes[f2][c2].ficha!=null){
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(3,nomHeroes[pos]);
+                pos+=1;   
+            }
+            while(pos<17){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,3);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(4,nomHeroes[pos]);
+                pos+=1;   
+            }
+            while(pos<21){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,3);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(5,nomHeroes[pos]);
+                pos+=1;   
+            }
+            while(pos<25){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,3);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(6,nomHeroes[pos]);
+                pos++;   
+            }
+            while(pos<28){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,3);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(7,nomHeroes[pos]);
+                pos++;   
+            }
+            while(pos<30){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,3);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(8,nomHeroes[pos]);
+                pos++;   
+            }
+            while(pos<31){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,3);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(9,nomHeroes[pos]);
+                pos++;   
+            }
+            while(pos<32){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,3);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(10,nomHeroes[pos]);
+                pos++;   
+            }
+            while(pos<nomHeroes.length){
+                while(heroes[f2][c2].ficha!=null){
+                    f2=posicionAleatoria(0,3);
+                    c2=posicionAleatoria(0,9);  
+                }
+                heroes[f2][c2]=new FichasHeroes(1,nomHeroes[pos]);
+                pos++;   
+            }
+            
+            
+        }
+        
+        */  
+            
+            
+        
+            
+        
+        
+        //////////////////
+        
+        
+        
         for (Ficha[] heroe : heroes) {
             for (int cont2 = 0; cont2 < heroe.length; cont2++) {
                 if (cont2>2 || 2 < heroe.length - 2) {
-                    heroe[cont2] = new FichasHeroes(2);
+                    heroe[cont2] = new FichasHeroes(2,"");
                 }
                 if (heroe[cont2] == null) {
-                    heroe[cont2] = new FichasHeroes(1);
+                    heroe[cont2] = new FichasHeroes(1," ");
                 }
             }
-        }
-    }
-    
+        }   
+                }
+
 }
 
 

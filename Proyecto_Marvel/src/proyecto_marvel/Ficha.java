@@ -16,14 +16,20 @@ public abstract class Ficha {
     protected int rango;
     protected TipoFicha ficha;
     protected ImageIcon imagen;
-    protected String nombreficha;
-    protected URL url;
+    String nombreficha;
+    protected String url;
     
-    public Ficha(TipoFicha ficha, int rango){
+    public Ficha(TipoFicha ficha, int rango,String nom){
         this.ficha= ficha;
         this.rango= rango;
+        this.nombreficha=nom;
+ 
       
         
+    }
+
+    public String getNombreficha() {
+        return nombreficha;
     }
     
    /* public boolean comer(){

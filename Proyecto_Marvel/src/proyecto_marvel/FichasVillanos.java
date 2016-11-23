@@ -16,7 +16,7 @@ public class FichasVillanos extends Ficha {
     public FichasVillanos cardsVillanos[][]= new FichasVillanos[4][10];
     
     public FichasVillanos(int rango) {
-        super(TipoFicha.VILLANO, rango);
+        super(TipoFicha.VILLANO, rango," ");
 
     }
 }
