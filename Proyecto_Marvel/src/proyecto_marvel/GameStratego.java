@@ -77,7 +77,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     public void tablero(){
         do
         {
-         playertwo = JOptionPane.showInputDialog(null, "Ingrese jugador 2");
+            
+        try{
+             playertwo = JOptionPane.showInputDialog(null, "Ingrese jugador 2");
 
          if (playertwo == null)
          {
@@ -98,6 +100,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             JOptionPane.showMessageDialog(null, "El jugador no existe o ingreselo correctamente");
             continue;
          }
+        }catch(NullPointerException e){
+            System.out.println("Error");
+        }
 
        } while (true);
         lblPlayerOne.setText(Player.getLoggedPlayer().getUsername());
@@ -143,7 +148,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 680));
 
