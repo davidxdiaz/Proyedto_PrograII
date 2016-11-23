@@ -16,6 +16,8 @@ public class MenuIncial extends javax.swing.JFrame {
      */
     public MenuIncial() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -32,7 +34,8 @@ public class MenuIncial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        logIn.setText("LOG IN");
+        logIn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        logIn.setText("Iniciar Sesion");
         logIn.setToolTipText("");
         logIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -40,6 +43,7 @@ public class MenuIncial extends javax.swing.JFrame {
             }
         });
 
+        crearPlayer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         crearPlayer.setText("CREAR PLAYER");
         crearPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,21 +56,18 @@ public class MenuIncial extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(crearPlayer))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(logIn)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(crearPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(52, 52, 52)
                 .addComponent(logIn)
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addComponent(crearPlayer)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
@@ -100,22 +101,16 @@ public class MenuIncial extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuIncial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuIncial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuIncial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuIncial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuIncial().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MenuIncial().setVisible(true);
         });
     }
 

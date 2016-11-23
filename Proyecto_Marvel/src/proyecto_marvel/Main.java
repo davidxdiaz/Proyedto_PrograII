@@ -12,10 +12,6 @@ package proyecto_marvel;
 public class Main {
     //Este main esn paranpruebas solo hay que colocar el nombre de clase:  Class.main(args);
     public static void main(String[] args) {
-        MenuPrincipal.main(args);
-   
-        //ImageIcon icon = new ImageIcon(ImageIO.read(Main.class.getClassLoader().getResource("")));
-        //ImageIcon icon2;
-       // icon2=this."";
+        MenuIncial.main(args);
     }
 }

@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
  * @author Miguel Paz
  */
 public class FichasHeroes extends Ficha {
-    private ImageIcon imgocultar;
+    private ImageIcon imgocultar,imagen;
     public FichasHeroes arrayheroes[][]= new FichasHeroes[4][10];
     
     public FichasHeroes(int rango) {
         super(TipoFicha.HEROE, rango);
-        //this.imgocultar;
+        imagen=new ImageIcon(".png");
     }
     
 }
