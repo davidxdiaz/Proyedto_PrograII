@@ -90,7 +90,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 if(i<heroes.length &&e<heroes[i].length){ 
                     celda[i][e]=new CasillasMarvel(i, e, heroes[i][e]);
                     celda[i][e].setText("HR"+i+" "+e);
-                    celda[i][e].setIcon(iconoH);
+                    celda[i][e].setIcon(obtenerImagen(heroes[i][e]));
                 }else if(i>5){
                     celda[i][e]=new CasillasMarvel(i, e, villanos[i-6][e]);
                     celda[i][e].setText("VILLAINS"+i+e);
@@ -422,6 +422,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         
         do{
             playertwo = JOptionPane.showInputDialog(null, "Ingrese jugador 2");
+        
+            if (playertwo.equals(JOptionPane.CANCEL_OPTION)){
+             this.dispose();
+             new MenuIncial().setVisible(true);
+             break;
+            }
             if (playertwo == null){
                 return;
             }            
@@ -482,7 +488,18 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     public void obtenerHeroes(){
         
-      /*
+        for (Ficha[] heroe : heroes) {
+            for (int cont2 = 0; cont2 < heroe.length; cont2++) {
+                if (cont2>2 || 2 < heroe.length - 2) {
+                    heroe[cont2] = new FichasHeroes(2,"Capitán América");
+                }
+                if (heroe[cont2] == null) {
+                    heroe[cont2] = new FichasHeroes(1,"Capitán América");
+                }
+            }
+        }  
+        
+      
         
         int f=0,pos=0;
         int c=posicionAleatoria(1,8);
@@ -490,31 +507,31 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         heroes[f][c+1]=new FichasHeroes(0,"Nova Blast");
         heroes[f][c-1]=new FichasHeroes(0,"Nova Blast");
         heroes[f+1][c]=new FichasHeroes(0,"Nova Blast");
-        f+=1;
-        ///////////////////
-        if(f==2){
+        /*f=1;
+        ////////////////////
+        if(f==1){
             int f1,c2;
             f1=posicionAleatoria(0,1);
             c2=posicionAleatoria(0,9);
-            while(heroes[f1][c2].ficha!=null){
+            while(heroes[f1][c2]!=null){
                 f1=posicionAleatoria(0,1);
                 c2=posicionAleatoria(0,9);  
             }
             heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
             
-            while(heroes[f1][c2].ficha!=null){
+            while(heroes[f1][c2]!=null){
                 f1=posicionAleatoria(0,1);
                 c2=posicionAleatoria(0,9);  
             }
             heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
-            f+=1;
+            f=2;
         }
-        if (f==3){
+        if (f==2){
             int f2,c2;
             f2=posicionAleatoria(0,3);
             c2=posicionAleatoria(0,9);
             while(pos<8){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,1);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -524,14 +541,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             while(pos<13){
                 f2=3;
                 c2=posicionAleatoria(0,9);
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     c2=posicionAleatoria(0,9);  
                 }
                 heroes[f2][c2]=new FichasHeroes(3,nomHeroes[pos]);
                 pos+=1;   
             }
             while(pos<17){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,3);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -539,7 +556,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos+=1;   
             }
             while(pos<21){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,3);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -547,7 +564,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos+=1;   
             }
             while(pos<25){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,3);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -555,7 +572,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos++;   
             }
             while(pos<28){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,3);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -563,7 +580,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos++;   
             }
             while(pos<30){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,3);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -571,7 +588,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos++;   
             }
             while(pos<31){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,3);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -579,7 +596,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos++;   
             }
             while(pos<32){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,3);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -587,7 +604,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos++;   
             }
             while(pos<nomHeroes.length){
-                while(heroes[f2][c2].ficha!=null){
+                while(heroes[f2][c2]!=null){
                     f2=posicionAleatoria(0,3);
                     c2=posicionAleatoria(0,9);  
                 }
@@ -597,8 +614,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             
             
         }
+        */
         
-        */  
             
             
         
@@ -609,16 +626,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         
         
         
-        for (Ficha[] heroe : heroes) {
-            for (int cont2 = 0; cont2 < heroe.length; cont2++) {
-                if (cont2>2 || 2 < heroe.length - 2) {
-                    heroe[cont2] = new FichasHeroes(2,"");
-                }
-                if (heroe[cont2] == null) {
-                    heroe[cont2] = new FichasHeroes(1," ");
-                }
-            }
-        }   
+         
                 }
 
 }
