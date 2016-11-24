@@ -283,7 +283,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             if (e.getSource().equals(objeto)){
                                 primerCasilla= objeto;
                                 System.out.println(objeto.getWidth()+"  "+objeto.getHeight());
-                                validarPrimerClic(primerCasilla);                                     
+                                try{
+                                validarPrimerClic(primerCasilla);   
+                                }catch(RuntimeException ae){
+                                    JOptionPane.showMessageDialog(null,"No has selecionado ninguna ficha");
+                                            
+                                }                                  
                             }
                         }
                     }
@@ -364,7 +369,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
  * @param primerCasilla  Obtiene el primer clic y valida que este cumpla con las condiciones requeridas
  */
     private void validarPrimerClic(CasillasMarvel primerCasilla) {
-        if(primerCasilla.ficha!=null && primerCasilla.ficha.ficha==miTipoFicha){
+        if(primerCasilla.ficha.rango==0){
+            JOptionPane.showMessageDialog(null, "Esta ficha no posee movimiento");
+        }
+        else if(primerCasilla.ficha!=null && primerCasilla.ficha.ficha==miTipoFicha){
             primerclic=true;
             System.out.println("Primer Clic");
             System.out.println(primerCasilla.x+""+primerCasilla.y+" "+infoTipoFicha(primerCasilla));
@@ -454,9 +462,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private String infoTipoFicha(CasillasMarvel objeto) {
         String tipo=null;
         if(objeto.ficha instanceof FichasHeroes){
-            tipo="HEROE";
+            tipo="HEROE"+" Rango: "+objeto.ficha.rango+" "+objeto.ficha.nombreficha;
         }else if(objeto.ficha instanceof FichasVillanos){
-            tipo="VILLANOS";
+            tipo="VILLANOS"+" Rango: "+objeto.ficha.rango+" "+objeto.ficha.nombreficha;
         }return tipo;
     }
 
@@ -499,20 +507,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     
     public void obtenerHeroes(){
-        
-        /*for (Ficha[] heroe : heroes) {
-            for (int cont2 = 0; cont2 < heroe.length; cont2++) {
-                if (cont2>2 || 2 < heroe.length - 2) {
-                    heroe[cont2] = new FichasHeroes(2,"Capitán América");
-                }
-                if (heroe[cont2] == null) {
-                    heroe[cont2] = new FichasHeroes(1,"Capitán América");
-                }
-            }
-        }  */
-        
-      
-        
+
         int f=0,pos=0;
         int c=posicionAleatoria(1,8);
         heroes[f][c]=new FichasHeroes(0,"Planet Earth");
@@ -535,10 +530,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 
             }
             while(pos<=9){
-                fila=posicionAleatoria(0,1);
+                fila=posicionAleatoria(0,4);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,3);
+                    fila=posicionAleatoria(0,4);
                     columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(2,nomHeroes[pos]);
@@ -634,6 +629,24 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
             
         }
+        
+        
+        
+        
+                
+        /*for (Ficha[] heroe : heroes) {
+            for (int cont2 = 0; cont2 < heroe.length; cont2++) {
+                if (cont2>2 || 2 < heroe.length - 2) {
+                    heroe[cont2] = new FichasHeroes(2,"Capitán América");
+                }
+                if (heroe[cont2] == null) {
+                    heroe[cont2] = new FichasHeroes(1,"Capitán América");
+                }
+            }
+        }  */
+        
+      
+        
        /* if(f==1){
             int f1,c2;
             f1=posicionAleatoria(0,1);
