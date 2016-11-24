@@ -41,7 +41,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     
     
-    String nomHeroes[]={"Nightcrowler","Elektra","Dr. Strange","Phoenix","Storm","Ice Man","SpiderGirl",
+    String nomHeroes[]={"Nova Blast","Nova Blast","Nightcrowler","Elektra","Dr. Strange","Phoenix","Storm","Ice Man","SpiderGirl",
         "Gambit","Colossus","Beast","Giant Man","She Hulk","Emma Frost",
         "Thing","Blade","Punisher","Ghost Rider",
         "Invisible Woman","Cyclops","Human Torch","Thor",
@@ -472,6 +472,18 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         return icoimg;
     }
 
+    private boolean isEmpty(Ficha[][] heroes) {
+        for(Ficha i[]:heroes){
+            for(Ficha e:i){
+                if(e==null){
+                    return true;
+                }
+                
+            }
+        } 
+        return false;
+    }
+
 
 
     private static class RunnableImpl implements Runnable {
@@ -488,7 +500,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     public void obtenerHeroes(){
         
-        for (Ficha[] heroe : heroes) {
+        /*for (Ficha[] heroe : heroes) {
             for (int cont2 = 0; cont2 < heroe.length; cont2++) {
                 if (cont2>2 || 2 < heroe.length - 2) {
                     heroe[cont2] = new FichasHeroes(2,"Capitán América");
@@ -497,7 +509,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     heroe[cont2] = new FichasHeroes(1,"Capitán América");
                 }
             }
-        }  
+        }  */
         
       
         
@@ -507,18 +519,131 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         heroes[f][c+1]=new FichasHeroes(0,"Nova Blast");
         heroes[f][c-1]=new FichasHeroes(0,"Nova Blast");
         heroes[f+1][c]=new FichasHeroes(0,"Nova Blast");
-       // f=1;
-        ////////////////////
-        //if(f==1){
-         //   int f1,c2;
-           // f1=posicionAleatoria(0,1);
-           // c2=posicionAleatoria(0,9);
-           // while(heroes[f1][c2]!=null){
-             //   f1=posicionAleatoria(0,1);
-             //   c2=posicionAleatoria(0,9);  
-           // }
-         //   heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
+       
+        
+        while(isEmpty(heroes)){
+            int fila,columna;
+            while(pos<=1){
+                fila=posicionAleatoria(0,1);
+                columna=posicionAleatoria(0,10);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,1);
+                    columna=posicionAleatoria(0,9);
+                }
+                heroes[fila][columna]=new FichasHeroes(0,nomHeroes[pos]);
+                pos+=1;
+                
+            }
+            while(pos<=9){
+                fila=posicionAleatoria(0,1);
+                columna=posicionAleatoria(0,9);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
+                }
+                heroes[fila][columna]=new FichasHeroes(2,nomHeroes[pos]);
+                pos+=1;   
+            }
+            while(pos<=14){
+                fila=posicionAleatoria(0,1);
+                columna=posicionAleatoria(0,9);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
+                }
+                heroes[fila][columna]=new FichasHeroes(3,nomHeroes[pos]);
+                pos+=1;   
+            }
+            while(pos<=18){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
+                }
+                heroes[fila][columna]=new FichasHeroes(4,nomHeroes[pos]);
+                pos+=1;   
+            }
+            while(pos<=22){
+                fila=posicionAleatoria(0,4);
+                columna=posicionAleatoria(0,9);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                heroes[fila][columna]=new FichasHeroes(5,nomHeroes[pos]);
+                pos+=1;   
+            }
+             while(pos<=26){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,4);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                heroes[fila][columna]=new FichasHeroes(6,nomHeroes[pos]);
+                pos+=1;   
+            } while(pos<=29){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                heroes[fila][columna]=new FichasHeroes(7,nomHeroes[pos]);
+                pos+=1;   
+            }
+            while(pos<=31){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                heroes[fila][columna]=new FichasHeroes(8,nomHeroes[pos]);
+                pos+=1;   
+            }
+             
+            while(pos<=32){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                heroes[fila][columna]=new FichasHeroes(9,nomHeroes[pos]);
+                pos+=1;   
+            }
+             while(pos<=33){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(heroes[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                heroes[fila][columna]=new FichasHeroes(10,nomHeroes[pos]);
+                pos+=1;   
+            }
+            for (Ficha[] heroe : heroes) {
+                for (int cont2 = 0; cont2 < heroe.length; cont2++) {
+     
+                    if (heroe[cont2] == null) {
+                        heroe[cont2] = new FichasHeroes(1,nomHeroes[pos]);
+                    }
+                }
+            }
             
+        }
+       /* if(f==1){
+            int f1,c2;
+            f1=posicionAleatoria(0,1);
+            c2=posicionAleatoria(0,9);
+            while(heroes[f1][c2]!=null){
+                f1=posicionAleatoria(0,1);
+                c2=posicionAleatoria(0,9);  
+            }
+              heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
+        }*/   
         //    while(heroes[f1][c2]!=null){
               //  f1=posicionAleatoria(0,1);
             //    c2=posicionAleatoria(0,9);  
