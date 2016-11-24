@@ -16,6 +16,7 @@ public class EliminarCuenta extends javax.swing.JFrame {
      */
     public EliminarCuenta() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

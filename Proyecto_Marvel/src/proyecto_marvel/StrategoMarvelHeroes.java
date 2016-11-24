@@ -16,6 +16,7 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame {
      */
     public StrategoMarvelHeroes() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -49,24 +50,24 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(95, 95, 95)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton2)
                         .addComponent(jButton1)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(39, 39, 39)
                 .addComponent(jButton1)
                 .addGap(28, 28, 28)
                 .addComponent(jButton2)
                 .addGap(28, 28, 28)
                 .addComponent(jButton3)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();

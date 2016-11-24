@@ -16,6 +16,7 @@ public class Ranking extends javax.swing.JFrame {
      */
     public Ranking() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

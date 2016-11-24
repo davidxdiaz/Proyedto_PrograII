@@ -7,7 +7,7 @@ package proyecto_marvel;
 
 /**
  *
- * @author David
+ * @author David Miguel
  */
 public class Configuracion extends javax.swing.JFrame {
     
@@ -17,6 +17,7 @@ public class Configuracion extends javax.swing.JFrame {
     int modojuego=0;
     public Configuracion() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
        
     }

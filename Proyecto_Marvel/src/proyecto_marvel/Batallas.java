@@ -16,6 +16,7 @@ public class Batallas extends javax.swing.JFrame {
      */
     public Batallas() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

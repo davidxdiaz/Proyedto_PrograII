@@ -16,6 +16,7 @@ public class Ultimosjuegos extends javax.swing.JFrame {
      */
     public Ultimosjuegos() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

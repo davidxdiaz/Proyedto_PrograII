@@ -16,6 +16,7 @@ public class UniversoMarvel extends javax.swing.JFrame {
      */
     public UniversoMarvel() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

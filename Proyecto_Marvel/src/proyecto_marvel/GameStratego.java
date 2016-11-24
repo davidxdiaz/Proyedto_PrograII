@@ -123,7 +123,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 680));
 
@@ -142,11 +142,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         );
 
         lblPlayerOne.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblPlayerOne.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerOne.setText("Player 1");
 
         lblPlayerTwo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblPlayerTwo.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerTwo.setText("Player 2");
 
         lblTurno.setFont(new java.awt.Font("Tahoma", 3, 16)); // NOI18N
@@ -159,7 +157,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel1.setText("Heroes:");
+        jLabel1.setText("Héroes:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jLabel2.setText("Villanos:");

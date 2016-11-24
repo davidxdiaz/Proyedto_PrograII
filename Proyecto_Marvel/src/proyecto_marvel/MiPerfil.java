@@ -16,6 +16,7 @@ public class MiPerfil extends javax.swing.JFrame {
      */
     public MiPerfil() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

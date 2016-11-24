@@ -16,6 +16,7 @@ public class ConectarTwitter extends javax.swing.JFrame {
      */
     public ConectarTwitter() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

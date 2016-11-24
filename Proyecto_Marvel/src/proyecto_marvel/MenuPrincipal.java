@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author David
@@ -17,6 +19,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        jLabel1.setText(Player.getLoggedPlayer().getUsername().toUpperCase());   
+        
+        
     }
 
     /**
@@ -33,6 +39,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnPerfil = new javax.swing.JButton();
         btnUniverso = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(100, 100));
@@ -72,6 +79,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Usuario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,26 +89,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(btnPerfil))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(btnStratego))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnConfig)
-                            .addComponent(btnUniverso))))
-                .addContainerGap(92, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCerrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(btnPerfil))
+                            .addComponent(btnStratego)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnConfig)
+                                    .addComponent(btnUniverso)
+                                    .addComponent(btnCerrar, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jLabel1)))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addComponent(btnStratego)
                 .addGap(18, 18, 18)
                 .addComponent(btnConfig)
@@ -108,7 +121,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnUniverso)
                 .addGap(18, 18, 18)
                 .addComponent(btnCerrar)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -171,5 +184,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPerfil;
     private javax.swing.JButton btnStratego;
     private javax.swing.JButton btnUniverso;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,6 +16,7 @@ public class Cambiarpass extends javax.swing.JFrame {
      */
     public Cambiarpass() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
