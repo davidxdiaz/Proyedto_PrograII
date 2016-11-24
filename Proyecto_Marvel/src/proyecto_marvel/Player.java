@@ -133,7 +133,9 @@ public class Player {
         if (n){
             resultado="VICTORIA";
         }
-        partidas.add(formato.format(actual)+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
+        String fecha=actual.toString();
+        partidas.add(fecha+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
+       
     }
     /**
      * 
@@ -153,8 +155,8 @@ public class Player {
         return false;
     }
     
+      
     
-
     public String getUsername() {
         return username;
     }

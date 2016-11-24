@@ -24,6 +24,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     /**
      * Variables Globales
      */    
+    String PLAYER_HEROE,PLAYER_VILLANO;
     String cap="Capitán América";
     ImageIcon icono=new ImageIcon("src/Imagenes/cardsVillain.png");
     ImageIcon iconoH=new ImageIcon("src/Imagenes/Heroes/"+cap+".png");
@@ -122,6 +123,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         lblTurno = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -142,9 +145,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         );
 
         lblPlayerOne.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblPlayerOne.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerOne.setText("Player 1");
 
         lblPlayerTwo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblPlayerTwo.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerTwo.setText("Player 2");
 
         lblTurno.setFont(new java.awt.Font("Tahoma", 3, 16)); // NOI18N
@@ -161,6 +166,21 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jLabel2.setText("Villanos:");
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/redirse.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,16 +200,16 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(83, 119, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
+                .addGap(184, 184, 184)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(120, 120, 120)
                 .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,6 +222,16 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     .addComponent(lblPlayerTwo)
                     .addComponent(jLabel2))
                 .addGap(213, 213, 213))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(264, 264, 264))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(227, 227, 227))
         );
 
         pack();
@@ -211,6 +241,38 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void lblTurnoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblTurnoPropertyChange
 
     }//GEN-LAST:event_lblTurnoPropertyChange
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int op;
+        op=JOptionPane.showConfirmDialog(null, "¿Dese usted redirse?","Rendirse",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+         if (op==0){
+            if (turno==1){
+                JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+"con "+ fichaContraria);
+                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+                
+                TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+                Player.existe(PLAYER_VILLANO).addPuntos();
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+            }
+            else{
+                turno=2;
+                JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"con "+fichaContraria);
+                Player.existe(PLAYER_HEROE).addPuntos();
+                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
+                
+                TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+            }
+            new MenuPrincipal().setVisible(true);
+            this.dispose();
+         }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       JOptionPane.showMessageDialog(null, "Proximamente Disponible!!");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,6 +302,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblPlayerOne;
@@ -451,12 +515,18 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         } while (true);
         if(Opciones.op==true){
             lblPlayerOne.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
+            PLAYER_HEROE=Player.getLoggedPlayer().getUsername();
             lblPlayerTwo.setText(playertwo.toUpperCase());
+            PLAYER_VILLANO=playertwo;
         }
         else{
+            PLAYER_HEROE=playertwo;
+            PLAYER_VILLANO=Player.getLoggedPlayer().getUsername();
             lblPlayerOne.setText(playertwo.toUpperCase());
+        
             lblPlayerTwo.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
         }
+       
     }
 
     private String infoTipoFicha(CasillasMarvel objeto) {
