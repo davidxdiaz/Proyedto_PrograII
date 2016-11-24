@@ -507,26 +507,27 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         heroes[f][c+1]=new FichasHeroes(0,"Nova Blast");
         heroes[f][c-1]=new FichasHeroes(0,"Nova Blast");
         heroes[f+1][c]=new FichasHeroes(0,"Nova Blast");
-        /*f=1;
+       // f=1;
         ////////////////////
-        if(f==1){
-            int f1,c2;
-            f1=posicionAleatoria(0,1);
-            c2=posicionAleatoria(0,9);
-            while(heroes[f1][c2]!=null){
-                f1=posicionAleatoria(0,1);
-                c2=posicionAleatoria(0,9);  
-            }
-            heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
+        //if(f==1){
+         //   int f1,c2;
+           // f1=posicionAleatoria(0,1);
+           // c2=posicionAleatoria(0,9);
+           // while(heroes[f1][c2]!=null){
+             //   f1=posicionAleatoria(0,1);
+             //   c2=posicionAleatoria(0,9);  
+           // }
+         //   heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
             
-            while(heroes[f1][c2]!=null){
-                f1=posicionAleatoria(0,1);
-                c2=posicionAleatoria(0,9);  
-            }
-            heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
-            f=2;
-        }
-        if (f==2){
+        //    while(heroes[f1][c2]!=null){
+              //  f1=posicionAleatoria(0,1);
+            //    c2=posicionAleatoria(0,9);  
+           // }
+            //heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
+           // f=2;
+     //   }
+       
+        /*if (f==2){
             int f2,c2;
             f2=posicionAleatoria(0,3);
             c2=posicionAleatoria(0,9);
