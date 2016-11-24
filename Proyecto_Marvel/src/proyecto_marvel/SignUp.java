@@ -56,7 +56,7 @@ public class SignUp extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        btnOk.setText("Ok");
+        btnOk.setText("REGISTRARSE");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
@@ -110,10 +110,10 @@ public class SignUp extends javax.swing.JFrame {
         {
             
             if(password.length()==5){
-                System.out.println("Password Valida");
+                System.out.println("Password Válida");
                 Player newPlayer = new Player(txtUsername.getText(), password);
                 Player.add(newPlayer.getUsername(), newPlayer.getPassword());
-                JOptionPane.showConfirmDialog(null,"Usuario registrado correctamente");
+                JOptionPane.showMessageDialog(null,"Usuario registrado correctamente");
                 Player.setLoggedPlayer(newPlayer);
                 dispose();
                 new MenuPrincipal().setVisible(true);
@@ -121,7 +121,7 @@ public class SignUp extends javax.swing.JFrame {
                 
             }
             else{
-                JOptionPane.showConfirmDialog(null,"Password no Valido");
+                JOptionPane.showMessageDialog(null,"Password no válido", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
              
                 
