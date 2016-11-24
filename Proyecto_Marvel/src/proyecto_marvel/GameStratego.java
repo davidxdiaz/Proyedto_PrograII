@@ -306,7 +306,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         int scx=segundaCasilla.x,scy=segundaCasilla.y; //COORDENADAS DE LA SEGUNDO BOTON O CASILA
         if(scx==4 ||scx==5){
             if(scy==2||scy==3||scy==6||scy==7){
-                JOptionPane.showMessageDialog(null, "!NO PUEDE MOVER ESTA PIEZA A LA ZONA PROHIBIDA");
+               JOptionPane.showMessageDialog(null,"Movimiento no válido", "Zona Prohibida", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
@@ -326,7 +326,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 cambiarTurno();
             }
             else{
-                JOptionPane.showMessageDialog(null, "Movimiento no valido, esta Ficha no se puede mover mas 2 posciones");
+                JOptionPane.showMessageDialog(null, "Movimiento no válido, esta Ficha no se puede mover más 2 posiciones");
             }
         }
         else if(primerCasilla.y==segundaCasilla.y){
@@ -343,11 +343,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 primerCasilla.ficha=null;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Movimiento no valido, esta Ficha no se puede mover mas 2 posciones");
+                JOptionPane.showMessageDialog(null, "Movimiento no válido, esta Ficha no se puede mover más 2 posiciones");
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Movimiento no valido, porfavor intenete de nuevo");
+            JOptionPane.showMessageDialog(null, "Movimiento no válido, por favor intente de nuevo");
         }
     }
         
@@ -374,7 +374,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         else {
             System.out.println(primerCasilla.x+""+primerCasilla.y+" "+infoTipoFicha(primerCasilla));
-            JOptionPane.showMessageDialog(null, "Selecione una ficha porfavor tuya porfavor");
+            JOptionPane.showMessageDialog(null, "Selecione una ficha tuya por favor");
         }
     }
 
