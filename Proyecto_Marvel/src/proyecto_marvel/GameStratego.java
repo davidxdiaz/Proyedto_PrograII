@@ -391,6 +391,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void validarMovimiento(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
         if(segundaCasilla.ficha == null|| segundaCasilla.ficha.ficha!=miTipoFicha){
             moverPieza(primerCasilla,segundaCasilla);
+        }else{
+            JOptionPane.showMessageDialog(null, "Existe una ficha tuya en esa posicion");
         }
 
             
@@ -512,17 +514,17 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 
             }
             while(pos<=10){
-                fila=posicionAleatoria(1,2);
+                fila=posicionAleatoria(0,1);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
-                    fila=posicionAleatoria(1,2);
+                    fila=posicionAleatoria(0,1);
                     columna=posicionAleatoria(0,9);
                 }
                 villanos[fila][columna]=new FichasVillanos(2,nombVillanos[pos]);
                 pos+=1;   
             }
             while(pos<=15){
-                fila=posicionAleatoria(0,1);
+                fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
                     fila=posicionAleatoria(0,3);
@@ -762,7 +764,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(2,3);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,3);
+                    fila=posicionAleatoria(2,3);
                     columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(2,nomHeroes[pos]);
