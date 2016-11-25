@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -482,8 +483,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         while(isEmpty(villanos)){
             int fila,columna;
             while(pos<=1){
-                fila=posicionAleatoria(0,3);
-                columna=posicionAleatoria(0,10);
+                fila=posicionAleatoria(2,3);
+                columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
                     fila=posicionAleatoria(2,3);
                     columna=posicionAleatoria(0,9);
@@ -493,10 +494,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 
             }
             while(pos<=9){
-                fila=posicionAleatoria(0,4);
+                fila=posicionAleatoria(1,2);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
+                    fila=posicionAleatoria(1,2);
                     columna=posicionAleatoria(0,9);
                 }
                 villanos[fila][columna]=new FichasVillanos(2,nombVillanos[pos]);
@@ -523,21 +524,21 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos+=1;   
             }
             while(pos<=21){
-                fila=posicionAleatoria(0,4);
+                fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 villanos[fila][columna]=new FichasVillanos(5,nombVillanos[pos]);
                 pos+=1;   
             }
              while(pos<=25){
                 fila=posicionAleatoria(0,3);
-                columna=posicionAleatoria(0,4);
+                columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 villanos[fila][columna]=new FichasVillanos(6,nombVillanos[pos]);
                 pos+=1;   
@@ -545,8 +546,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 villanos[fila][columna]=new FichasVillanos(7,nombVillanos[pos]);
                 pos+=1;   
@@ -555,8 +556,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 villanos[fila][columna]=new FichasVillanos(8,nombVillanos[pos]);
                 pos+=1;   
@@ -566,8 +567,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 villanos[fila][columna]=new FichasVillanos(9,nombVillanos[pos]);
                 pos+=1;   
@@ -576,8 +577,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 villanos[fila][columna]=new FichasVillanos(10,nombVillanos[pos]);
                 pos+=1;   
@@ -675,8 +676,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private int posicionAleatoria(int min,int max) {
-        int numero=(int)(Math.random()*max)+min;
-        return numero;
+      Random rand = new Random();
+      int randomNum = rand.nextInt((max - min) + 1) + min;
+
+      return randomNum;
+        //int numero=(int)(Math.random()*max)+min;
+        //return numero;
     }
 
 
@@ -732,7 +737,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             int fila,columna;
             while(pos<=1){
                 fila=posicionAleatoria(0,1);
-                columna=posicionAleatoria(0,10);
+                columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
                     fila=posicionAleatoria(0,1);
                     columna=posicionAleatoria(0,9);
@@ -742,17 +747,17 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 
             }
             while(pos<=9){
-                fila=posicionAleatoria(0,4);
+                fila=posicionAleatoria(2,3);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
+                    fila=posicionAleatoria(0,3);
                     columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(2,nomHeroes[pos]);
                 pos+=1;   
             }
             while(pos<=14){
-                fila=posicionAleatoria(0,1);
+                fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
                     fila=posicionAleatoria(0,3);
@@ -772,21 +777,21 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos+=1;   
             }
             while(pos<=22){
-                fila=posicionAleatoria(0,4);
+                fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(5,nomHeroes[pos]);
                 pos+=1;   
             }
              while(pos<=26){
                 fila=posicionAleatoria(0,3);
-                columna=posicionAleatoria(0,4);
+                columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(6,nomHeroes[pos]);
                 pos+=1;   
@@ -794,8 +799,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(7,nomHeroes[pos]);
                 pos+=1;   
@@ -804,8 +809,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(8,nomHeroes[pos]);
                 pos+=1;   
@@ -815,8 +820,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(9,nomHeroes[pos]);
                 pos+=1;   
@@ -825,8 +830,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(heroes[fila][columna]!=null){
-                    fila=posicionAleatoria(0,4);
-                    columna=posicionAleatoria(0,10);
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
                 }
                 heroes[fila][columna]=new FichasHeroes(10,nomHeroes[pos]);
                 pos+=1;   
