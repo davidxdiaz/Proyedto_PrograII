@@ -86,7 +86,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnConfig">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CONFIGURACION"/>
+        <Property name="text" type="java.lang.String" value="CONFIGURACI&#xd3;N"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfigActionPerformed"/>
@@ -110,7 +110,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCerrar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CERRAR SESION"/>
+        <Property name="text" type="java.lang.String" value="CERRAR SESI&#xd3;N"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarActionPerformed"/>

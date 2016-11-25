@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author David
+ * @author David  Miguel
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -51,7 +51,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnConfig.setText("CONFIGURACION");
+        btnConfig.setText("CONFIGURACIÓN");
         btnConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfigActionPerformed(evt);
@@ -72,7 +72,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnCerrar.setText("CERRAR SESION");
+        btnCerrar.setText("CERRAR SESIÓN");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);
@@ -128,9 +128,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        Player.setLoggedPlayer(null);
-        dispose();
-        new MenuIncial().setVisible(true);
+        //Pregunta si desea cerrar sesión
+        
+        int n= JOptionPane.showConfirmDialog(null, "¿Desea salir", "Información", JOptionPane.YES_NO_OPTION);
+        
+        if (true){
+            Player.setLoggedPlayer(null);
+            dispose();
+            new MenuIncial().setVisible(true);  
+        }else{
+            
+        }
+      
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
@@ -146,7 +155,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUniversoActionPerformed
 
     private void btnStrategoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStrategoActionPerformed
-        new Opciones().setVisible(true);
+        new StrategoMarvelHeroes().setVisible(true);
     }//GEN-LAST:event_btnStrategoActionPerformed
 
     /**
