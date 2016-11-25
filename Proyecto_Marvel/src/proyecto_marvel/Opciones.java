@@ -113,7 +113,7 @@ public class Opciones extends javax.swing.JFrame {
     private void optHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optHActionPerformed
 
         op=true;
-        new GameStratego().setVisible(true);
+        new User2().setVisible(true);
         dispose();
         
     }//GEN-LAST:event_optHActionPerformed
@@ -121,7 +121,7 @@ public class Opciones extends javax.swing.JFrame {
     private void optVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optVActionPerformed
        
         op=false;
-        new GameStratego().setVisible(true);
+        new User2().setVisible(true);
         dispose();
     }//GEN-LAST:event_optVActionPerformed
 

@@ -38,7 +38,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     TipoFicha miTipoFicha = turnoPlayerHeroes? TipoFicha.HEROE:TipoFicha.VILLANO;
     int turno=1; 
     String turnoplayer=(turno==1?"HEROES":"VILANOS");
-    private String playertwo;
+   
     
     
     
@@ -629,33 +629,17 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         
         
         
-        do{
-            playertwo = JOptionPane.showInputDialog(null, "Ingrese jugador 2",JOptionPane.YES_OPTION);
         
-            
-            if (playertwo == null){
-                return;
-            }            
-            if ("".equals(playertwo)){
-                JOptionPane.showMessageDialog(null, "El jugador no puede estar vacio");
-                continue;
-            }
-            if ((Player.existe(playertwo) != null) && !playertwo.equals(Player.getLoggedPlayer().getUsername())){
-                break;
-            } else{
-                JOptionPane.showMessageDialog(null, "El jugador no existe o ingreselo correctamente");
-            }
-        } while (true);
         if(Opciones.op==true){
             lblPlayerOne.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
             PLAYER_HEROE=Player.getLoggedPlayer().getUsername();
-            lblPlayerTwo.setText(playertwo.toUpperCase());
-            PLAYER_VILLANO=playertwo;
+            lblPlayerTwo.setText(User2.playerTwo.toUpperCase());
+            PLAYER_VILLANO=User2.playerTwo;
         }
         else{
-            PLAYER_HEROE=playertwo;
+            PLAYER_HEROE=User2.playerTwo;
             PLAYER_VILLANO=Player.getLoggedPlayer().getUsername();
-            lblPlayerOne.setText(playertwo.toUpperCase());
+            lblPlayerOne.setText(User2.playerTwo.toUpperCase());
         
             lblPlayerTwo.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
         }
