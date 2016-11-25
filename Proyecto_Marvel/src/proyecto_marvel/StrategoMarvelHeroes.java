@@ -35,7 +35,7 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setText("PARTIDA NUEVA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
