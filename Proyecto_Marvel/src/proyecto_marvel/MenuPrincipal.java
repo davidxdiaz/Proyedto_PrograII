@@ -132,12 +132,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         int n= JOptionPane.showConfirmDialog(null, "¿Desea salir", "Información", JOptionPane.YES_NO_OPTION);
         
-        if (true){
+        if (n==JOptionPane.YES_OPTION){
             Player.setLoggedPlayer(null);
             dispose();
-            new MenuIncial().setVisible(true);  
+            new MenuIncial().setVisible(true);
         }else{
-            
+           
         }
       
     }//GEN-LAST:event_btnCerrarActionPerformed
