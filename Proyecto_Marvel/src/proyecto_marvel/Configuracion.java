@@ -14,10 +14,11 @@ public class Configuracion extends javax.swing.JFrame {
     /**
      * Creates new form Configuracion
      */
-    int modojuego=0;
+     static int modojuego=0;
     public Configuracion() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jRadioButton1.setSelected(true);
         
        
     }
@@ -32,6 +33,7 @@ public class Configuracion extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
@@ -39,6 +41,7 @@ public class Configuracion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jRadioButton1.setText("Modo Tutorial");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -47,6 +50,7 @@ public class Configuracion extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jRadioButton2.setText("Modo Clásico");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,32 +60,34 @@ public class Configuracion extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Seleccione una opción");
+        jLabel1.setText("MODO DE JUEGO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
                         .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton2)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                        .addGap(35, 35, 35)
+                        .addComponent(jRadioButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jLabel1)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addGap(83, 83, 83)
+                .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,6 +145,7 @@ public class Configuracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
