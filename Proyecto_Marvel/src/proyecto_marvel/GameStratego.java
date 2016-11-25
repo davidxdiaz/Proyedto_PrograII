@@ -55,7 +55,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     String nombVillanos[]={"Pumpkin Bomb","Pumpkin Bomb","Pumpkin Bomb","Ultron","Leader","Mr. Sinister","Electro","Sandman",
         "Sentinel 1","Sentinel 2","Viper","Carnage","Juggernaut","Lizard","Mole man","Rhino","Abomination",
-        "Black Cat","Sabretooth","Thanos","Dr. Octopus","Mysterio","Mystique","Bullseye","Omega Red","Onslaught","Red Skull",
+        "Black Cat","Sabretooth","Thanos","Dr. Octopus","Deadpool","Mysterio","Mystique","Bullseye","Omega Red","Onslaught","Red Skull",
         "Venom","Apocalypse","Green Goblin","Kingpin","Magneto","Galactus","Dr. Doom","Black Widow mala"};
 
 
@@ -542,7 +542,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 }
                 villanos[fila][columna]=new FichasVillanos(6,nombVillanos[pos]);
                 pos+=1;   
-            } while(pos<=29){
+            } while(pos<=30){
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
@@ -552,7 +552,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 villanos[fila][columna]=new FichasVillanos(7,nombVillanos[pos]);
                 pos+=1;   
             }
-            while(pos<=30){
+            while(pos<=32){
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
@@ -563,7 +563,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pos+=1;   
             }
              
-            while(pos<=32){
+            while(pos<=33){
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
@@ -573,7 +573,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 villanos[fila][columna]=new FichasVillanos(9,nombVillanos[pos]);
                 pos+=1;   
             }
-             while(pos<=33){
+             while(pos<=34){
                 fila=posicionAleatoria(0,3);
                 columna=posicionAleatoria(0,9);
                 while(villanos[fila][columna]!=null){
