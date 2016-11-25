@@ -101,9 +101,10 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-        if(Player.cont>2)
+        if(Player.cont>2){
             new Opciones().setVisible(true);
-        else
+            this.dispose();
+        }else
             JOptionPane.showMessageDialog(null,"Esta opcion no esta disponible aun", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 

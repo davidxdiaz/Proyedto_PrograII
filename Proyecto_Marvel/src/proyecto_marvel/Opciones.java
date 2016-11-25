@@ -115,7 +115,7 @@ public class Opciones extends javax.swing.JFrame {
 
         op=true;
         new User2().setVisible(true);
-        dispose();
+        this.dispose();
         
     }//GEN-LAST:event_optHActionPerformed
 
@@ -123,7 +123,7 @@ public class Opciones extends javax.swing.JFrame {
        
         op=false;
         new User2().setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_optVActionPerformed
 
     /**
