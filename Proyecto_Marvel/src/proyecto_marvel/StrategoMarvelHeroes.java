@@ -5,13 +5,15 @@
  */
 package proyecto_marvel;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author David
  */
-public class StrategoMarvelHeroes extends javax.swing.JFrame {
+public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowListener{
 
     /**
      * Creates new form StrategoMarvelHeroes
@@ -19,6 +21,7 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame {
     public StrategoMarvelHeroes() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -36,6 +39,7 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jButton1.setText("PARTIDA NUEVA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -153,4 +157,40 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+      new MenuPrincipal().setVisible(true);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        new MenuPrincipal().setVisible(true);
+        this.dispose();
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
