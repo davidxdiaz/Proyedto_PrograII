@@ -113,10 +113,16 @@ public class Player {
      * @param pass  CONTRASEÑA ACTUAL
      * @param nuevapass NUEVA CONTRASEÑA
      */
-    public void cambiarPassword(String user, String pass,String nuevapass){
-        verificar(user, pass).setPassword(nuevapass);
+    public void cambiarPassword(String user, String nuevapass){
+        for(Player p: players){
+            if(p.getUsername().equals(user)){
+                p.setPassword(nuevapass);
+            }
+        }
+            
         
     }
+   
     
     /**
      * Funcion que adiciona un juego a mi arreglo de partidas

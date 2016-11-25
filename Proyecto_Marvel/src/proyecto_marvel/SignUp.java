@@ -115,6 +115,8 @@ public class SignUp extends javax.swing.JFrame {
                 Player.add(newPlayer.getUsername(), newPlayer.getPassword());
                 JOptionPane.showMessageDialog(null,"Usuario registrado correctamente");
                 Player.setLoggedPlayer(newPlayer);
+                System.out.println(Player.getLoggedPlayer().getPassword());
+                System.out.println(txtPassword.getText());
                 dispose();
                 new MenuPrincipal().setVisible(true);
                 dispose();

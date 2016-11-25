@@ -26,14 +26,14 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnCPass" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" max="32767" attributes="0"/>
-                      <Component id="lblUser" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPassA" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUser" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Component id="txtPassNew" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnCPass" alignment="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="txtPassA" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="205" max="32767" attributes="0"/>
           </Group>
@@ -50,9 +50,9 @@
               <Component id="txtPassA" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="txtPassNew" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="btnCPass" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
@@ -75,10 +75,6 @@
         <Property name="text" type="java.lang.String" value="Ingrese la nueva contrse&#xf1;a"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPassA">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPassNew">
-    </Component>
     <Component class="javax.swing.JButton" name="btnCPass">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cambiar password"/>
@@ -86,6 +82,10 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCPassActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtPassA">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtPassNew">
     </Component>
   </SubComponents>
 </Form>

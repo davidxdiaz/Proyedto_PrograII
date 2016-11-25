@@ -34,9 +34,9 @@ public class Cambiarpass extends javax.swing.JFrame {
         lblUser = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtPassA = new javax.swing.JTextField();
-        txtPassNew = new javax.swing.JTextField();
         btnCPass = new javax.swing.JButton();
+        txtPassA = new javax.swing.JPasswordField();
+        txtPassNew = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,13 +60,13 @@ public class Cambiarpass extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCPass)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblUser)
-                        .addComponent(txtPassA)
-                        .addComponent(txtPassNew)))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(lblUser)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtPassNew, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnCPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtPassA, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -80,9 +80,9 @@ public class Cambiarpass extends javax.swing.JFrame {
                 .addComponent(txtPassA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addComponent(txtPassNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(32, 32, 32)
                 .addComponent(btnCPass)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
@@ -96,7 +96,7 @@ public class Cambiarpass extends javax.swing.JFrame {
             //Verifico si el pass new es de 5 caracteres
             if(txtPassNew.getText().length()==5){
                 //cambio el pass
-                Player.getLoggedPlayer().setPassword(txtPassNew.getText());
+                Player.getLoggedPlayer().cambiarPassword(Player.getLoggedPlayer().getUsername(), txtPassNew.getText());
                 this.dispose();
             }
             else
@@ -147,7 +147,7 @@ public class Cambiarpass extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblUser;
-    private javax.swing.JTextField txtPassA;
-    private javax.swing.JTextField txtPassNew;
+    private javax.swing.JPasswordField txtPassA;
+    private javax.swing.JPasswordField txtPassNew;
     // End of variables declaration//GEN-END:variables
 }
