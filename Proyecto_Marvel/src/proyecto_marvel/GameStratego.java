@@ -51,6 +51,15 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         "Nick Fury","Profesor X",
         "Capitán América","Mr. Fantastic","Black Widow"};
     
+    
+    String nombVillanos[]={"Pumpkin Bomb","Pumpkin Bomb","Ultron","Leader","Mr. Sinister","Electro","Sandman",
+        "Sentinel 1","Sentinel 2","Viper","Carnage","Juggernaut","Lizard","Mole man","Rhino","Abomination",
+        "Black Cat","Sabretooth","Thanos","Dr. Octopus","Mysterio","Mystique","Bullseye","Omega Red","Onslaught","Red Skull",
+        "Venom","Apocalypse","Green Goblin","Kingpin","Magneto","Galactus","Dr. Doom","Black Widow mala"};
+
+
+
+
     /**
      * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMID
      */
@@ -95,7 +104,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 }else if(i>5){
                     celda[i][e]=new CasillasMarvel(i, e, villanos[i-6][e]);
                     celda[i][e].setText("VILLAINS"+i+e);
-                    celda[i][e].setIcon(icono);
+                    celda[i][e].setIcon(obtenerImagenVillano(villanos[i-6][e]));
                 }else{ 
                     celda[i][e]=new CasillasMarvel(i, e, null);
                 }
@@ -461,7 +470,130 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void obtenerVillanos() {
-        for (int cont1=0;cont1<villanos.length;cont1++){
+        
+        int f=3,pos=0;
+        int c=posicionAleatoria(1,8);
+        villanos[f][c]=new FichasVillanos(0,"Planet Earth");
+        villanos[f][c+1]=new FichasVillanos(0,"Pumpkin Bomb");
+        villanos[f][c-1]=new FichasVillanos(0,"Pumpkin Bomb");
+        villanos[f-1][c]=new FichasVillanos(0,"Pumpkin Bomb");
+       
+        
+        while(isEmpty(villanos)){
+            int fila,columna;
+            while(pos<=1){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,10);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(2,3);
+                    columna=posicionAleatoria(0,9);
+                }
+                villanos[fila][columna]=new FichasVillanos(0,nombVillanos[pos]);
+                pos+=1;
+                
+            }
+            while(pos<=9){
+                fila=posicionAleatoria(0,4);
+                columna=posicionAleatoria(0,9);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,9);
+                }
+                villanos[fila][columna]=new FichasVillanos(2,nombVillanos[pos]);
+                pos+=1;   
+            }
+            while(pos<=14){
+                fila=posicionAleatoria(0,1);
+                columna=posicionAleatoria(0,9);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
+                }
+                villanos[fila][columna]=new FichasVillanos(3,nombVillanos[pos]);
+                pos+=1;   
+            }
+            while(pos<=18){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,3);
+                    columna=posicionAleatoria(0,9);
+                }
+                villanos[fila][columna]=new FichasVillanos(4,nombVillanos[pos]);
+                pos+=1;   
+            }
+            while(pos<=21){
+                fila=posicionAleatoria(0,4);
+                columna=posicionAleatoria(0,9);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                villanos[fila][columna]=new FichasVillanos(5,nombVillanos[pos]);
+                pos+=1;   
+            }
+             while(pos<=25){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,4);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                villanos[fila][columna]=new FichasVillanos(6,nombVillanos[pos]);
+                pos+=1;   
+            } while(pos<=28){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                villanos[fila][columna]=new FichasVillanos(7,nombVillanos[pos]);
+                pos+=1;   
+            }
+            while(pos<=30){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                villanos[fila][columna]=new FichasVillanos(8,nombVillanos[pos]);
+                pos+=1;   
+            }
+             
+            while(pos<=31){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                villanos[fila][columna]=new FichasVillanos(9,nombVillanos[pos]);
+                pos+=1;   
+            }
+             while(pos<=32){
+                fila=posicionAleatoria(0,3);
+                columna=posicionAleatoria(0,9);
+                while(villanos[fila][columna]!=null){
+                    fila=posicionAleatoria(0,4);
+                    columna=posicionAleatoria(0,10);
+                }
+                villanos[fila][columna]=new FichasVillanos(10,nombVillanos[pos]);
+                pos+=1;   
+            }
+        
+            
+            for (Ficha[] villano : villanos) {
+                for (int cont2 = 0; cont2 < villano.length; cont2++) {
+     
+                    if (villano[cont2] == null) {
+                        villano[cont2] = new FichasVillanos(1,nombVillanos[nombVillanos.length-1]);
+                    }
+                }
+            }
+        
+        /*for (int cont1=0;cont1<villanos.length;cont1++){
             for(int cont2=0; cont2<villanos[cont1].length;cont2++){
                 if (cont1<2) {
                    villanos[cont1][cont2] = new FichasVillanos(2);
@@ -473,7 +605,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 }
                 
             }
+        }*/
         }
+      
+        
+        
     }
 
     private void cambiarTurno() {
@@ -560,6 +696,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         } 
         return false;
+    }
+
+    private ImageIcon obtenerImagenVillano(Ficha fic) {
+        String dir=(String)(fic.nombreficha);
+        ImageIcon icoimg= new ImageIcon("src/Imagenes/Villanos/"+dir+".png");
+        return icoimg;
     }
 
 

@@ -15,8 +15,8 @@ public class FichasVillanos extends Ficha {
     private ImageIcon imgocultar;
     public FichasVillanos cardsVillanos[][]= new FichasVillanos[4][10];
     
-    public FichasVillanos(int rango) {
-        super(TipoFicha.VILLANO, rango," ");
+    public FichasVillanos(int rango,String nombre) {
+        super(TipoFicha.VILLANO, rango,nombre);
 
     }
 }
