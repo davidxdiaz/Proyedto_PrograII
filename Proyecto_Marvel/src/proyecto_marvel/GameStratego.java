@@ -710,13 +710,13 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void modoJuego() {
         switch (Configuracion.modojuego) {
             case 1:
-                jLabel3.setText("MODO ALEATORIO");
+                jLabel3.setText("MODO TUTORIAL");
                 break;
             case 2:
                 jLabel3.setText("MODO CLASICO");
                 break;
             default:
-                jLabel3.setText("MODO ALEATORIO");
+                jLabel3.setText("MODO TUTORIAL");
                 break;
         }
     }
