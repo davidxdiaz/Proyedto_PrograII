@@ -194,6 +194,7 @@ public class Player {
      * ESTA ES UN FUNCION ORDENAR EL RAKING DE LOS JUGADORES 
      * @param args 
      */
+    /*
     public static void main(String[] args) {
         players.add(new Player("andy", "password"));
         players.get(0).addPuntos();
@@ -240,7 +241,7 @@ public class Player {
             }
         }
     }
-             
+     */     
     
 }
     

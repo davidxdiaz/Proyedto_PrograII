@@ -630,13 +630,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         
         
         do{
-            playertwo = JOptionPane.showInputDialog(null, "Ingrese jugador 2");
+            playertwo = JOptionPane.showInputDialog(null, "Ingrese jugador 2",JOptionPane.YES_OPTION);
         
-            if (playertwo.equals(JOptionPane.CANCEL_OPTION)){
-             this.dispose();
-             new MenuIncial().setVisible(true);
-             break;
-            }
+            
             if (playertwo == null){
                 return;
             }            
