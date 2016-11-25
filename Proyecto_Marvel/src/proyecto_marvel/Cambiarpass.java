@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Miguel Paz
@@ -16,6 +18,7 @@ public class Cambiarpass extends javax.swing.JFrame {
      */
     public Cambiarpass() {
         initComponents();
+        lblUser.setText(Player.getLoggedPlayer().getUsername());
         this.setLocationRelativeTo(null);
     }
 
@@ -28,33 +31,81 @@ public class Cambiarpass extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtPassA = new javax.swing.JTextField();
+        txtPassNew = new javax.swing.JTextField();
+        btnCPass = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("¡PRÓXIMAMENTE DISPONIBLE!");
+        lblUser.setText("user");
+
+        jLabel3.setText("Ingrese la contraseña actual");
+
+        jLabel4.setText("Ingrese la nueva contrseña");
+
+        btnCPass.setText("Cambiar password");
+        btnCPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCPassActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCPass)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblUser)
+                        .addComponent(txtPassA)
+                        .addComponent(txtPassNew)))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(lblUser)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPassA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(17, 17, 17)
+                .addComponent(txtPassNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnCPass)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPassActionPerformed
+        //Evaluo si el pass ingresado es igual al pass del usuario logged
+        if(txtPassA.getText().equals(Player.getLoggedPlayer().getPassword())){
+            //Verifico si el pass new es de 5 caracteres
+            if(txtPassNew.getText().length()==5){
+                //cambio el pass
+                Player.getLoggedPlayer().setPassword(txtPassNew.getText());
+                this.dispose();
+            }
+            else
+               JOptionPane.showMessageDialog(null,"Password nuevo no válido", "ERROR", JOptionPane.ERROR_MESSAGE); 
+            
+        }
+        else
+            JOptionPane.showMessageDialog(null,"Password actual no válido", "ERROR", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_btnCPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -92,6 +143,11 @@ public class Cambiarpass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnCPass;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblUser;
+    private javax.swing.JTextField txtPassA;
+    private javax.swing.JTextField txtPassNew;
     // End of variables declaration//GEN-END:variables
 }
