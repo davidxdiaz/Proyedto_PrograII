@@ -17,6 +17,7 @@ public class Player {
     //Atributos
     private String username;
     private String password;
+    
     private int puntos;
     int playersActivos=0,playersHistoricos=0;
     int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
@@ -26,13 +27,14 @@ public class Player {
     //Variables Global
    
     private static Player loggedPlayer;
+    public static int cont=0;
     
     //Constructor
     public Player(String username,String password){
         this.username = username;
         this.password = password;
         this.puntos = 0;
-        
+        cont++;
         playersActivos+=1;
         playersHistoricos+=1;
  
