@@ -17,6 +17,14 @@ public class MiPerfil extends javax.swing.JFrame {
     public MiPerfil() {
         initComponents();
         this.setLocationRelativeTo(null);
+        lblNompERFIL.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
+        int puntos=Player.existe(Player.getLoggedPlayer().getUsername()).getPuntos();
+        txtPuntos.setText(""+puntos);
+        int ganoV=Player.existe(Player.getLoggedPlayer().getUsername()).WinVillanos;
+        int ganoH=Player.existe(Player.getLoggedPlayer().getUsername()).WinHeroes;
+        
+        lblWinHeroes.setText(""+ganoH);
+        lblWinVillanos.setText(""+ganoV);
     }
 
     /**
@@ -32,6 +40,13 @@ public class MiPerfil extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        lblNompERFIL = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtPuntos = new javax.swing.JLabel();
+        lblwinH = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblWinHeroes = new javax.swing.JLabel();
+        lblWinVillanos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,34 +78,78 @@ public class MiPerfil extends javax.swing.JFrame {
             }
         });
 
+        lblNompERFIL.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblNompERFIL.setText("    ");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Puntos:");
+
+        txtPuntos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtPuntos.setText("        ");
+
+        lblwinH.setText("Partidas ganada con Heroes");
+
+        jLabel2.setText("Partidas Ganadas con Villanos");
+
+        lblWinHeroes.setText("jLabel3");
+
+        lblWinVillanos.setText("jLabel3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addComponent(jButton1)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(lblNompERFIL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(31, 31, 31)
+                .addComponent(txtPuntos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lblwinH)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblWinVillanos)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblWinHeroes)
+                .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(112, 112, 112))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton2)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(101, 101, 101))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNompERFIL)
+                    .addComponent(jLabel1)
+                    .addComponent(txtPuntos))
+                .addGap(30, 30, 30)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblwinH)
+                    .addComponent(jLabel2)
+                    .addComponent(lblWinVillanos)
+                    .addComponent(lblWinHeroes))
+                .addContainerGap())
         );
 
         pack();
@@ -152,5 +211,12 @@ public class MiPerfil extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblNompERFIL;
+    private javax.swing.JLabel lblWinHeroes;
+    private javax.swing.JLabel lblWinVillanos;
+    private javax.swing.JLabel lblwinH;
+    private javax.swing.JLabel txtPuntos;
     // End of variables declaration//GEN-END:variables
 }

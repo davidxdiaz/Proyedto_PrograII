@@ -156,7 +156,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnStrategoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStrategoActionPerformed
         new StrategoMarvelHeroes().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnStrategoActionPerformed
 
     /**

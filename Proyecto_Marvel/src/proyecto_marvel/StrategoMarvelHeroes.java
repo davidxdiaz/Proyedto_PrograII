@@ -39,7 +39,6 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
 
         jButton1.setText("PARTIDA NUEVA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

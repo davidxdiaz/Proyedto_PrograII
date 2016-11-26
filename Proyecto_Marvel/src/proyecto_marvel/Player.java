@@ -140,6 +140,12 @@ public class Player {
         String resultado="DERROTA";  
         if (n){
             resultado="VICTORIA";
+            if (m==TipoFicha.HEROE){
+                WinHeroes++;
+            }else{
+                WinVillanos++;
+            }
+            
         }
         String fecha=actual.toString();
         partidas.add(fecha+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
