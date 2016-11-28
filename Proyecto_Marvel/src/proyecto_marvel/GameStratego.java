@@ -381,7 +381,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         }
         if(primerCasilla.ficha.rango==2){
-            if (primerCasilla.x==segundaCasilla.x){
+            if (primerCasilla.x==primerCasilla.x){
                 int cMax=columMax(primerCasilla);
                 int cMin=columMin(primerCasilla);
                 if(segundaCasilla.y<=cMax && segundaCasilla.y>=cMin){
@@ -397,7 +397,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }else if(primerCasilla.y==segundaCasilla.y){
                 int fMax=filaMax(primerCasilla);
                 int fMin=filaMin(primerCasilla);
-                if(segundaCasilla.x<=fMax && segundaCasilla.x>=fMin){
+                if(primerCasilla.x<=fMax && primerCasilla.x>=fMin){
                     segundaCasilla.ficha=primerCasilla.ficha;
                     segundaCasilla.setText(primerCasilla.getText());
                     primerCasilla.setText(null);
