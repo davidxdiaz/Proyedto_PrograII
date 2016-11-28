@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,9 +19,10 @@ public class Player {
     //Atributos
     private String username;
     private String password;
+    private RandomAccessFile rplayers;
     
     private int puntos;
-    int playersActivos=0,playersHistoricos=0;
+    static int playersActivos=0,playersHistoricos=0;
     int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
     static ArrayList<Player> players=new ArrayList<>();
     static ArrayList<String>partidas;
@@ -53,6 +56,18 @@ public class Player {
         players.add(new Player(user, pass));
         
    }
+     public void addPlayer(String user, String pass)throws IOException
+    {
+        //Me aseguro que el puntero este en al final
+        rplayers.seek(rplayers.length());
+        //Nombre de usuario
+        rplayers.writeUTF(user);
+        //puntos
+        rplayers.write(puntos);
+        //Password
+        rplayers.writeUTF(pass);
+       
+    }
     
 /***
  * 
