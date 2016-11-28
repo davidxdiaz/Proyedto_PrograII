@@ -24,33 +24,12 @@ public class CasillasMarvel extends JButton{
         this.x = x;
         this.y = y;
         this.ficha = ficha;
+        this.setOpaque(true);
+        this.setBorderPainted(false);
        // this.addActionListener(this);
   
     }
-    
-    
-/*
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println(getName());
-       
-    }
-
-    public void setName(int x, int y){
-        setText(x+""+y);
-    }
-    
-    @Override
-    public String getName(){
-     return String.valueOf(x)+String.valueOf(y);   
-    }
-
-
-
-    
-
-*/
-   
+ 
 }
     
 

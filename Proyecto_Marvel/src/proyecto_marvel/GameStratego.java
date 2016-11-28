@@ -4,17 +4,14 @@
  * and open the template in the editor.
  */
 package proyecto_marvel;
-
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Random;
 import javax.swing.ImageIcon;
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,9 +24,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
      * Variables Globales
      */    
     String PLAYER_HEROE,PLAYER_VILLANO;
-    String cap="Capitán América";
-    ImageIcon icono=new ImageIcon("src/Imagenes/cardsVillain.png");
-    ImageIcon iconoH=new ImageIcon("src/Imagenes/Heroes/"+cap+".png");
     CasillasMarvel celda[][]=new CasillasMarvel[10][10];
     Ficha heroes[][]=new FichasHeroes[4][10];
     Ficha villanos[][]=new FichasVillanos[4][10];
@@ -37,12 +31,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     boolean turnoPlayerHeroes=true, primerclic=false;
     TipoFicha fichaContraria= turnoPlayerHeroes?TipoFicha.VILLANO:TipoFicha.HEROE;
     TipoFicha miTipoFicha = turnoPlayerHeroes? TipoFicha.HEROE:TipoFicha.VILLANO;
-    int turno=1; 
+    int turno=0,MODO_JUEGO=Configuracion.modojuego; 
     String turnoplayer=(turno==1?"HEROES":"VILANOS");
-   
-    
-    
-    
     
     String nomHeroes[]={"Nova Blast","Nova Blast","Nova Blast","Nightcrowler","Elektra","Dr. Strange","Phoenix","Storm","Ice Man","SpiderGirl",
         "Gambit","Colossus","Beast","Giant Man","She Hulk","Emma Frost",
@@ -91,7 +81,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         obtenerVillanos();
         tablero(); //IMPLEMENTA EL TABLERO EN PANTALLA\
         pintarZonaSegura();
-        lblTurno.setText("TURNO "+turnoplayer);
+        cambiarTurno();
     }
     
   /**
@@ -108,13 +98,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 }else if(i>5){
                     celda[i][e]=new CasillasMarvel(i, e, villanos[i-6][e]);
                     celda[i][e].setText("VILLAINS"+i+e);
-                    celda[i][e].setIcon(obtenerImagenVillano(villanos[i-6][e]));
+                    celda[i][e].setIcon(obtenerImagen(villanos[i-6][e]));
                 }else{ 
                     celda[i][e]=new CasillasMarvel(i, e, null);
                 }
                 celda[i][e].setName(i+""+e);
                 celda[i][e].addActionListener(this);
-                
                 panelTablero.add(celda[i][e]);
         
             }
@@ -340,46 +329,30 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private javax.swing.JPanel panelTablero;
     // End of variables declaration//GEN-END:variables
 
-    private static ImageIcon getImage(String path)
-   {
-      try
-      {
-         
-         Image image = ImageIO.read(GameStratego.class.getResource(path));
-         Image image_resize = image.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
-         return new ImageIcon(image_resize);
-      } catch (IOException e){
-          e.getMessage();
-      }
-      return null;
-   }
-
     @Override
     public void actionPerformed(ActionEvent e) {
- 
-            if(primerclic){
-                if(e.getSource() instanceof CasillasMarvel){
-                    for (CasillasMarvel[] celda1 : celda) {
-                        for (CasillasMarvel objeto : celda1) {
-                            if (e.getSource().equals(objeto)) {
-                                segundaCasilla=objeto;
-                                validarSegundoClic(primerCasilla,segundaCasilla);                   
-                            }
+        if(primerclic){
+            if(e.getSource() instanceof CasillasMarvel){
+                for (CasillasMarvel[] celda1 : celda) {
+                    for (CasillasMarvel objeto : celda1) {
+                        if (e.getSource().equals(objeto)) {
+                            segundaCasilla=objeto;
+                            validarSegundoClic(primerCasilla,segundaCasilla);                   
                         }
                     }
-                }  
-            }else{
-                if(e.getSource() instanceof CasillasMarvel){
-                    for (CasillasMarvel[] celda1 : celda) {
-                        for (CasillasMarvel objeto : celda1) {
-                            if (e.getSource().equals(objeto)){
-                                primerCasilla= objeto;
-                                System.out.println(objeto.getWidth()+"  "+objeto.getHeight());
-                                try{
+                }
+            }  
+        }else{
+            if(e.getSource() instanceof CasillasMarvel){
+                for (CasillasMarvel[] celda1 : celda) {
+                    for (CasillasMarvel objeto : celda1) {
+                        if (e.getSource().equals(objeto)){
+                            primerCasilla= objeto;
+                            System.out.println(objeto.getWidth()+"  "+objeto.getHeight());
+                            try{
                                 validarPrimerClic(primerCasilla);   
-                                }catch(RuntimeException ae){
-                                    JOptionPane.showMessageDialog(null,"No has selecionado ninguna ficha");
-                                            
+                            }catch(RuntimeException ae){
+                                JOptionPane.showMessageDialog(null,"No has selecionado ninguna ficha");                                
                                 }                                  
                             }
                         }
@@ -407,7 +380,64 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 return;
             }
         }
-        if (primerCasilla.x==segundaCasilla.x){
+        if(primerCasilla.ficha.rango==2){
+            if (primerCasilla.x==segundaCasilla.x){
+                int cMax=columMax(primerCasilla);
+                int cMin=columMin(primerCasilla);
+                if(segundaCasilla.y<=cMax && segundaCasilla.y>=cMin){
+                    segundaCasilla.ficha=primerCasilla.ficha;
+                    segundaCasilla.setText(primerCasilla.getText());
+                    primerCasilla.setText(null);
+                    //Quita la imagen de la casilla anterior
+                    segundaCasilla.setIcon(primerCasilla.getIcon());
+                    primerCasilla.setIcon(null);
+                    primerCasilla.ficha=null;         
+                    cambiarTurno();
+                }
+            }else if(primerCasilla.y==segundaCasilla.y){
+                int fMax=filaMax(primerCasilla);
+                int fMin=filaMin(primerCasilla);
+                if(segundaCasilla.x<=fMax && segundaCasilla.x>=fMin){
+                    segundaCasilla.ficha=primerCasilla.ficha;
+                    segundaCasilla.setText(primerCasilla.getText());
+                    primerCasilla.setText(null);
+                    //Quita la imagen de la casilla anterior
+                    segundaCasilla.setIcon(primerCasilla.getIcon());
+                    primerCasilla.setIcon(null);
+                    primerCasilla.ficha=null;         
+                    cambiarTurno();
+                }
+                /*int pos=segundaCasilla.y;
+                int cmax=columMax(segundaCasilla);
+                int cmin=columMin(segundaCasilla);
+                if ((cmax+1)>=pos &&(cmin-1)>=pos){
+                    segundaCasilla.ficha=primerCasilla.ficha;
+                    segundaCasilla.setText(primerCasilla.getText());
+                    primerCasilla.setText(null);
+                    //Quita la imagen de la casilla anterior
+                    segundaCasilla.setIcon(primerCasilla.getIcon());
+                    primerCasilla.setIcon(null);
+                    primerCasilla.ficha=null;         
+                    cambiarTurno();
+                }
+            }else if(primerCasilla.y==segundaCasilla.y){
+                int pos=segundaCasilla.y;
+                int fmax=filaMax(primerCasilla);
+                int fmin=filaMin(primerCasilla);
+                if ((fmax+1)>=pos &&(fmin-1)>=pos){
+                    segundaCasilla.ficha=primerCasilla.ficha;
+                    segundaCasilla.setText(primerCasilla.getText());
+                    primerCasilla.setText(null);
+                    //Quita la imagen de la casilla anterior
+                    segundaCasilla.setIcon(primerCasilla.getIcon());
+                    primerCasilla.setIcon(null);
+                    primerCasilla.ficha=null;         
+                    cambiarTurno();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Moviento no valido");*/
+            }  
+        }else if (primerCasilla.x==segundaCasilla.x){
             int pos=primerCasilla.y;
             int s=segundaCasilla.y;
             if ((s+1)>=pos &&(s-1)<=pos){
@@ -417,12 +447,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 //Quita la imagen de la casilla anterior
                 segundaCasilla.setIcon(primerCasilla.getIcon());
                 primerCasilla.setIcon(null);
-                
-                primerCasilla.ficha=null;
-                
+                primerCasilla.ficha=null;         
                 cambiarTurno();
-            }
-            else{
+            }else{
                 JOptionPane.showMessageDialog(null, "Movimiento no válido, esta Ficha no se puede mover más 2 posiciones");
             }
         }
@@ -432,12 +459,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             if ((s+1)>=h &&(s-1)<=h){
                 segundaCasilla.ficha=primerCasilla.ficha;
                 segundaCasilla.setText(primerCasilla.getText());
-                
+              
                 segundaCasilla.setIcon(primerCasilla.getIcon());
                 primerCasilla.setIcon(null);
-                cambiarTurno();
                 primerCasilla.setText(null);
                 primerCasilla.ficha=null;
+                cambiarTurno();
             }
             else{
                 JOptionPane.showMessageDialog(null, "Movimiento no válido, esta Ficha no se puede mover más 2 posiciones");
@@ -448,7 +475,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }
     }
         
-    private void pintarZonaSegura() {
+    private void pintarZonaSegura(){
         for(int y=4;y<=5;y++){
             for (int x=2;x<=3;x++){
                 celda[y][x].setBackground(Color.YELLOW);     
@@ -463,7 +490,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
  * @param primerCasilla  Obtiene el primer clic y valida que este cumpla con las condiciones requeridas
  */
     private void validarPrimerClic(CasillasMarvel primerCasilla) {
-        if(primerCasilla.ficha.rango==0){
+        if(primerCasilla.ficha.ficha==fichaContraria){
+            JOptionPane.showMessageDialog(null, "Selecione una ficha tuya por favor");        
+        }else if(primerCasilla.ficha.rango<=0){
             JOptionPane.showMessageDialog(null, "Esta ficha no posee movimiento");
         }
         else if(primerCasilla.ficha!=null && primerCasilla.ficha.ficha==miTipoFicha){
@@ -491,15 +520,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void obtenerVillanos() {
-        
         int f=3,pos=0;
         int c=posicionAleatoria(1,8);
-        villanos[f][c]=new FichasVillanos(0,"Planet Earth");
+        villanos[f][c]=new FichasVillanos(-1,"Planet Earth");
         villanos[f][c+1]=new FichasVillanos(0,"Pumpkin Bomb");
         villanos[f][c-1]=new FichasVillanos(0,"Pumpkin Bomb");
         villanos[f-1][c]=new FichasVillanos(0,"Pumpkin Bomb");
-       
-        
         while(isEmpty(villanos)){
             int fila,columna;
             while(pos<=2){
@@ -603,53 +629,30 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 villanos[fila][columna]=new FichasVillanos(10,nombVillanos[pos]);
                 pos+=1;   
             }
-        
-            
             for (Ficha[] villano : villanos) {
                 for (int cont2 = 0; cont2 < villano.length; cont2++) {
-     
                     if (villano[cont2] == null) {
                         villano[cont2] = new FichasVillanos(1,nombVillanos[nombVillanos.length-1]);
                     }
                 }
             }
-        
-        /*for (int cont1=0;cont1<villanos.length;cont1++){
-            for(int cont2=0; cont2<villanos[cont1].length;cont2++){
-                if (cont1<2) {
-                   villanos[cont1][cont2] = new FichasVillanos(2);
-                }else if(cont1<4){
-                    villanos[cont1][cont2]=new FichasVillanos(4);
-                }
-                if (villanos[cont1][cont2] == null) {
-                    villanos[cont1][cont2] = new FichasVillanos(1);
-                }
-                
-            }
-        }*/
         }
-      
-        
-        
     }
 
     private void cambiarTurno() {
         turno++;
+        lblTurno.setText("TURNO "+turnoplayer);
         if (turno>2){
            turno=1;
-        }
+        }  
         turnoplayer= turno==1?"HEROES":"VILLANOS";
         lblTurno.setText("TURNO "+turnoplayer);
         fichaContraria= turno==1?TipoFicha.VILLANO:TipoFicha.HEROE;
         miTipoFicha = turno==1? TipoFicha.HEROE:TipoFicha.VILLANO;
+        ocultarFichas();
     }
 
     private void formularioInicial() {
-        
-        
-        
-        
-        
         if(Opciones.op==true){
             lblPlayerOne.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
             PLAYER_HEROE=Player.getLoggedPlayer().getUsername();
@@ -676,45 +679,40 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private int posicionAleatoria(int min,int max) {
-      Random rand = new Random();
-      int randomNum = rand.nextInt((max - min) + 1) + min;
-
-      return randomNum;
-        //int numero=(int)(Math.random()*max)+min;
-        //return numero;
+        Random rand = new Random();
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
     }
-
 
     private ImageIcon obtenerImagen(Ficha img) {
         String dir=(String)(img.nombreficha);
-        ImageIcon icoimg= new ImageIcon("src/Imagenes/Heroes/"+dir+".png");
-        return icoimg;
+        if(img.ficha==TipoFicha.HEROE){
+            ImageIcon icoimg= new ImageIcon("src/Imagenes/Heroes/"+dir+".png");
+            Image image_resize = icoimg.getImage().getScaledInstance(53, 60, Image.SCALE_SMOOTH);
+            return new ImageIcon(image_resize);
+        }else{
+            ImageIcon icoimg= new ImageIcon("src/Imagenes/Villanos/"+dir+".png");
+            Image image_resize = icoimg.getImage().getScaledInstance(53, 60, Image.SCALE_SMOOTH);
+            return new ImageIcon(image_resize);       
+        }
     }
-
+    
     private boolean isEmpty(Ficha[][] heroes) {
         for(Ficha i[]:heroes){
             for(Ficha e:i){
                 if(e==null){
                     return true;
-                }
-                
+                }                
             }
         } 
         return false;
     }
-
-    private ImageIcon obtenerImagenVillano(Ficha fic) {
-        String dir=(String)(fic.nombreficha);
-        ImageIcon icoimg= new ImageIcon("src/Imagenes/Villanos/"+dir+".png");
-        return icoimg;
-    }
-
     private void modoJuego() {
         switch (Configuracion.modojuego) {
-            case 1:
+            case 0:
                 jLabel3.setText("MODO TUTORIAL");
                 break;
-            case 2:
+            case 1:
                 jLabel3.setText("MODO CLASICO");
                 break;
             default:
@@ -723,30 +721,87 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }
     }
 
+    private void ocultarFichas() {
+        if(MODO_JUEGO!=0){
+            if (turno==1){
+                ImageIcon imgOcultaVillanos=new ImageIcon("src/Imagenes/cardsVillain.png");
+                Icon icoVillano=new ImageIcon(imgOcultaVillanos.getImage().getScaledInstance(53,60,Image.SCALE_SMOOTH));
+                for(CasillasMarvel[] tipo:celda){
+                    for(CasillasMarvel villano:tipo){
+                        if(villano.ficha instanceof FichasVillanos){
+                            villano.setIcon(icoVillano);
+                        }else if(villano.ficha instanceof FichasHeroes){
+                            villano.setIcon(obtenerImagen(villano.ficha));
+                        }
+                    }
+                }
+            }else{
+                ImageIcon imgOcultaHeroe=new ImageIcon("src/Imagenes/cardsHeroes.png");
+                 Icon icoHeroe= new ImageIcon(imgOcultaHeroe.getImage().getScaledInstance(53,60,Image.SCALE_SMOOTH));
+                 for(CasillasMarvel[] tipo:celda){
+                    for(CasillasMarvel heroe:tipo){
+                        if(heroe.ficha instanceof FichasHeroes){
+                            heroe.setIcon(icoHeroe);
+                        }else if(heroe.ficha instanceof FichasVillanos){
+                            heroe.setIcon(obtenerImagen(heroe.ficha));
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    private int filaMax(CasillasMarvel posicion) {
+       for(int fmax=posicion.x;fmax<=9;fmax++){
+           if(celda[fmax][posicion.y].ficha!=null){
+               return fmax;
+           }
+        }
+        return 9;
+    }
 
+    private int columMax(CasillasMarvel posicion) {
+        for(int cmax=posicion.y;cmax<=9;cmax++){
+           if(celda[posicion.x][cmax].ficha!=null){
+               return cmax;
+           }
+        }
+        return 9;
+    }
+
+    private int filaMin(CasillasMarvel posicion) {
+        for(int fmin=posicion.y;fmin>=0;fmin--){
+           if(celda[fmin][posicion.y].ficha!=null){
+               return fmin;
+           }
+        }
+        return 0;
+    }
+
+    private int columMin(CasillasMarvel posi) {
+        for(int cMin=posi.y;cMin>=0;cMin--){
+            if(celda[primerCasilla.x][cMin].ficha!=null){
+                return cMin;
+            }
+        }return 0;
+        
+    }
     private static class RunnableImpl implements Runnable {
 
-        public RunnableImpl() {
-        }
-
+        public RunnableImpl() {}
         @Override
         public void run() {
             new GameStratego().setVisible(true);
         }
     }
-    
-    
+        
     public void obtenerHeroes(){
-
         int f=0,pos=0;
         int c=posicionAleatoria(1,8);
-        heroes[f][c]=new FichasHeroes(0,"Planet Earth");
+        heroes[f][c]=new FichasHeroes(-1,"Planet Earth");
         heroes[f][c+1]=new FichasHeroes(0,"Nova Blast");
         heroes[f][c-1]=new FichasHeroes(0,"Nova Blast");
         heroes[f+1][c]=new FichasHeroes(0,"Nova Blast");
-       
-        
         while(isEmpty(heroes)){
             int fila,columna;
             while(pos<=2){
@@ -758,7 +813,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 }
                 heroes[fila][columna]=new FichasHeroes(0,nomHeroes[pos]);
                 pos+=1;
-                
             }
             while(pos<=10){
                 fila=posicionAleatoria(2,3);
@@ -852,158 +906,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
             for (Ficha[] heroe : heroes) {
                 for (int cont2 = 0; cont2 < heroe.length; cont2++) {
-     
                     if (heroe[cont2] == null) {
                         heroe[cont2] = new FichasHeroes(1,nomHeroes[pos]);
                     }
                 }
             }
-            
         }
-        
-        
-        
-        
-                
-        /*for (Ficha[] heroe : heroes) {
-            for (int cont2 = 0; cont2 < heroe.length; cont2++) {
-                if (cont2>2 || 2 < heroe.length - 2) {
-                    heroe[cont2] = new FichasHeroes(2,"Capitán América");
-                }
-                if (heroe[cont2] == null) {
-                    heroe[cont2] = new FichasHeroes(1,"Capitán América");
-                }
-            }
-        }  */
-        
-      
-        
-       /* if(f==1){
-            int f1,c2;
-            f1=posicionAleatoria(0,1);
-            c2=posicionAleatoria(0,9);
-            while(heroes[f1][c2]!=null){
-                f1=posicionAleatoria(0,1);
-                c2=posicionAleatoria(0,9);  
-            }
-              heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
-        }*/   
-        //    while(heroes[f1][c2]!=null){
-              //  f1=posicionAleatoria(0,1);
-            //    c2=posicionAleatoria(0,9);  
-           // }
-            //heroes[f1][c2]=new FichasHeroes(0,"Nova Blast");
-           // f=2;
-     //   }
-       
-        /*if (f==2){
-            int f2,c2;
-            f2=posicionAleatoria(0,3);
-            c2=posicionAleatoria(0,9);
-            while(pos<8){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,1);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(2,nomHeroes[pos]);
-                pos+=1;
-            }
-            while(pos<13){
-                f2=3;
-                c2=posicionAleatoria(0,9);
-                while(heroes[f2][c2]!=null){
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(3,nomHeroes[pos]);
-                pos+=1;   
-            }
-            while(pos<17){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,3);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(4,nomHeroes[pos]);
-                pos+=1;   
-            }
-            while(pos<21){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,3);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(5,nomHeroes[pos]);
-                pos+=1;   
-            }
-            while(pos<25){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,3);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(6,nomHeroes[pos]);
-                pos++;   
-            }
-            while(pos<28){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,3);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(7,nomHeroes[pos]);
-                pos++;   
-            }
-            while(pos<30){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,3);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(8,nomHeroes[pos]);
-                pos++;   
-            }
-            while(pos<31){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,3);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(9,nomHeroes[pos]);
-                pos++;   
-            }
-            while(pos<32){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,3);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(10,nomHeroes[pos]);
-                pos++;   
-            }
-            while(pos<nomHeroes.length){
-                while(heroes[f2][c2]!=null){
-                    f2=posicionAleatoria(0,3);
-                    c2=posicionAleatoria(0,9);  
-                }
-                heroes[f2][c2]=new FichasHeroes(1,nomHeroes[pos]);
-                pos++;   
-            }
-            
-            
-        }
-        */
-        
-            
-            
-        
-            
-        
-        
-        //////////////////
-        
-        
-        
-         
-                }
+    }
 
 }
-
-
-
-        
-
-
-

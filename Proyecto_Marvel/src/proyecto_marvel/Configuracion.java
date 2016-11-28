@@ -96,7 +96,7 @@ public class Configuracion extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
        if (jRadioButton1.isSelected()){
            System.out.println("El modo tutorial ha sido seleccionado");
-           modojuego=1;
+           modojuego=0;
        }
        
     }//GEN-LAST:event_jRadioButton1ActionPerformed
@@ -104,7 +104,7 @@ public class Configuracion extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
        if(jRadioButton2.isSelected()){
            System.out.println("El modo clásico ha sido seleccionado");
-           modojuego=2;
+           modojuego=1;
        }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
