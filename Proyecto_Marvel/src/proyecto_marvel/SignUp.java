@@ -103,20 +103,17 @@ public class SignUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        Player logIn = Player.existe(txtUsername.getText());
+  
         String nomUsuario=txtUsername.getText();
         String password=txtPassword.getText();
-        if(logIn==null)//Usuario no existe
+        if( Player.existe(nomUsuario)==null)//Usuario no existe
         {
             
             if(password.length()==5){
                 System.out.println("Password Válida");
-                Player newPlayer = new Player(txtUsername.getText(), password);
-                Player.add(newPlayer.getUsername(), newPlayer.getPassword());
+                Player.add(nomUsuario, password);
                 JOptionPane.showMessageDialog(null,"Usuario registrado correctamente");
-                Player.setLoggedPlayer(newPlayer);
-                System.out.println(Player.getLoggedPlayer().getPassword());
-                System.out.println(txtPassword.getText());
+                
                 dispose();
                 new MenuPrincipal().setVisible(true);
                 dispose();

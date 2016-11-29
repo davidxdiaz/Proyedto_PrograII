@@ -22,7 +22,7 @@ public class Player {
     private RandomAccessFile rplayers;
     
     private int puntos;
-    static int playersActivos=0,playersHistoricos=0;
+    public static int playersActivos=0,playersHistoricos=0;
     int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
     static ArrayList<Player> players=new ArrayList<>();
     static ArrayList<String>partidas;
@@ -30,14 +30,12 @@ public class Player {
     //Variables Global
    
     private static Player loggedPlayer;
-    public static int cont=0;
-    
+   
     //Constructor
     public Player(String username,String password){
         this.username = username;
         this.password = password;
         this.puntos = 0;
-        cont++;
         playersActivos+=1;
         playersHistoricos+=1;
  
@@ -53,7 +51,9 @@ public class Player {
     * @param pass Contraseña
     */
     public static void add(String user, String pass){
-        players.add(new Player(user, pass));
+        Player newPlayer = new Player(user,pass);
+        setLoggedPlayer(newPlayer);
+        players.add(newPlayer);
         
    }
      public void addPlayer(String user, String pass)throws IOException
