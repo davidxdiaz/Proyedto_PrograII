@@ -99,7 +99,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(660, 600, 190, 30);
+        jButton2.setBounds(650, 600, 190, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,7 +112,7 @@ public class LogIn extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String passw = "";
 
@@ -141,6 +141,10 @@ public class LogIn extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
