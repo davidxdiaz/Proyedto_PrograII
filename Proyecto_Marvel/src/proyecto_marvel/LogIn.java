@@ -23,9 +23,7 @@ public class LogIn extends javax.swing.JFrame {
      */
     public LogIn() {
         initComponents();
-            this.setLocationRelativeTo(null);
-            this.setExtendedState(MAXIMIZED_BOTH);
-            this.setLocation(0,0);
+           
         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Login.jpeg");
         //OBTENER TAMAÑO DEL FRAME
         Toolkit tk= Toolkit.getDefaultToolkit();
@@ -35,6 +33,9 @@ public class LogIn extends javax.swing.JFrame {
      
         ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(JLabel3.getWidth(), JLabel3.getHeight(),Image.SCALE_DEFAULT));
         JLabel3.setIcon(icono);
+         this.setLocationRelativeTo(null);
+            this.setExtendedState(MAXIMIZED_BOTH);
+            this.setLocation(0,0);
        
      
      
@@ -60,7 +61,6 @@ public class LogIn extends javax.swing.JFrame {
         JLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
