@@ -5,6 +5,11 @@
  */
 package proyecto_marvel;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author David
@@ -17,7 +22,20 @@ public class MenuIncial extends javax.swing.JFrame {
     public MenuIncial() {
         initComponents();
         Player.creandoFolder();
+        ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Paraelinicio.jpeg");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel2.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(),Image.SCALE_DEFAULT));
+        jLabel2.setIcon(icono);
+       
+     
         this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
         
     }
 
@@ -33,9 +51,11 @@ public class MenuIncial extends javax.swing.JFrame {
         logIn = new javax.swing.JButton();
         crearPlayer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(0, 0));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         logIn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -64,6 +84,10 @@ public class MenuIncial extends javax.swing.JFrame {
         jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel1);
         jLabel1.setBounds(40, 440, 440, 70);
+
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 1020, 770);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -110,6 +134,7 @@ public class MenuIncial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton crearPlayer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton logIn;
     // End of variables declaration//GEN-END:variables
 }
