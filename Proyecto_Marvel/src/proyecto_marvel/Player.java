@@ -22,10 +22,7 @@ public class Player {
     private String password;
     private static RandomAccessFile rplayers;
     private static boolean activo;
-    
-    
     private int puntos;
-    public static int playersActivos=0,playersHistoricos=0;
     int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
     static ArrayList<Player> players=new ArrayList<>();
     static ArrayList<String>partidas;
@@ -92,7 +89,28 @@ public class Player {
     public int getWinVillanos() {
         return WinVillanos;
     }
-    
+    public static int pHistoricos()throws IOException{
+        rplayers.seek(0);
+        int c=0;
+        while(rplayers.getFilePointer()<rplayers.length()){
+            rplayers.skipBytes(20);
+            rplayers.readUTF();
+            c++;
+        }
+        return c;
+    }
+    public static int pActivos()throws IOException{
+        rplayers.seek(0);
+        int c=0;
+        while(rplayers.getFilePointer()<rplayers.length()){
+            rplayers.skipBytes(11);
+            if(rplayers.readBoolean())
+                c++;
+            rplayers.skipBytes(8);
+            rplayers.readUTF();
+        }
+        return c;
+    }
     //Funciones
     
    /**
@@ -263,7 +281,6 @@ public class Player {
     public void elimiarCuenta(String user, String pass){
         try{
         players.remove(players.indexOf(verificar(user, pass)));
-        playersActivos-=1;
         }catch (IOException e){
             System.out.println("Error"+e.getMessage());
         }

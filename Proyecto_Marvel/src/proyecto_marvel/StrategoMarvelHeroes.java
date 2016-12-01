@@ -7,6 +7,7 @@ package proyecto_marvel;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -103,12 +104,17 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
-        if(Player.playersHistoricos>1){
-            new Opciones().setVisible(true);
-            this.dispose();
-        }else
-            JOptionPane.showMessageDialog(null,"Esta opcion no esta disponible aun", "ERROR", JOptionPane.ERROR_MESSAGE);
+        try{
+            
+        
+            if(Player.pActivos()>1){
+                new Opciones().setVisible(true);
+                this.dispose();
+            }else
+                JOptionPane.showMessageDialog(null,"Esta opcion no esta disponible aun", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }catch(IOException e){
+            System.out.println("Error "+e.getMessage() );
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
