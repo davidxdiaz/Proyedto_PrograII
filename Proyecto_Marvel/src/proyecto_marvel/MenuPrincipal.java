@@ -5,6 +5,10 @@
  */
 package proyecto_marvel;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +23,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\RaBatallas.jpg");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel3.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(),Image.SCALE_DEFAULT));
+        jLabel3.setIcon(icono);
+       
+     
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
         
         jLabel1.setText(Player.getLoggedPlayer().getUsername().toUpperCase());   
         
@@ -40,9 +58,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnUniverso = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setSize(new java.awt.Dimension(100, 100));
+        getContentPane().setLayout(null);
 
         btnStratego.setText("STRATEGO – MARVEL HEROES!");
         btnStratego.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +72,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnStrategoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnStratego);
+        btnStratego.setBounds(100, 220, 310, 40);
 
         btnConfig.setText("CONFIGURACIÓN");
         btnConfig.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +81,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnConfigActionPerformed(evt);
             }
         });
+        getContentPane().add(btnConfig);
+        btnConfig.setBounds(100, 280, 310, 40);
 
         btnPerfil.setText("MI PERFIL");
         btnPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -64,6 +90,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnPerfilActionPerformed(evt);
             }
         });
+        getContentPane().add(btnPerfil);
+        btnPerfil.setBounds(100, 340, 310, 40);
 
         btnUniverso.setText("UNIVERSO MARVEL");
         btnUniverso.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +99,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnUniversoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnUniverso);
+        btnUniverso.setBounds(100, 400, 310, 40);
 
         btnCerrar.setText("CERRAR SESIÓN");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,51 +108,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 btnCerrarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCerrar);
+        btnCerrar.setBounds(100, 460, 310, 40);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Usuario");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(200, 170, 80, 15);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(btnPerfil))
-                            .addComponent(btnStratego)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnConfig)
-                                    .addComponent(btnUniverso)
-                                    .addComponent(btnCerrar, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jLabel1)))
-                .addContainerGap(98, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(btnStratego)
-                .addGap(18, 18, 18)
-                .addComponent(btnConfig)
-                .addGap(18, 18, 18)
-                .addComponent(btnPerfil)
-                .addGap(18, 18, 18)
-                .addComponent(btnUniverso)
-                .addGap(18, 18, 18)
-                .addComponent(btnCerrar)
-                .addGap(19, 19, 19))
-        );
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("BIENVENIDO:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(100, 130, 310, 20);
+
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 0, 860, 520);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -130,7 +135,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         //Pregunta si desea cerrar sesión
         
-        int n= JOptionPane.showConfirmDialog(null, "¿Desea salir", "Información", JOptionPane.YES_NO_OPTION);
+        int n= JOptionPane.showConfirmDialog(null, "¿Desea salir?", "Información", JOptionPane.YES_NO_OPTION);
         
         if (n==JOptionPane.YES_OPTION){
             Player.setLoggedPlayer(null);
@@ -194,5 +199,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnStratego;
     private javax.swing.JButton btnUniverso;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

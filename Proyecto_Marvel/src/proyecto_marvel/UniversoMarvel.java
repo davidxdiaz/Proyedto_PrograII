@@ -5,6 +5,11 @@
  */
 package proyecto_marvel;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author David
@@ -16,6 +21,20 @@ public class UniversoMarvel extends javax.swing.JFrame {
      */
     public UniversoMarvel() {
         initComponents();
+         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\rabata.png");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel1.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(),Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icono);
+       
+     
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
         this.setLocationRelativeTo(null);
     }
 
@@ -30,8 +49,12 @@ public class UniversoMarvel extends javax.swing.JFrame {
 
         btnRanking = new javax.swing.JButton();
         btnBatallas = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         btnRanking.setText("RANKING");
         btnRanking.addActionListener(new java.awt.event.ActionListener() {
@@ -39,6 +62,8 @@ public class UniversoMarvel extends javax.swing.JFrame {
                 btnRankingActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRanking);
+        btnRanking.setBounds(250, 160, 260, 70);
 
         btnBatallas.setText("BATALLAS");
         btnBatallas.addActionListener(new java.awt.event.ActionListener() {
@@ -46,27 +71,19 @@ public class UniversoMarvel extends javax.swing.JFrame {
                 btnBatallasActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBatallas);
+        btnBatallas.setBounds(250, 260, 260, 70);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnBatallas)
-                    .addComponent(btnRanking))
-                .addContainerGap(157, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(btnRanking)
-                .addGap(59, 59, 59)
-                .addComponent(btnBatallas)
-                .addContainerGap(122, Short.MAX_VALUE))
-        );
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("ESTADÍSTICAS");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(230, 90, 310, 30);
+
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 840, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -117,5 +134,7 @@ public class UniversoMarvel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatallas;
     private javax.swing.JButton btnRanking;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

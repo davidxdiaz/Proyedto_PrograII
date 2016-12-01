@@ -5,7 +5,11 @@
  */
 package proyecto_marvel;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Locale;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,6 +22,20 @@ public class Opciones extends javax.swing.JFrame {
      */
     public Opciones() {
         initComponents();
+         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Bando.jpg");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel3.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(),Image.SCALE_DEFAULT));
+        jLabel3.setIcon(icono);
+       
+     
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
         this.setLocationRelativeTo(null);
     }
 
@@ -41,8 +59,13 @@ public class Opciones extends javax.swing.JFrame {
         optH = new javax.swing.JRadioButton();
         optV = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
+
+        jPanel1.setLayout(null);
 
         optH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         optH.setText("Héroes");
@@ -51,6 +74,8 @@ public class Opciones extends javax.swing.JFrame {
                 optHActionPerformed(evt);
             }
         });
+        jPanel1.add(optH);
+        optH.setBounds(52, 36, 67, 25);
 
         optV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         optV.setText("Villanos");
@@ -59,54 +84,20 @@ public class Opciones extends javax.swing.JFrame {
                 optVActionPerformed(evt);
             }
         });
+        jPanel1.add(optV);
+        optV.setBounds(52, 79, 69, 25);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(optV)
-                    .addComponent(optH))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(optH)
-                .addGap(18, 18, 18)
-                .addComponent(optV)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(450, 200, 200, 148);
 
         jLabel1.setFont(new java.awt.Font("Toledo", 0, 36)); // NOI18N
         jLabel1.setText("Elije tu bando");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(450, 150, 215, 60);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(93, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
-        );
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 0, 690, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -170,6 +161,7 @@ public class Opciones extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton optH;
     private javax.swing.JRadioButton optV;
