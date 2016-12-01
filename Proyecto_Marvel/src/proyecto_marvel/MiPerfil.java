@@ -5,6 +5,11 @@
  */
 package proyecto_marvel;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author David
@@ -16,7 +21,6 @@ public class MiPerfil extends javax.swing.JFrame {
      */
     public MiPerfil() {
         initComponents();
-        this.setLocationRelativeTo(null);
         lblNompERFIL.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
         int puntos=Player.getLoggedPlayer().getPuntos();
         txtPuntos.setText(""+puntos);
@@ -25,6 +29,22 @@ public class MiPerfil extends javax.swing.JFrame {
         
         lblWinHeroes.setText(""+ganoH);
         lblWinVillanos.setText(""+ganoV);
+        ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Perfil.jpg");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel4.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel4.getWidth(), jLabel4.getHeight(),Image.SCALE_DEFAULT));
+        jLabel4.setIcon(icono);
+       
+     
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
+        this.setLocationRelativeTo(null);
+      
     }
 
     /**
@@ -47,8 +67,13 @@ public class MiPerfil extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lblWinHeroes = new javax.swing.JLabel();
         lblWinVillanos = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jButton1.setText("LOG DE MIS ULTIMOS JUEGOS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +81,8 @@ public class MiPerfil extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(40, 130, 310, 40);
 
         jButton2.setText("CAMBIAR MI PASSWORD");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +90,8 @@ public class MiPerfil extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(40, 180, 310, 40);
 
         jButton3.setText("CONECTAR A TWITTER");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +99,8 @@ public class MiPerfil extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(40, 230, 310, 40);
 
         jButton4.setText("ELIMINAR MI CUENTA");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -77,80 +108,69 @@ public class MiPerfil extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(40, 280, 310, 40);
 
         lblNompERFIL.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblNompERFIL.setText("    ");
+        lblNompERFIL.setForeground(new java.awt.Color(255, 255, 255));
+        lblNompERFIL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNompERFIL.setText("User");
+        getContentPane().add(lblNompERFIL);
+        lblNompERFIL.setBounds(30, 400, 170, 29);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Puntos:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(310, 400, 70, 22);
 
         txtPuntos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        txtPuntos.setText("        ");
+        txtPuntos.setForeground(new java.awt.Color(255, 255, 255));
+        txtPuntos.setText("...");
+        getContentPane().add(txtPuntos);
+        txtPuntos.setBounds(390, 400, 18, 22);
 
-        lblwinH.setText("Partidas ganada con Heroes");
+        lblwinH.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblwinH.setForeground(new java.awt.Color(255, 255, 255));
+        lblwinH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblwinH.setText("Partidas Ganadas con Héroes");
+        getContentPane().add(lblwinH);
+        lblwinH.setBounds(30, 490, 270, 22);
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Partidas Ganadas con Villanos");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(30, 550, 270, 22);
 
+        lblWinHeroes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblWinHeroes.setForeground(new java.awt.Color(255, 255, 255));
         lblWinHeroes.setText("jLabel3");
+        getContentPane().add(lblWinHeroes);
+        lblWinHeroes.setBounds(350, 550, 70, 22);
 
+        lblWinVillanos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblWinVillanos.setForeground(new java.awt.Color(255, 255, 255));
         lblWinVillanos.setText("jLabel3");
+        getContentPane().add(lblWinVillanos);
+        lblWinVillanos.setBounds(350, 490, 80, 17);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(lblNompERFIL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(txtPuntos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblwinH)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblWinVillanos)
-                .addGap(22, 22, 22)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblWinHeroes)
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(101, 101, 101))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNompERFIL)
-                    .addComponent(jLabel1)
-                    .addComponent(txtPuntos))
-                .addGap(30, 30, 30)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblwinH)
-                    .addComponent(jLabel2)
-                    .addComponent(lblWinVillanos)
-                    .addComponent(lblWinHeroes))
-                .addContainerGap())
-        );
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("VER INFORMACIÓN");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(10, 80, 190, 22);
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("MIS DATOS");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(10, 370, 140, 22);
+
+        jLabel4.setText("jLabel3");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 0, 920, 650);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,6 +233,9 @@ public class MiPerfil extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblNompERFIL;
     private javax.swing.JLabel lblWinHeroes;
     private javax.swing.JLabel lblWinVillanos;
