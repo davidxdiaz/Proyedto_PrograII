@@ -5,6 +5,7 @@
  */
 package proyecto_marvel;
 
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -97,20 +98,25 @@ public class LogIn extends javax.swing.JFrame {
             {
                 passw += c;
             }
-
-            Player login = Player.verificar(txtName.getText(), passw);
-            if (login != null)
-            {
-                Player.setLoggedPlayer(login);
-                dispose();
-                new MenuPrincipal().setVisible(true);
-                System.out.println("LOGGED PLAYER: " + Player.getLoggedPlayer());
-            } else
-            {
-                JOptionPane.showMessageDialog(null," Usuario y/o contraseña incorrectos.\n"
-                                + "Debe crear el usuario o intentar con otro usuario y contraseña");
+            try{
+                
+            
+                Player login = Player.verificar(txtName.getText(), passw);
+                if (login != null)
+                {
+                    Player.setLoggedPlayer(login);
+                    dispose();
+                    new MenuPrincipal().setVisible(true);
+                    System.out.println("LOGGED PLAYER: " + Player.getLoggedPlayer());
+                } else
+                {
+                    JOptionPane.showMessageDialog(null," Usuario y/o contraseña incorrectos.\n"
+                                    + "Debe crear el usuario o intentar con otro usuario y contraseña");
+                }
+            }catch(IOException e){
+                System.out.println("Error log in "+e.getMessage()+" ");
+                e.printStackTrace();
             }
-       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

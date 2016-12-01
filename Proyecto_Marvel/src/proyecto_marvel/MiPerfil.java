@@ -18,10 +18,10 @@ public class MiPerfil extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         lblNompERFIL.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
-        int puntos=Player.existe(Player.getLoggedPlayer().getUsername()).getPuntos();
+        int puntos=Player.getLoggedPlayer().getPuntos();
         txtPuntos.setText(""+puntos);
-        int ganoV=Player.existe(Player.getLoggedPlayer().getUsername()).WinVillanos;
-        int ganoH=Player.existe(Player.getLoggedPlayer().getUsername()).WinHeroes;
+        int ganoV=Player.getLoggedPlayer().WinVillanos;
+        int ganoH=Player.getLoggedPlayer().WinHeroes;
         
         lblWinHeroes.setText(""+ganoH);
         lblWinVillanos.setText(""+ganoV);

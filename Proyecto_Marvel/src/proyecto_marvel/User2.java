@@ -5,6 +5,7 @@
  */
 package proyecto_marvel;
 
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -88,12 +89,16 @@ public class User2 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"El jugador no puede estar vacio", "ERROR", JOptionPane.ERROR_MESSAGE);
                 
             }
+            try{
             if ((Player.existe(playertwo) != null) && !playertwo.equals(Player.getLoggedPlayer().getUsername())){
                 playerTwo= playertwo;
                 new GameStratego().setVisible(true);
                 this.dispose();
             } else{
                  JOptionPane.showMessageDialog(null,"El jugador no existe o ingreselo correctamente", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            } catch(IOException e){
+                System.out.println("Error"+e.getMessage());
             }
         
        

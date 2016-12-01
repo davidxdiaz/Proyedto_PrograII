@@ -16,6 +16,7 @@ public class MenuIncial extends javax.swing.JFrame {
      */
     public MenuIncial() {
         initComponents();
+        Player.creandoFolder();
         this.setLocationRelativeTo(null);
         
     }

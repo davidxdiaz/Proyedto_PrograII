@@ -5,7 +5,9 @@
  */
 package proyecto_marvel;
 
+import java.io.IOException;
 import javax.swing.JOptionPane;
+import static proyecto_marvel.Player.setLoggedPlayer;
 
 /**
  *
@@ -106,12 +108,18 @@ public class SignUp extends javax.swing.JFrame {
   
         String nomUsuario=txtUsername.getText();
         String password=txtPassword.getText();
+        
+        try{
+       
+        
         if( Player.existe(nomUsuario)==null)//Usuario no existe
         {
             
             if(password.length()==5){
                 System.out.println("Password Válida");
-                Player.add(nomUsuario, password);
+                Player.add(nomUsuario,password);
+                
+                
                 JOptionPane.showMessageDialog(null,"Usuario registrado correctamente");
                 
                 dispose();
@@ -125,11 +133,17 @@ public class SignUp extends javax.swing.JFrame {
              
                 
         }
+        
         else{
             JOptionPane.showMessageDialog(null,"Ya existe un Usuario con este nombre,\n porfavor intente con otro");
             txtUsername.setText(null);
             txtPassword.setText(null);
         }
+        }catch(IOException e){
+            System.out.println("Error en registro "+e.getMessage());
+        }
+        
+        
     }//GEN-LAST:event_btnOkActionPerformed
     
     /**
