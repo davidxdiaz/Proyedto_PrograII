@@ -21,7 +21,7 @@ public class UniversoMarvel extends javax.swing.JFrame {
      */
     public UniversoMarvel() {
         initComponents();
-         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\rabata.png");
+         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\AgeOfUltron.jpg");
         //OBTENER TAMAÑO DEL FRAME
         Toolkit tk= Toolkit.getDefaultToolkit();
         Dimension tamaño= tk.getScreenSize();
@@ -63,7 +63,7 @@ public class UniversoMarvel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRanking);
-        btnRanking.setBounds(250, 160, 260, 70);
+        btnRanking.setBounds(70, 160, 260, 70);
 
         btnBatallas.setText("BATALLAS");
         btnBatallas.addActionListener(new java.awt.event.ActionListener() {
@@ -72,14 +72,14 @@ public class UniversoMarvel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBatallas);
-        btnBatallas.setBounds(250, 260, 260, 70);
+        btnBatallas.setBounds(70, 260, 260, 70);
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("ESTADÍSTICAS");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(230, 90, 310, 30);
+        jLabel4.setBounds(50, 90, 310, 30);
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
