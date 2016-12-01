@@ -22,7 +22,7 @@ public class LogIn extends javax.swing.JFrame {
      */
     public LogIn() {
         initComponents();
-         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Login.jpg");
+         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Login.jpeg");
         //OBTENER TAMAÑO DEL FRAME
         Toolkit tk= Toolkit.getDefaultToolkit();
         Dimension tamaño= tk.getScreenSize();
@@ -65,17 +65,17 @@ public class LogIn extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("USERNAME");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(100, 470, 120, 14);
+        jLabel1.setBounds(480, 470, 120, 14);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("PASSWORD");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(100, 550, 110, 14);
+        jLabel2.setBounds(480, 550, 110, 14);
 
         txtPass.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         getContentPane().add(txtPass);
-        txtPass.setBounds(260, 540, 200, 30);
+        txtPass.setBounds(640, 540, 200, 30);
 
         jButton1.setText("CONFIRMAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,11 +84,11 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(100, 600, 160, 30);
+        jButton1.setBounds(480, 600, 160, 30);
 
         txtName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         getContentPane().add(txtName);
-        txtName.setBounds(260, 470, 200, 30);
+        txtName.setBounds(640, 470, 200, 30);
 
         jButton2.setText("¿NECESITA REGISTRARSE?");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -97,16 +97,16 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(280, 600, 190, 30);
+        jButton2.setBounds(660, 600, 190, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("INICIO DE SESIÓN");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(130, 400, 310, 30);
+        jLabel4.setBounds(510, 400, 310, 30);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 880, 680);
+        jLabel3.setBounds(0, 0, 1070, 680);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
