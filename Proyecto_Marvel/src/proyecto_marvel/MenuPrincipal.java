@@ -135,7 +135,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         //Pregunta si desea cerrar sesión
         
-        int n= JOptionPane.showConfirmDialog(null, "¿Desea salir", "Información", JOptionPane.YES_NO_OPTION);
+        int n= JOptionPane.showConfirmDialog(null, "¿Desea salir?", "Información", JOptionPane.YES_NO_OPTION);
         
         if (n==JOptionPane.YES_OPTION){
             Player.setLoggedPlayer(null);
