@@ -431,6 +431,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         }
         if(primerCasilla.ficha.rango==2){
+<<<<<<< HEAD
             if(primerCasilla.x==segundaCasilla.x){
                 int pos=segundaCasilla.y;
                 int cmax=columMax(primerCasilla);
@@ -439,6 +440,38 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     if(segundaCasilla.ficha!=null){
                         iniciarBatalla(primerCasilla,segundaCasilla);
                     }else{
+=======
+            if (primerCasilla.x==segundaCasilla.x){
+                int cMax=columMax(primerCasilla);
+                int cMin=columMin(primerCasilla);
+                if(segundaCasilla.y<=cMax && segundaCasilla.y>=cMin){
+                    segundaCasilla.ficha=primerCasilla.ficha;
+                    segundaCasilla.setText(primerCasilla.getText());
+                    primerCasilla.setText(null);
+                    //Quita la imagen de la casilla anterior
+                    segundaCasilla.setIcon(primerCasilla.getIcon());
+                    primerCasilla.setIcon(null);
+                    primerCasilla.ficha=null;         
+                    cambiarTurno();
+                }
+            }else if(primerCasilla.y==segundaCasilla.y){
+                int fMax=filaMax(primerCasilla);
+                int fMin=filaMin(primerCasilla);
+                if(segundaCasilla.x<=fMax && segundaCasilla.x>=fMin){
+                    segundaCasilla.ficha=primerCasilla.ficha;
+                    segundaCasilla.setText(primerCasilla.getText());
+                    primerCasilla.setText(null);
+                    //Quita la imagen de la casilla anterior
+                    segundaCasilla.setIcon(primerCasilla.getIcon());
+                    primerCasilla.setIcon(null);
+                    primerCasilla.ficha=null;         
+                    cambiarTurno();
+                }
+                /*int pos=segundaCasilla.y;
+                int cmax=columMax(segundaCasilla);
+                int cmin=columMin(segundaCasilla);
+                if ((cmax+1)>=pos &&(cmin-1)>=pos){
+>>>>>>> parent of e2e45a0... :1234:
                     segundaCasilla.ficha=primerCasilla.ficha;
                     segundaCasilla.setText(primerCasilla.getText());
                     primerCasilla.setText(null);
