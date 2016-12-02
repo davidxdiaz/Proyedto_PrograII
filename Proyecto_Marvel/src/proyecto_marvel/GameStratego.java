@@ -9,7 +9,11 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.util.Calendar;
+=======
+import java.io.IOException;
+>>>>>>> origin/master
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
@@ -292,9 +296,15 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int op;
         op=JOptionPane.showConfirmDialog(null, "¿Dese usted redirse?","Rendirse",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+<<<<<<< HEAD
          if (op==0){
              obtenerGanadorRendirse();
             /*if (turno==1){
+=======
+        try{ 
+        if (op==0){
+            if (turno==1){
+>>>>>>> origin/master
                 JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+"con "+ fichaContraria);
                 TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
                 
@@ -316,6 +326,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             new MenuPrincipal().setVisible(true);
             this.dispose();
          }
+        }catch(IOException e){
+            System.out.println("Erro"+e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

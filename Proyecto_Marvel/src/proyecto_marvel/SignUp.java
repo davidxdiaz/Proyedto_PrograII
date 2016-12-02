@@ -5,7 +5,13 @@
  */
 package proyecto_marvel;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import static proyecto_marvel.Player.setLoggedPlayer;
 
 /**
  *
@@ -18,7 +24,21 @@ public class SignUp extends javax.swing.JFrame {
      */
     public SignUp() {
         initComponents();
-        this.setLocationRelativeTo(null); //CENTRA EL JFRAME EN LA PANTALLA
+        ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\InicioSesion.jpg");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel3.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(),Image.SCALE_DEFAULT));
+        jLabel3.setIcon(icono);
+       
+     
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
+        
     }
 
     /**
@@ -36,6 +56,8 @@ public class SignUp extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnOk = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -51,10 +73,24 @@ public class SignUp extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
+        txtUsername.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        getContentPane().add(txtUsername);
+        txtUsername.setBounds(890, 280, 140, 30);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Username");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(780, 290, 90, 17);
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(780, 350, 70, 17);
 
         btnOk.setText("REGISTRARSE");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -62,61 +98,45 @@ public class SignUp extends javax.swing.JFrame {
                 btnOkActionPerformed(evt);
             }
         });
+        getContentPane().add(btnOk);
+        btnOk.setBounds(820, 390, 160, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(txtPassword)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(btnOk)))
-                .addContainerGap(143, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(btnOk)
-                .addContainerGap(78, Short.MAX_VALUE))
-        );
+        txtPassword.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(890, 340, 140, 30);
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("¡REGÍSTRATE AHORA!");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(720, 210, 310, 30);
+
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 0, 1050, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        Player logIn = Player.existe(txtUsername.getText());
+  
         String nomUsuario=txtUsername.getText();
         String password=txtPassword.getText();
-        if(logIn==null)//Usuario no existe
+        
+        try{
+       
+        
+        if( Player.existe(nomUsuario)==null)//Usuario no existe
         {
             
             if(password.length()==5){
                 System.out.println("Password Válida");
-                Player newPlayer = new Player(txtUsername.getText(), password);
-                Player.add(newPlayer.getUsername(), newPlayer.getPassword());
+                Player.add(nomUsuario,password);
+                
+                
                 JOptionPane.showMessageDialog(null,"Usuario registrado correctamente");
-                Player.setLoggedPlayer(newPlayer);
-                System.out.println(Player.getLoggedPlayer().getPassword());
-                System.out.println(txtPassword.getText());
+                
                 dispose();
                 new MenuPrincipal().setVisible(true);
                 dispose();
@@ -128,11 +148,17 @@ public class SignUp extends javax.swing.JFrame {
              
                 
         }
+        
         else{
             JOptionPane.showMessageDialog(null,"Ya existe un Usuario con este nombre,\n porfavor intente con otro");
             txtUsername.setText(null);
             txtPassword.setText(null);
         }
+        }catch(IOException e){
+            System.out.println("Error en registro "+e.getMessage());
+        }
+        
+        
     }//GEN-LAST:event_btnOkActionPerformed
     
     /**
@@ -176,6 +202,8 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

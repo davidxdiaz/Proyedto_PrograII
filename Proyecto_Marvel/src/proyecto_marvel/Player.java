@@ -5,6 +5,9 @@
  */
 package proyecto_marvel;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,9 +20,9 @@ public class Player {
     //Atributos
     private String username;
     private String password;
-    
+    private static RandomAccessFile rplayers;
+    private static boolean activo;
     private int puntos;
-    int playersActivos=0,playersHistoricos=0;
     int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
     static ArrayList<Player> players=new ArrayList<>();
     static ArrayList<String>partidas;
@@ -27,47 +30,195 @@ public class Player {
     //Variables Global
    
     private static Player loggedPlayer;
-    public static int cont=0;
-    
+   
     //Constructor
     public Player(String username,String password){
         this.username = username;
         this.password = password;
         this.puntos = 0;
-        cont++;
-        playersActivos+=1;
-        playersHistoricos+=1;
- 
-        partidas=new ArrayList<>();        
+        this.partidasGanadas=0;
+        this.WinHeroes=0;
+        this.WinVillanos=0;
+        this.activo=true;
+       
+    }
+
+    
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
+    public void setPartidasGanadas(int partidasGanadas) {
+        this.partidasGanadas = partidasGanadas;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setWinHeroes(int WinHeroes) {
+        this.WinHeroes = WinHeroes;
+    }
+
+    public void setWinVillanos(int WinVillanos) {
+        this.WinVillanos = WinVillanos;
+    }
+    public static void creandoFolder(){
+        try{
+            //1- Asegurar que el folder company exista
+            File f = new File("Players");
+            f.mkdir();
+            //2- Instanciar los RAFs dentro de company
+            rplayers = new RandomAccessFile("Players/players.pl", "rw");
+            
+        }
+        catch(IOException e){
+            System.out.println("No deberia de pasar esto");
+        }
+    }
+
+    public int getPartidasGanadas() {
+        return partidasGanadas;
+    }
+
+    public int getWinHeroes() {
+        return WinHeroes;
+    }
+
+    public int getWinVillanos() {
+        return WinVillanos;
+    }
+    public static int pHistoricos()throws IOException{
+        rplayers.seek(0);
+        int c=0;
+        while(rplayers.getFilePointer()<rplayers.length()){
+            rplayers.skipBytes(20);
+            rplayers.readUTF();
+            c++;
+        }
+        return c;
+    }
+    public static int pActivos()throws IOException{
+        rplayers.seek(0);
+        int c=0;
+        while(rplayers.getFilePointer()<rplayers.length()){
+            rplayers.skipBytes(11);
+            if(rplayers.readBoolean())
+                c++;
+            rplayers.skipBytes(8);
+            rplayers.readUTF();
+        }
+        return c;
+    }
     //Funciones
     
    /**
     * FUNCION QUE PERMITE REGISTRA UN NUEVO USUARIO
     * 
-    * @param user Nnombre del Usuario 
+    * @param user Nombre del Usuario 
     * @param pass Contraseña
     */
-    public static void add(String user, String pass){
-        players.add(new Player(user, pass));
+    /*public static void add(String user, String pass){
+        Player newPlayer = new Player(user,pass);
+        setLoggedPlayer(newPlayer);
+        players.add(newPlayer);
         
-   }
+   }*/
+     public static void add(String user, String pass)throws IOException
+    {   
+        Player newPlayer = new Player(user,pass);
+        setLoggedPlayer(newPlayer);
+        //Me aseguro que el puntero este en al final
+        rplayers.seek(rplayers.length());
+        //Password
+        rplayers.writeUTF(pass);
+        //puntos
+        rplayers.writeInt(Player.loggedPlayer.getPuntos());
+        //Activo
+        activo=true;
+        rplayers.writeBoolean(activo);
+        //win Heroes
+        rplayers.writeInt(loggedPlayer.getWinHeroes());
+        //Win Villanos
+        rplayers.writeInt(loggedPlayer.getWinVillanos());
+        
+        //Nombre de usuario
+        rplayers.writeUTF(user);
+       
+    }
+     
     
 /***
  * 
  * @param user Nombre del Usuario a Buscar
  * @return Retorna el Objeto donde se encuentra el Usuario
+     * @throws java.io.IOException
+ *
  */
-    public static Player existe(String user){
-        for (Player player : players){
+   /* public static Player existe(String user) throws IOException{
+        
+        try{
+            existe.existeP(user);
+        }catch(IOException e){
+            System.out.println("Error"+e.getMessage());
+        }
+        return existe;
+    }
+    */
+        
+    public static Player existe(String user)throws IOException{
+        
+        if(rplayers.length()>0){
+        //Me aseguro de este en la primera posicion
+            rplayers.seek(0);
+            //Se hace mientras el puntero sea menor que el tamaño del archivo
+            while(rplayers.getFilePointer()<rplayers.length()){
+                //obtengo la posicion del puntero
+                long pos = rplayers.getFilePointer();
+                /**
+                 * Salto los 20 Bytes segun el formato
+                 * pos 0  pass 7 cantidad_caracteres + 2 (5 caracteres + 2)=7
+                 * pos 7  pts  4
+                 * pos 11 act  1
+                 * pos 12 WinH 4
+                 * pos 16 WinV 4
+                 * pos 20 User Cantidad_caracteres + 2
+                 */
+                rplayers.skipBytes(20);
+                String n = rplayers.readUTF();
+                if(n.equals(user)){
+                    rplayers.seek(pos);
+                    rplayers.skipBytes(11);
+                    if(rplayers.readBoolean()){
+                        rplayers.seek(pos);
+                        Player newPlayer = new Player(user,rplayers.readUTF());
+                        setDatos(newPlayer);
+                        rplayers.readUTF();
+                        return newPlayer;
+                    }
+
+
+                }    
+
+            }
+            
+        }
+        return null;
+        /*for (Player player : players){
             if (player != null){
                 if (user.equals(player.username)){
                     return player;
                 }
             }
         }
-        return null;
+        return null;*/
+    }
+    public static void setDatos(Player newPlayer)throws IOException{
+        newPlayer.setPuntos(rplayers.readInt());
+        newPlayer.setActivo(rplayers.readBoolean());
+        newPlayer.setWinHeroes(rplayers.readInt());
+        newPlayer.setWinVillanos(rplayers.readInt());
     }
     
     public static Player getLoggedPlayer(){
@@ -78,15 +229,39 @@ public class Player {
    }
     //Funcion que verifica que los datos del usuario esten correctos
     
-    public static Player verificar(String user, String pass){
-        for (Player player : players){
+    public static Player verificar(String user, String pass)throws IOException{
+        //Me aseguro que este en la posicion 0
+        if(rplayers.length()>0){
+            rplayers.seek(0);
+            String pas;
+
+            while(rplayers.getFilePointer()<rplayers.length()){
+                
+                pas=rplayers.readUTF();
+                long pos = rplayers.getFilePointer();
+                rplayers.skipBytes(13);
+               
+                Player newPlayer = new Player(rplayers.readUTF(),pas);
+                if(user.equals(newPlayer.getUsername()) && pass.equals(newPlayer.getPassword())){
+                    rplayers.seek(pos);
+                    setDatos(newPlayer);
+                    if(newPlayer.isActivo()){
+                        return newPlayer;
+                    }
+                    rplayers.readUTF();
+
+                }
+            }
+        }    
+        return null;
+        /*for (Player player : players){
             if (player != null){
                 if (user.equals(player.username) && pass.equals(player.password)){
                     return player;
                 }
             }
-        }
-        return null;
+        }*/
+        
     }
     
     
@@ -104,8 +279,11 @@ public class Player {
      * @param pass CONTRASEÑA 
      */
     public void elimiarCuenta(String user, String pass){
+        try{
         players.remove(players.indexOf(verificar(user, pass)));
-        playersActivos-=1;
+        }catch (IOException e){
+            System.out.println("Error"+e.getMessage());
+        }
     }
     
     
@@ -194,6 +372,7 @@ public class Player {
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
+    
 
     
     /**
