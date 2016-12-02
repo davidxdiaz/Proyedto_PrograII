@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.io.IOException;
 import java.util.Random;
 import javax.swing.ImageIcon;
@@ -56,8 +57,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     /**
      * vARIABLE QUE ME CUENTA LOS VILLANOS QUE SE HAN COMID
      */
-    int cVillanosR1=0,cVillanosR2=0,cVillanosR3=0,cVillanosR4=0,cVillanosR5=0;
-    int cVillanosR6=0,cVillanosR7=0,cVillanosR8=0,cVillanosR9=0,cVillanosR10=0;
+    final int MAX_VILLANOS=40,MAX_HEROES=40;
     
     /**
      * VARIABLE QUE CUENTA LA CANTIDA DE HEROE QUE ME HA COMIDO
@@ -129,6 +129,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblFichasPerdidasH = new javax.swing.JLabel();
+        lblFichasPerdidaV = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -191,28 +195,47 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/modoAleatorio.png"))); // NOI18N
         jLabel3.setText("MODO DE JUEGO");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("Fichas perdidas");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Fichas Perdidas");
+
+        lblFichasPerdidasH.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblFichasPerdidasH.setForeground(new java.awt.Color(255, 51, 51));
+        lblFichasPerdidasH.setText("   -----");
+
+        lblFichasPerdidaV.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblFichasPerdidaV.setForeground(new java.awt.Color(255, 51, 51));
+        lblFichasPerdidaV.setText("------");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPlayerOne))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(20, 20, 20)
+                        .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFichasPerdidasH))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPlayerOne))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblPlayerTwo)))
-                .addGap(40, 40, 40)
+                        .addComponent(lblPlayerTwo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFichasPerdidaV)))
+                .addGap(29, 29, 29)
                 .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,10 +264,18 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPlayerOne)
                             .addComponent(jLabel1))
-                        .addGap(170, 170, 170)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblFichasPerdidasH))
+                        .addGap(138, 138, 138)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPlayerTwo)
-                            .addComponent(jLabel2)))
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFichasPerdidaV)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -262,8 +293,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int op;
         op=JOptionPane.showConfirmDialog(null, "¿Dese usted redirse?","Rendirse",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-        try{ 
+        
         if (op==0){
+        try{
             String user;
             if (turno==1){
                 JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+"con "+ fichaContraria);
@@ -285,12 +317,16 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
                 Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
             }
+        }catch(IOException e){
+            System.out.println("Error "+e.getMessage());
+        }
+
+            obtenerGanadorRendirse();
+
             new MenuPrincipal().setVisible(true);
             this.dispose();
-         }
-        }catch(IOException e){
-            System.out.println("Erro"+e.getMessage());
         }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -330,6 +366,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblFichasPerdidaV;
+    private javax.swing.JLabel lblFichasPerdidasH;
     private javax.swing.JLabel lblPlayerOne;
     private javax.swing.JLabel lblPlayerTwo;
     public javax.swing.JLabel lblTurno;
@@ -344,7 +384,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     for (CasillasMarvel objeto : celda1) {
                         if (e.getSource().equals(objeto)) {
                             segundaCasilla=objeto;
-                            validarSegundoClic(primerCasilla,segundaCasilla);                   
+                            validarSegundoClic(primerCasilla,segundaCasilla);
+                            fichasDisponibles();
                         }
                     }
                 }
@@ -373,10 +414,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             moverPieza(primerCasilla,segundaCasilla);
         }else{
             JOptionPane.showMessageDialog(null, "Existe una ficha tuya en esa posicion");
-        }
-
-            
-        
+        }        
     }
 
     private void moverPieza(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
@@ -388,23 +426,33 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         }
         if(primerCasilla.ficha.rango==2){
-            if (primerCasilla.x==primerCasilla.x){
-                int cMax=columMax(primerCasilla);
-                int cMin=columMin(primerCasilla);
-                if(segundaCasilla.y<=cMax && segundaCasilla.y>=cMin){
-                    segundaCasilla.ficha=primerCasilla.ficha;
-                    segundaCasilla.setText(primerCasilla.getText());
-                    primerCasilla.setText(null);
-                    //Quita la imagen de la casilla anterior
-                    segundaCasilla.setIcon(primerCasilla.getIcon());
-                    primerCasilla.setIcon(null);
-                    primerCasilla.ficha=null;         
-                    cambiarTurno();
-                }
+            if(primerCasilla.x==segundaCasilla.x){
+                int pos=segundaCasilla.y;
+                int cmax=columMax(primerCasilla);
+                int cmin=columMin(primerCasilla);
+                if (pos<=cmax&& pos>=cmin){
+                    if(segundaCasilla.ficha!=null){
+                        iniciarBatalla(primerCasilla,segundaCasilla);
+                    }else{
+                        segundaCasilla.ficha=primerCasilla.ficha;
+                        segundaCasilla.setText(primerCasilla.getText());
+                        primerCasilla.setText(null);
+                        //Quita la imagen de la casilla anterior
+                        segundaCasilla.setIcon(primerCasilla.getIcon());
+                        primerCasilla.setIcon(null);
+                        primerCasilla.ficha=null;         
+                        cambiarTurno();
+                    }
+                }else{
+                        JOptionPane.showMessageDialog(null,"Tu pieza de rango "+ primerCasilla.ficha.rango+" no puede llegar hasta esa posicion");
+                    }
             }else if(primerCasilla.y==segundaCasilla.y){
                 int fMax=filaMax(primerCasilla);
                 int fMin=filaMin(primerCasilla);
-                if(primerCasilla.x<=fMax && primerCasilla.x>=fMin){
+                if(segundaCasilla.x<=fMax && segundaCasilla.x>=fMin){
+                    if(segundaCasilla.ficha!=null){
+                        iniciarBatalla(primerCasilla, segundaCasilla);
+                    }else{
                     segundaCasilla.ficha=primerCasilla.ficha;
                     segundaCasilla.setText(primerCasilla.getText());
                     primerCasilla.setText(null);
@@ -413,41 +461,20 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     primerCasilla.setIcon(null);
                     primerCasilla.ficha=null;         
                     cambiarTurno();
-                }
-                /*int pos=segundaCasilla.y;
-                int cmax=columMax(segundaCasilla);
-                int cmin=columMin(segundaCasilla);
-                if ((cmax+1)>=pos &&(cmin-1)>=pos){
-                    segundaCasilla.ficha=primerCasilla.ficha;
-                    segundaCasilla.setText(primerCasilla.getText());
-                    primerCasilla.setText(null);
-                    //Quita la imagen de la casilla anterior
-                    segundaCasilla.setIcon(primerCasilla.getIcon());
-                    primerCasilla.setIcon(null);
-                    primerCasilla.ficha=null;         
-                    cambiarTurno();
-                }
-            }else if(primerCasilla.y==segundaCasilla.y){
-                int pos=segundaCasilla.y;
-                int fmax=filaMax(primerCasilla);
-                int fmin=filaMin(primerCasilla);
-                if ((fmax+1)>=pos &&(fmin-1)>=pos){
-                    segundaCasilla.ficha=primerCasilla.ficha;
-                    segundaCasilla.setText(primerCasilla.getText());
-                    primerCasilla.setText(null);
-                    //Quita la imagen de la casilla anterior
-                    segundaCasilla.setIcon(primerCasilla.getIcon());
-                    primerCasilla.setIcon(null);
-                    primerCasilla.ficha=null;         
-                    cambiarTurno();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Tu pieza de rango "+ primerCasilla.ficha.rango+" no puede llegar hasta esa posicion");
                 }
             }else{
-                JOptionPane.showMessageDialog(null,"Moviento no valido");*/
-            }  
+                JOptionPane.showMessageDialog(null,"Moviento no valido");
+            }
         }else if (primerCasilla.x==segundaCasilla.x){
             int pos=primerCasilla.y;
             int s=segundaCasilla.y;
             if ((s+1)>=pos &&(s-1)<=pos){
+                if(segundaCasilla.ficha!=null){
+                    iniciarBatalla(primerCasilla, segundaCasilla);
+                }else{
                 segundaCasilla.ficha=primerCasilla.ficha;
                 segundaCasilla.setText(primerCasilla.getText());
                 primerCasilla.setText(null);
@@ -456,6 +483,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 primerCasilla.setIcon(null);
                 primerCasilla.ficha=null;         
                 cambiarTurno();
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "Movimiento no válido, esta Ficha no se puede mover más 2 posiciones");
             }
@@ -464,6 +492,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             int h=primerCasilla.x;
             int s=segundaCasilla.x;
             if ((s+1)>=h &&(s-1)<=h){
+                if(segundaCasilla.ficha!=null){
+                    iniciarBatalla(primerCasilla, segundaCasilla);
+                }else{
                 segundaCasilla.ficha=primerCasilla.ficha;
                 segundaCasilla.setText(primerCasilla.getText());
               
@@ -472,14 +503,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 primerCasilla.setText(null);
                 primerCasilla.ficha=null;
                 cambiarTurno();
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Movimiento no válido, esta Ficha no se puede mover más 2 posiciones");
             }
-        }
-        else{
+        }else{
             JOptionPane.showMessageDialog(null, "Movimiento no válido, por favor intente de nuevo");
-        }
+        }   
     }
         
     private void pintarZonaSegura(){
@@ -500,12 +531,15 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         if(primerCasilla.ficha.ficha==fichaContraria){
             JOptionPane.showMessageDialog(null, "Selecione una ficha tuya por favor");        
         }else if(primerCasilla.ficha.rango<=0){
+            primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
             JOptionPane.showMessageDialog(null, "Esta ficha no posee movimiento");
+            ocultarFichas();
         }
         else if(primerCasilla.ficha!=null && primerCasilla.ficha.ficha==miTipoFicha){
             primerclic=true;
             System.out.println("Primer Clic");
-            System.out.println(primerCasilla.x+""+primerCasilla.y+" "+infoTipoFicha(primerCasilla));
+            primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
+            System.out.println("fila:"+primerCasilla.x+" columna"+primerCasilla.y+" "+infoTipoFicha(primerCasilla));
                                     
             }
         else {
@@ -520,7 +554,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             JOptionPane.showMessageDialog(null,"Usted a hecho clic en la misma cordenada");
         }
         else{
-            System.out.println("Segundo Clic\n"+objeto.x+""+objeto.y+" "+infoTipoFicha(objeto)); //infotipoFicha retorna String segun el tipo del Objeto
+            System.out.println("Segundo Clic\n"+" fila "+objeto.x+" columna"+objeto.y+" "+infoTipoFicha(objeto)); //infotipoFicha retorna String segun el tipo del Objeto
             validarMovimiento(primerCasilla,segundaCasilla);
             primerclic=false;     
         }
@@ -656,6 +690,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         lblTurno.setText("TURNO "+turnoplayer);
         fichaContraria= turno==1?TipoFicha.VILLANO:TipoFicha.HEROE;
         miTipoFicha = turno==1? TipoFicha.HEROE:TipoFicha.VILLANO;
+        contarFichasPerdidas();
         ocultarFichas();
     }
 
@@ -739,10 +774,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             villano.setIcon(icoVillano);
                         }else if(villano.ficha instanceof FichasHeroes){
                             villano.setIcon(obtenerImagen(villano.ficha));
-                        }
+                       }
                     }
                 }
-            }else{
+           }else{
                 ImageIcon imgOcultaHeroe=new ImageIcon("src/Imagenes/cardsHeroes.png");
                  Icon icoHeroe= new ImageIcon(imgOcultaHeroe.getImage().getScaledInstance(53,60,Image.SCALE_SMOOTH));
                  for(CasillasMarvel[] tipo:celda){
@@ -751,7 +786,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             heroe.setIcon(icoHeroe);
                         }else if(heroe.ficha instanceof FichasVillanos){
                             heroe.setIcon(obtenerImagen(heroe.ficha));
-                        }
+                       }
                     }
                 }
             }
@@ -759,7 +794,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private int filaMax(CasillasMarvel posicion) {
-       for(int fmax=posicion.x;fmax<=9;fmax++){
+       for(int fmax=posicion.x+1;fmax<=9;fmax++){
            if(celda[fmax][posicion.y].ficha!=null){
                return fmax;
            }
@@ -768,16 +803,16 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private int columMax(CasillasMarvel posicion) {
-        for(int cmax=posicion.y;cmax<=9;cmax++){
+        for(int cmax=posicion.y+1;cmax<=9;cmax++){
            if(celda[posicion.x][cmax].ficha!=null){
-               return cmax;
+                return cmax;
            }
         }
         return 9;
     }
 
     private int filaMin(CasillasMarvel posicion) {
-        for(int fmin=posicion.y;fmin>=0;fmin--){
+        for(int fmin=posicion.x-1;fmin>=0;fmin--){
            if(celda[fmin][posicion.y].ficha!=null){
                return fmin;
            }
@@ -786,13 +821,71 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private int columMin(CasillasMarvel posi) {
-        for(int cMin=posi.y;cMin>=0;cMin--){
-            if(celda[primerCasilla.x][cMin].ficha!=null){
+        for(int cMin=posi.y-1;cMin>0;cMin--){
+            if(celda[posi.x][cMin].ficha!=null){
                 return cMin;
             }
         }return 0;
         
     }
+
+    private void contarFichasPerdidas() {
+        int contH=0,contV=0;
+        for(CasillasMarvel fichas[]:celda){
+            for(CasillasMarvel ficha:fichas){
+                if (ficha.ficha instanceof FichasHeroes){
+                    contH+=1;
+                }else if(ficha.ficha instanceof FichasVillanos){
+                    contV+=1;
+                }
+            }
+        }
+        lblFichasPerdidasH.setText(""+(MAX_HEROES-contH));
+        lblFichasPerdidaV.setText(""+(MAX_VILLANOS-contV));
+    }
+
+    private void fichasDisponibles() {
+        int Tierra=0,pconM=0;
+        if (turno==1){
+            for (CasillasMarvel cas[]:celda){
+                for (CasillasMarvel fic:cas){
+                    if(fic.ficha instanceof FichasHeroes){
+                        if(fic.ficha.rango==-1){
+                            Tierra=+1;
+                        }
+                        if(fic.ficha.rango>0){
+                            pconM+=1;
+                        }
+                    }
+                }
+            }
+        }else if(turno==2){
+            for (CasillasMarvel cas[]:celda){
+                for (CasillasMarvel fic:cas){
+                    if(fic.ficha instanceof FichasVillanos){
+                        if(fic.ficha.rango==-1){
+                            Tierra=+1;
+                        }
+                        if(fic.ficha.rango>0){
+                            pconM+=1;
+                        }
+                    }
+                }
+            }
+        }       
+        if (Tierra==0){
+            obtenerGanadorTierra();
+        }else if (pconM==0){
+            obtenerGanadorFichasSinMovimientos();
+        }
+    }
+
+    private void mostrarBatalla(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
+        primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
+        segundaCasilla.setIcon(obtenerImagen(segundaCasilla.ficha));
+    }
+
+   
     private static class RunnableImpl implements Runnable {
 
         public RunnableImpl() {}
@@ -920,5 +1013,152 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         }
     }
-
+    
+    public void obtenerGanadorRendirse(){
+        Calendar fecha=Calendar.getInstance();
+        if (turno==1){
+            
+            TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+            JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Vencedor usando "+ fichaContraria+
+                    "S ha ganado\n ya que "+lblPlayerOne.getText().toUpperCase()+ " usando "+miTipoFicha+"S se ha retirado del juego\n"+fecha.getTime());
+                  
+            TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+//            Player.existe(PLAYER_VILLANO).addPuntos();
+            
+        //    Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
+        //    Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+        }else{
+            turno=2;
+            JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"Vencedor usando "+fichaContraria+
+                    " ha ganado ya que "+lblPlayerTwo.getText().toUpperCase()+" usando "+miTipoFicha+" se ha retirado del juego\n"+fecha.getTime());
+         //   Player.existe(PLAYER_HEROE).addPuntos();
+            TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+//            Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
+            TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+//            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+        }
+    }
+    
+    public void obtenerGanadorFichasSinMovimientos(){
+        Calendar fecha=Calendar.getInstance();
+        try{
+        String us;
+        if (turno==1){
+            JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Perdedor usando "+miTipoFicha+
+                    " ha perdido por no tener movimientos validos disponibles ante "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
+            us= lblPlayerOne.getText();
+            Player.existe(PLAYER_VILLANO).addPuntos(us);
+            TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+//            Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true,PLAYER_VILLANO);
+            TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+    //        Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+        
+            
+        }else{
+            turno=2;
+            TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+            JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Perdedor usando "+ miTipoFicha+
+            "S ha perdido\n por no tener movimientos validos ante "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime());
+            us=lblPlayerTwo.getText();  
+            TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+            Player.existe(PLAYER_HEROE).addPuntos(us);
+            
+//            Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true, PLAYER_HEROE);
+//            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+        }
+        }catch(IOException e){
+            System.out.println("Error "+e.getMessage());
+        }
+        new MenuPrincipal().setVisible(true);
+        this.dispose();
+    }
+    
+    public void obtenerGanadorTierra(){
+        Calendar fecha=Calendar.getInstance();
+        try{
+        String us;
+        if (turno==1){
+            TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+            JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Vencedor usando "+ fichaContraria+
+            "S ha capturado la Tierra! Venciendo a "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime());
+            us = lblPlayerOne.getText();   
+            TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+            Player.existe(PLAYER_VILLANO).addPuntos(us);
+            
+//            Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
+//            Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+        }else{
+            turno=2;
+            
+            JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Vencedor usando "+fichaContraria+
+                    " ha salvado la Tierra! Venciendo a "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
+            us = lblPlayerTwo.getText();
+            Player.existe(PLAYER_HEROE).addPuntos(us);
+            TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+ //           Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
+            TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+  //          Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+        }
+        }catch(IOException e){
+            System.out.println("Error "+e.getMessage());
+        }
+        new MenuPrincipal().setVisible(true);
+        this.dispose();
+    }
+    
+     private void iniciarBatalla(CasillasMarvel pC, CasillasMarvel sC) {
+        mostrarBatalla(primerCasilla,segundaCasilla);
+        JOptionPane.showMessageDialog(null,pC.ficha.rango+". "+pC.ficha.nombreficha+" VS. "+sC.ficha.rango+". "+sC.ficha.nombreficha);
+        if(pC.ficha.rango==sC.ficha.rango){
+            sC.ficha=null;
+            sC.setText(null);
+            sC.setIcon(null);
+            pC.ficha=null;
+            pC.setText(null);
+            pC.setIcon(null);
+           
+        }else if(pC.ficha.rango==1){
+            if(sC.ficha.rango==10){
+                sC.ficha=pC.ficha;
+                sC.setText(pC.getText());
+                pC.setText(null);
+                //Quita la imagen de la casilla anterior
+                sC.setIcon(pC.getIcon());
+                pC.setIcon(null);
+                pC.ficha=null;
+            }
+        }else if(sC.ficha.rango==0){
+            if(pC.ficha.rango!=3){
+                pC.ficha=null;
+            pC.setText(null);
+            pC.setIcon(null);
+            
+            sC.ficha=null;
+            sC.setText(null);
+            sC.setIcon(null);      
+            }else{
+                sC.ficha=pC.ficha;
+                sC.setText(pC.getText());
+                pC.setText(null);
+                //Quita la imagen de la casilla anterior
+                sC.setIcon(pC.getIcon());
+                pC.setIcon(null);
+                pC.ficha=null;
+            }
+        }else if(pC.ficha.rango>sC.ficha.rango){
+            sC.ficha=pC.ficha;
+                sC.setText(pC.getText());
+                pC.setText(null);
+                //Quita la imagen de la casilla anterior
+                sC.setIcon(pC.getIcon());
+                pC.setIcon(null);
+                pC.ficha=null;
+        }else{
+                pC.setText(null);
+                //Quita la imagen de la casilla anterior
+                pC.setIcon(null);
+                pC.ficha=null;
+        }
+        cambiarTurno();
+    }
 }

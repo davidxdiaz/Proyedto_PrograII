@@ -5,7 +5,13 @@
  */
 package proyecto_marvel;
 
+
 import java.io.IOException;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +25,22 @@ public class Cambiarpass extends javax.swing.JFrame {
      */
     public Cambiarpass() {
         initComponents();
-        lblUser.setText(Player.getLoggedPlayer().getUsername());
+        lblUser.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
+        ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Thanos.jpg");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel1.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(),Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icono);
+       
+     
         this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
+        
     }
 
     /**
@@ -38,55 +58,52 @@ public class Cambiarpass extends javax.swing.JFrame {
         btnCPass = new javax.swing.JButton();
         txtPassA = new javax.swing.JPasswordField();
         txtPassNew = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
+        lblUser.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(255, 255, 255));
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblUser.setText("user");
+        getContentPane().add(lblUser);
+        lblUser.setBounds(60, 60, 150, 22);
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Ingrese la contraseña actual");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(60, 110, 200, 17);
 
-        jLabel4.setText("Ingrese la nueva contrseña");
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Ingrese la nueva contraseña");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(60, 200, 260, 17);
 
+        btnCPass.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCPass.setText("Cambiar password");
         btnCPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCPassActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCPass);
+        btnCPass.setBounds(60, 300, 260, 50);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(lblUser)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtPassNew, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnCPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(txtPassA, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(205, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(lblUser)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPassA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(txtPassNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnCPass)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        txtPassA.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        getContentPane().add(txtPassA);
+        txtPassA.setBounds(60, 130, 260, 40);
+
+        txtPassNew.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        getContentPane().add(txtPassNew);
+        txtPassNew.setBounds(60, 220, 260, 40);
+
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 790, 470);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -151,6 +168,7 @@ public class Cambiarpass extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCPass;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblUser;
