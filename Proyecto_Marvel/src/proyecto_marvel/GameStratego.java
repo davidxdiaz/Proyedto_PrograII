@@ -296,39 +296,13 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int op;
         op=JOptionPane.showConfirmDialog(null, "¿Dese usted redirse?","Rendirse",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-<<<<<<< HEAD
-         if (op==0){
-             obtenerGanadorRendirse();
-            /*if (turno==1){
-=======
-        try{ 
+         
         if (op==0){
-            if (turno==1){
->>>>>>> origin/master
-                JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+"con "+ fichaContraria);
-                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-                
-                TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.existe(PLAYER_VILLANO).addPuntos();
-                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
-                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
-            }
-            else{
-                turno=2;
-                JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"con "+fichaContraria);
-                Player.existe(PLAYER_HEROE).addPuntos();
-                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
-                
-                TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
-            }*/
+            obtenerGanadorRendirse();
             new MenuPrincipal().setVisible(true);
             this.dispose();
          }
-        }catch(IOException e){
-            System.out.println("Erro"+e.getMessage());
-        }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -416,10 +390,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             moverPieza(primerCasilla,segundaCasilla);
         }else{
             JOptionPane.showMessageDialog(null, "Existe una ficha tuya en esa posicion");
-        }
-
-            
-        
+        }        
     }
 
     private void moverPieza(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
@@ -431,7 +402,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         }
         if(primerCasilla.ficha.rango==2){
-<<<<<<< HEAD
             if(primerCasilla.x==segundaCasilla.x){
                 int pos=segundaCasilla.y;
                 int cmax=columMax(primerCasilla);
@@ -440,55 +410,22 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     if(segundaCasilla.ficha!=null){
                         iniciarBatalla(primerCasilla,segundaCasilla);
                     }else{
-=======
-            if (primerCasilla.x==segundaCasilla.x){
-                int cMax=columMax(primerCasilla);
-                int cMin=columMin(primerCasilla);
-                if(segundaCasilla.y<=cMax && segundaCasilla.y>=cMin){
-                    segundaCasilla.ficha=primerCasilla.ficha;
-                    segundaCasilla.setText(primerCasilla.getText());
-                    primerCasilla.setText(null);
-                    //Quita la imagen de la casilla anterior
-                    segundaCasilla.setIcon(primerCasilla.getIcon());
-                    primerCasilla.setIcon(null);
-                    primerCasilla.ficha=null;         
-                    cambiarTurno();
-                }
+                        segundaCasilla.ficha=primerCasilla.ficha;
+                        segundaCasilla.setText(primerCasilla.getText());
+                        primerCasilla.setText(null);
+                        //Quita la imagen de la casilla anterior
+                        segundaCasilla.setIcon(primerCasilla.getIcon());
+                        primerCasilla.setIcon(null);
+                        primerCasilla.ficha=null;         
+                        cambiarTurno();
+                    }
+                }else{
+                        JOptionPane.showMessageDialog(null,"Tu pieza de rango "+ primerCasilla.ficha.rango+" no puede llegar hasta esa posicion");
+                    }
             }else if(primerCasilla.y==segundaCasilla.y){
                 int fMax=filaMax(primerCasilla);
                 int fMin=filaMin(primerCasilla);
                 if(segundaCasilla.x<=fMax && segundaCasilla.x>=fMin){
-                    segundaCasilla.ficha=primerCasilla.ficha;
-                    segundaCasilla.setText(primerCasilla.getText());
-                    primerCasilla.setText(null);
-                    //Quita la imagen de la casilla anterior
-                    segundaCasilla.setIcon(primerCasilla.getIcon());
-                    primerCasilla.setIcon(null);
-                    primerCasilla.ficha=null;         
-                    cambiarTurno();
-                }
-                /*int pos=segundaCasilla.y;
-                int cmax=columMax(segundaCasilla);
-                int cmin=columMin(segundaCasilla);
-                if ((cmax+1)>=pos &&(cmin-1)>=pos){
->>>>>>> parent of e2e45a0... :1234:
-                    segundaCasilla.ficha=primerCasilla.ficha;
-                    segundaCasilla.setText(primerCasilla.getText());
-                    primerCasilla.setText(null);
-                    //Quita la imagen de la casilla anterior
-                    segundaCasilla.setIcon(primerCasilla.getIcon());
-                    primerCasilla.setIcon(null);
-                    primerCasilla.ficha=null;         
-                    cambiarTurno();
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Tu pieza de rango "+ primerCasilla.ficha.rango+" no puede llegar hasta esa posicion");
-                }
-            }else if(primerCasilla.y==segundaCasilla.y){
-                int pos=segundaCasilla.x;
-                int fmax=filaMax(primerCasilla);
-                int fmin=filaMin(primerCasilla);
-                if (pos<=fmax &&pos>=fmin){
                     if(segundaCasilla.ficha!=null){
                         iniciarBatalla(primerCasilla, segundaCasilla);
                     }else{
@@ -506,7 +443,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Moviento no valido");
-            }  
+            }
         }else if (primerCasilla.x==segundaCasilla.x){
             int pos=primerCasilla.y;
             int s=segundaCasilla.y;
@@ -547,10 +484,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             else{
                 JOptionPane.showMessageDialog(null, "Movimiento no válido, esta Ficha no se puede mover más 2 posiciones");
             }
-        }
-        else{
+        }else{
             JOptionPane.showMessageDialog(null, "Movimiento no válido, por favor intente de nuevo");
-        }
+        }   
     }
         
     private void pintarZonaSegura(){
@@ -805,31 +741,31 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
     private void ocultarFichas() {
         if(MODO_JUEGO!=0){
-           // if (turno==1){
+            if (turno==1){
                 ImageIcon imgOcultaVillanos=new ImageIcon("src/Imagenes/cardsVillain.png");
                 Icon icoVillano=new ImageIcon(imgOcultaVillanos.getImage().getScaledInstance(53,60,Image.SCALE_SMOOTH));
                 for(CasillasMarvel[] tipo:celda){
                     for(CasillasMarvel villano:tipo){
                         if(villano.ficha instanceof FichasVillanos){
                             villano.setIcon(icoVillano);
-                        }//else if(villano.ficha instanceof FichasHeroes){
-                         //   villano.setIcon(obtenerImagen(villano.ficha));
-                       // }
+                        }else if(villano.ficha instanceof FichasHeroes){
+                            villano.setIcon(obtenerImagen(villano.ficha));
+                       }
                     }
                 }
-           // }else{
+           }else{
                 ImageIcon imgOcultaHeroe=new ImageIcon("src/Imagenes/cardsHeroes.png");
                  Icon icoHeroe= new ImageIcon(imgOcultaHeroe.getImage().getScaledInstance(53,60,Image.SCALE_SMOOTH));
                  for(CasillasMarvel[] tipo:celda){
                     for(CasillasMarvel heroe:tipo){
                         if(heroe.ficha instanceof FichasHeroes){
                             heroe.setIcon(icoHeroe);
-                        }//else if(heroe.ficha instanceof FichasVillanos){
-                          //  heroe.setIcon(obtenerImagen(heroe.ficha));
-                       // }
+                        }else if(heroe.ficha instanceof FichasVillanos){
+                            heroe.setIcon(obtenerImagen(heroe.ficha));
+                       }
                     }
                 }
-            //}
+            }
         }
     }
 
