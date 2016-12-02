@@ -5,6 +5,7 @@
  */
 package proyecto_marvel;
 
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -95,9 +96,15 @@ public class Cambiarpass extends javax.swing.JFrame {
         if(txtPassA.getText().equals(Player.getLoggedPlayer().getPassword())){
             //Verifico si el pass new es de 5 caracteres
             if(txtPassNew.getText().length()==5){
-                //cambio el pass
-                Player.getLoggedPlayer().cambiarPassword(Player.getLoggedPlayer().getUsername(), txtPassNew.getText());
-                this.dispose();
+                try{
+                    //cambio el pass
+                    Player.getLoggedPlayer().setPassword(txtPassNew.getText());
+                    Player.getLoggedPlayer().cambiarPassword(Player.getLoggedPlayer().getUsername(), Player.getLoggedPlayer().getPassword());
+                    JOptionPane.showMessageDialog(null,"Cambiado exitosamente", "Gracias", JOptionPane.CLOSED_OPTION); 
+                    dispose();
+                }catch(IOException e){
+                    System.out.println("Error "+e.getMessage());
+                }
             }
             else
                JOptionPane.showMessageDialog(null,"Password nuevo no válido", "ERROR", JOptionPane.ERROR_MESSAGE); 

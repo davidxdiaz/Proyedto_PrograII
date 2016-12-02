@@ -156,17 +156,6 @@ public class Player {
      * @throws java.io.IOException
  *
  */
-   /* public static Player existe(String user) throws IOException{
-        
-        try{
-            existe.existeP(user);
-        }catch(IOException e){
-            System.out.println("Error"+e.getMessage());
-        }
-        return existe;
-    }
-    */
-        
     public static Player existe(String user)throws IOException{
         
         if(rplayers.length()>0){
@@ -249,27 +238,32 @@ public class Player {
                         return newPlayer;
                     }
                     rplayers.readUTF();
-
                 }
             }
         }    
-        return null;
-        /*for (Player player : players){
-            if (player != null){
-                if (user.equals(player.username) && pass.equals(player.password)){
-                    return player;
-                }
-            }
-        }*/
-        
+        return null;    
     }
     
     
     /**
      * FUNCION QUE ADICIONA 3 PUNTOS AL PLAYER GANADOR
      */
-    public void addPuntos(){
+    public void addPuntos(String user)throws IOException{
         this.puntos+=3;
+        rplayers.seek(0);
+        while(rplayers.getFilePointer()<rplayers.length()){
+            rplayers.readUTF();
+            long pos = rplayers.getFilePointer();
+            rplayers.skipBytes(13);
+            if(rplayers.readUTF().equals(user)){
+                rplayers.seek(pos);
+                rplayers.writeInt(puntos);
+                break;
+            }
+        }
+        
+        
+        
     }
     
     
@@ -293,12 +287,23 @@ public class Player {
      * @param pass  CONTRASEÑA ACTUAL
      * @param nuevapass NUEVA CONTRASEÑA
      */
-    public void cambiarPassword(String user, String nuevapass){
-        for(Player p: players){
+    public void cambiarPassword(String user, String nuevapass)throws IOException{
+        rplayers.seek(0);
+        while(rplayers.getFilePointer()<rplayers.length()){
+            long pos = rplayers.getFilePointer();
+            rplayers.skipBytes(20);
+            if(rplayers.readUTF().equals(user)){
+                rplayers.seek(pos);
+                rplayers.writeUTF(nuevapass);
+                break;
+            }
+        }
+        
+        /*for(Player p: players){
             if(p.getUsername().equals(user)){
                 p.setPassword(nuevapass);
             }
-        }
+        }*/
             
         
     }

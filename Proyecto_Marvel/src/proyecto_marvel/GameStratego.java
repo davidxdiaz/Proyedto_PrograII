@@ -264,19 +264,21 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         op=JOptionPane.showConfirmDialog(null, "¿Dese usted redirse?","Rendirse",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         try{ 
         if (op==0){
+            String user;
             if (turno==1){
                 JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+"con "+ fichaContraria);
                 TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-                
+                user= lblPlayerOne.getText();
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.existe(PLAYER_VILLANO).addPuntos();
+                Player.existe(PLAYER_VILLANO).addPuntos(user);
                 Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
                 Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
             }
             else{
                 turno=2;
                 JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"con "+fichaContraria);
-                Player.existe(PLAYER_HEROE).addPuntos();
+                user=lblPlayerTwo.getText();
+                Player.existe(PLAYER_HEROE).addPuntos(user);
                 TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
                 Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
                 
