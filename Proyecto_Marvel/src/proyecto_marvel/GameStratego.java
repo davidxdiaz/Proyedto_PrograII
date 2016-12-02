@@ -9,11 +9,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
 import java.util.Calendar;
-=======
 import java.io.IOException;
->>>>>>> origin/master
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
