@@ -32,7 +32,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     CasillasMarvel primerCasilla=null,segundaCasilla=null;
     boolean turnoPlayerHeroes=true, primerclic=false;
     TipoFicha fichaContraria= turnoPlayerHeroes?TipoFicha.VILLANO:TipoFicha.HEROE;
-    TipoFicha miTipoFicha = turnoPlayerHeroes? TipoFicha.HEROE:TipoFicha.VILLANO;
+     TipoFicha miTipoFicha = turnoPlayerHeroes? TipoFicha.HEROE:TipoFicha.VILLANO;
     int turno=0,MODO_JUEGO=Configuracion.modojuego; 
     String turnoplayer=(turno==1?"HEROES":"VILANOS");
     
@@ -1161,4 +1161,28 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }
         cambiarTurno();
     }
+    
+     public CasillasMarvel[][] getCasillas(){
+         return celda;
+     }
+     public Ficha[][] getHereos(){
+         return heroes;
+     }
+     public Ficha[][] getVillanos(){
+         return villanos;
+     }
+     public CasillasMarvel getPrimerCasilla(){
+         return primerCasilla;
+     }
+     public CasillasMarvel getSegundaCasilla(){
+         return segundaCasilla;
+     }
+     public boolean getTurno(){
+         return turnoPlayerHeroes;
+     }
+     
+     
+     
+    
+     
 }
