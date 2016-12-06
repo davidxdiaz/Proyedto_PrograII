@@ -24,11 +24,12 @@ public class MiPerfil extends javax.swing.JFrame {
         try{
         initComponents();
         Player.actualizarDatos(Player.getLoggedPlayer().getUsername());
+            System.out.println(Player.getLoggedPlayer().getUsername());
         lblNompERFIL.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
         int puntos=Player.getLoggedPlayer().getPuntos();
         txtPuntos.setText(""+puntos);
-        int ganoV=Player.getLoggedPlayer().WinVillanos;
-        int ganoH=Player.getLoggedPlayer().WinHeroes;
+        int ganoH=Player.getWinHeroes(Player.getLoggedPlayer().getUsername());
+        int ganoV=Player.getLoggedPlayer().getWinVillanos();
         
         lblWinHeroes.setText(""+ganoH);
         lblWinVillanos.setText(""+ganoV);
@@ -48,7 +49,7 @@ public class MiPerfil extends javax.swing.JFrame {
         this.setLocation(0,0);
         this.setLocationRelativeTo(null);
         }catch(IOException e){
-            System.out.println("No se");
+            e.printStackTrace();
         }
       
     }

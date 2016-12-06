@@ -302,20 +302,20 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
                 user= lblPlayerOne.getText();
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.existe(PLAYER_VILLANO).addPuntos(PLAYER_VILLANO);
-                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE,PLAYER_VILLANO);
-                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO,PLAYER_VILLANO);
+                Player.addPuntos(PLAYER_VILLANO);
+                Player.ultimasPartidas(fich, true, PLAYER_HEROE,PLAYER_VILLANO);
+                Player.ultimasPartidas(fichacontra, false, PLAYER_VILLANO,PLAYER_HEROE);
             }
             else{
                 turno=2;
                 JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"con "+fichaContraria);
                 user=lblPlayerTwo.getText();
-                Player.existe(PLAYER_HEROE).addPuntos(PLAYER_HEROE);
+                Player.addPuntos(PLAYER_HEROE);
                 TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO,PLAYER_HEROE);
+                Player.ultimasPartidas(fich, true,PLAYER_VILLANO,PLAYER_HEROE);
                 
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE,PLAYER_VILLANO);
+                Player.ultimasPartidas(fichacontra, false, PLAYER_HEROE,PLAYER_VILLANO);
             }
         }catch(IOException e){
             System.out.println("Error "+e.getMessage());

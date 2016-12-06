@@ -17,6 +17,23 @@ import java.util.Calendar;
  * @author David
  */
 public class Player {
+
+    static int getWinHeroes(String username) throws IOException {
+        rplayers.seek(0);
+        while(rplayers.getFilePointer()<rplayers.length()){
+            rplayers.readUTF();
+            rplayers.readInt();
+            rplayers.readBoolean();
+            long pos= rplayers.getFilePointer();
+            rplayers.readInt();
+            rplayers.readInt();
+            if(rplayers.readUTF().equals(username)){
+                rplayers.seek(pos);
+                return rplayers.readInt();
+            }
+        }
+        return 0;
+    }
     //Atributos
     private String username;
     private String password;
@@ -155,14 +172,14 @@ public class Player {
     }
     public static long posPlayer(String user)throws IOException{
         rplayers.seek(0);
+        long pos=0;
         while(rplayers.getFilePointer()<rplayers.length()){
-            long pos = rplayers.getFilePointer();
-            rplayers.readUTF();
-            rplayers.skipBytes(13);
+            pos = rplayers.getFilePointer();
+            rplayers.skipBytes(20);
             if(user.equals(rplayers.readUTF()));
                 return pos;
         }
-        return 0;
+        return pos;
     }
      
     
@@ -265,7 +282,7 @@ public class Player {
     /**
      * FUNCION QUE ADICIONA 3 PUNTOS AL PLAYER GANADOR
      */
-    public void addPuntos(String user)throws IOException{
+    public static void addPuntos(String user)throws IOException{
         rplayers.seek(posPlayer(user));
         rplayers.readUTF();
         long pos = rplayers.getFilePointer();
@@ -330,7 +347,7 @@ public class Player {
      * 
      * Obtiene la fecha actual 
      */
-    public void ultimasPartidas(TipoFicha m,boolean n, String rival,String ganador)throws IOException{
+    public static void ultimasPartidas(TipoFicha m,boolean n, String rival,String ganador)throws IOException{
         Calendar actual=Calendar.getInstance();
         SimpleDateFormat formato =new SimpleDateFormat("dd-mm-yyyy hh:mm:ss a");
         String resultado="DERROTA";  
