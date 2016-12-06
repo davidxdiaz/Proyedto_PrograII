@@ -48,7 +48,8 @@ public class Partidas {
         Date fecha = Calendar.getInstance().getTime();
         //Creo la direccion para el RAF
         String path = dirPadre+"/"+name+"_vs_"+invitado+"_"+fecha+".ps";
-        rpartidas= new RandomAccessFile(path, "rw");
+        //rpartidas= new RandomAccessFile(path, "rw");
+        partidaSalvada(path);
     }
     private void partidaSalvada(String path){
         try {
