@@ -302,20 +302,20 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
                 user= lblPlayerOne.getText();
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.existe(PLAYER_VILLANO).addPuntos(user);
-                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
-                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+                Player.existe(PLAYER_VILLANO).addPuntos(PLAYER_VILLANO);
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE,PLAYER_VILLANO);
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO,PLAYER_VILLANO);
             }
             else{
                 turno=2;
                 JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"con "+fichaContraria);
                 user=lblPlayerTwo.getText();
-                Player.existe(PLAYER_HEROE).addPuntos(user);
+                Player.existe(PLAYER_HEROE).addPuntos(PLAYER_HEROE);
                 TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO,PLAYER_HEROE);
                 
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE,PLAYER_VILLANO);
             }
         }catch(IOException e){
             System.out.println("Error "+e.getMessage());
@@ -330,7 +330,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       JOptionPane.showMessageDialog(null, "Proximamente Disponible!!");
+        try{  
+            Game.partida.savePartidaForPlayer(Player.getLoggedPlayer().getUsername(), User2.playerTwo);
+        }catch(IOException e){
+            System.out.println("No se");
+        }
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -695,6 +700,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void formularioInicial() {
+        try{
         if(Opciones.op==true){
             lblPlayerOne.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
             PLAYER_HEROE=Player.getLoggedPlayer().getUsername();
@@ -707,6 +713,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             lblPlayerOne.setText(User2.playerTwo.toUpperCase());
         
             lblPlayerTwo.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
+        }
+        }catch (NullPointerException e){
+            System.out.println("No se que pasa "+e.getMessage());
         }
        
     }

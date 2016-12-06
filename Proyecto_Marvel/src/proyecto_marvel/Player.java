@@ -24,8 +24,6 @@ public class Player {
     private static boolean activo;
     private int puntos;
     int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
-    static ArrayList<Player> players=new ArrayList<>();
-    static ArrayList<String>partidas;
     
     //Variables Global
    
@@ -147,6 +145,25 @@ public class Player {
         rplayers.writeUTF(user);
        
     }
+    public static void actualizarDatos(String user)throws IOException{
+        rplayers.seek(posPlayer(user));
+        rplayers.readUTF();
+        loggedPlayer.setPuntos(rplayers.readInt());
+        rplayers.readBoolean();
+        loggedPlayer.setWinHeroes(rplayers.readInt());
+        loggedPlayer.setWinVillanos(rplayers.readInt());
+    }
+    public static long posPlayer(String user)throws IOException{
+        rplayers.seek(0);
+        while(rplayers.getFilePointer()<rplayers.length()){
+            long pos = rplayers.getFilePointer();
+            rplayers.readUTF();
+            rplayers.skipBytes(13);
+            if(user.equals(rplayers.readUTF()));
+                return pos;
+        }
+        return 0;
+    }
      
     
 /***
@@ -249,22 +266,15 @@ public class Player {
      * FUNCION QUE ADICIONA 3 PUNTOS AL PLAYER GANADOR
      */
     public void addPuntos(String user)throws IOException{
-        this.puntos+=3;
-        rplayers.seek(0);
-        while(rplayers.getFilePointer()<rplayers.length()){
-            rplayers.readUTF();
-            long pos = rplayers.getFilePointer();
-            rplayers.skipBytes(13);
-            if(rplayers.readUTF().equals(user)){
-                rplayers.seek(pos);
-                rplayers.writeInt(puntos);
-                break;
-            }
-        }
-        
-        
-        
+        rplayers.seek(posPlayer(user));
+        rplayers.readUTF();
+        long pos = rplayers.getFilePointer();
+        int pts= rplayers.readInt();
+        rplayers.seek(pos);
+        rplayers.writeInt(pts+3);
+                
     }
+        
     
     
     /**
@@ -272,12 +282,15 @@ public class Player {
      * @param user NOMBRE DEL USUARIO
      * @param pass CONTRASEÑA 
      */
-    public void elimiarCuenta(String user, String pass){
-        try{
-        players.remove(players.indexOf(verificar(user, pass)));
-        }catch (IOException e){
-            System.out.println("Error"+e.getMessage());
+    public void elimiarCuenta(String user, String pass)throws IOException{
+        if(verificar(user,pass)!=null){
+            rplayers.seek(posPlayer(user));
+            rplayers.readUTF();
+            rplayers.readInt();
+            rplayers.writeBoolean(false);
         }
+       
+        
     }
     
     
@@ -317,40 +330,36 @@ public class Player {
      * 
      * Obtiene la fecha actual 
      */
-    public void ultimasPartidas(TipoFicha m,boolean n, String rival){
+    public void ultimasPartidas(TipoFicha m,boolean n, String rival,String ganador)throws IOException{
         Calendar actual=Calendar.getInstance();
         SimpleDateFormat formato =new SimpleDateFormat("dd-mm-yyyy hh:mm:ss a");
         String resultado="DERROTA";  
         if (n){
             resultado="VICTORIA";
+            rplayers.seek(posPlayer(ganador));
+            rplayers.readUTF();
+            rplayers.skipBytes(5);
             if (m==TipoFicha.HEROE){
-                WinHeroes++;
+                long pos = rplayers.getFilePointer();
+                int g= rplayers.readInt();
+                rplayers.seek(pos);
+                rplayers.writeInt(g+1);
+                //WinHeroes++;
             }else{
-                WinVillanos++;
+                rplayers.readInt();
+                long pos = rplayers.getFilePointer();
+                int g= rplayers.readInt();
+                rplayers.seek(pos);
+                rplayers.writeInt(g+1);
+                //WinVillanos++;
             }
             
         }
         String fecha=actual.toString();
-        partidas.add(fecha+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
+        //partidas.add(fecha+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
        
     }
-    /**
-     * 
-     * @param nomb NOMBRE DEL USUARIO
-     * @param pass CONTRASEÑA
-     * @return RETORNA TRUE SI EL USUARIO Y CONTRASEÑA ES CORRECTA,SINO  RETURNA FALSE
-     */
-    
-    public boolean verificarCuenta(String nomb, String pass){
-        for(Player player:players){
-            if (nomb.equals(player.username)){
-                if(pass.equals(player.password)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+   
     
       
     

@@ -8,6 +8,7 @@ package proyecto_marvel;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 
 /**
@@ -20,7 +21,9 @@ public class MiPerfil extends javax.swing.JFrame {
      * Creates new form MiPerfil
      */
     public MiPerfil() {
+        try{
         initComponents();
+        Player.actualizarDatos(Player.getLoggedPlayer().getUsername());
         lblNompERFIL.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
         int puntos=Player.getLoggedPlayer().getPuntos();
         txtPuntos.setText(""+puntos);
@@ -44,6 +47,9 @@ public class MiPerfil extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setLocation(0,0);
         this.setLocationRelativeTo(null);
+        }catch(IOException e){
+            System.out.println("No se");
+        }
       
     }
 

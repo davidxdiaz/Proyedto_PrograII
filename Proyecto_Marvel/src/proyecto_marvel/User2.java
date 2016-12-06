@@ -43,6 +43,12 @@ public class User2 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Ingrese el Usuario 2");
 
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +89,7 @@ public class User2 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String playertwo=txtUser.getText();
-         
+        
                       
             if ("".equals(playertwo)){
                 JOptionPane.showMessageDialog(null,"El jugador no puede estar vacio", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -92,7 +98,7 @@ public class User2 extends javax.swing.JFrame {
             try{
             if ((Player.existe(playertwo) != null) && !playertwo.equals(Player.getLoggedPlayer().getUsername())){
                 playerTwo= playertwo;
-                new GameStratego().setVisible(true);
+                new Game();
                 this.dispose();
             } else{
                  JOptionPane.showMessageDialog(null,"El jugador no existe o ingreselo correctamente", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -103,6 +109,10 @@ public class User2 extends javax.swing.JFrame {
         
        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
 
     /**
      * @param args the command line arguments

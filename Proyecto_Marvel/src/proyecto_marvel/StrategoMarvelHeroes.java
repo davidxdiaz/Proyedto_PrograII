@@ -25,7 +25,7 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
      */
     public StrategoMarvelHeroes() {
         initComponents();
-         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Deadpool.jpg");
+        ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Deadpool.jpg");
         //OBTENER TAMAÑO DEL FRAME
         Toolkit tk= Toolkit.getDefaultToolkit();
         Dimension tamaño= tk.getScreenSize();
