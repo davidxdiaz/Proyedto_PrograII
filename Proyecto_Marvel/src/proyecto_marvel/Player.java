@@ -86,7 +86,7 @@ public class Player implements Serializable{
         try{
             FileInputStream fi = new FileInputStream("player.pl");
             ObjectInputStream oi = new ObjectInputStream(fi);
-            players=(ArrayList<Player>)oi.readObject();
+            Player.players=(ArrayList<Player>)oi.readObject();
             for(Player player:players){
                 if (text.equals(player.username)){
                     if(passw.equals(player.password)){
@@ -97,7 +97,7 @@ public class Player implements Serializable{
         }catch(FileNotFoundException e){
             FileOutputStream fo = new FileOutputStream("player.pl");
             ObjectOutputStream oo = new ObjectOutputStream(fo);
-            oo.writeObject(players);
+            oo.writeObject(Player.players);
             return null;
         }
         
@@ -345,7 +345,99 @@ public class Player implements Serializable{
         }
     }
     
-  
+    public static int playersHistoricos(){
+        int conH=0;
+        try {
+           FileInputStream fi = new FileInputStream("player.pl");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            players= (ArrayList<Player>)oi.readObject();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(Player p:players){
+            conH++;
+        }
+        return conH;
+    }
+    
+    public static int playersActivos(){
+        int contA=0;
+        try {
+           FileInputStream fi = new FileInputStream("player.pl");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            players= (ArrayList<Player>)oi.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(Player p:players){
+            if(p.activo){
+                contA++;
+            }
+        }
+        return contA;
+    }
+    
+    
+    
+    public static int obtenerpartidasGanadasHeroes(){
+        int contA=0;
+        try {
+           FileInputStream fi = new FileInputStream("player.pl");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            players= (ArrayList<Player>)oi.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(Player p:players){
+            contA+=p.WinHeroes;
+        }
+        return contA;
+    }
+    
+    public static int obtenerpartidasGanadasVillanos(){
+        int contA=0;
+        try {
+           FileInputStream fi = new FileInputStream("player.pl");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            players= (ArrayList<Player>)oi.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(Player p:players){
+            contA+=p.WinVillanos;
+        }
+        return contA;
+    }
+    
+    
+    public static int obtenerpartidasJugadas(){
+        int contA=0;
+        try {
+           FileInputStream fi = new FileInputStream("player.pl");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            players= (ArrayList<Player>)oi.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(Player p:players){
+            contA+=p.WinHeroes;
+            contA+=p.WinVillanos;
+          
+        }
+        return contA;
+    }
+     
 
     public ArrayList<String> getPartidas() {
         return partidas;
