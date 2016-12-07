@@ -8,6 +8,9 @@ package proyecto_marvel;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -152,7 +155,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
-        new MiPerfil().setVisible(true);
+        try {
+            new MiPerfil().setVisible(true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnUniversoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUniversoActionPerformed

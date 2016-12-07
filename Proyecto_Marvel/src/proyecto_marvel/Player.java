@@ -5,41 +5,35 @@
  */
 package proyecto_marvel;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author David
  */
-public class Player {
+public class Player implements Serializable{
 
-    static int getWinHeroes(String username) throws IOException {
-        rplayers.seek(0);
-        while(rplayers.getFilePointer()<rplayers.length()){
-            rplayers.readUTF();
-            rplayers.readInt();
-            rplayers.readBoolean();
-            long pos= rplayers.getFilePointer();
-            rplayers.readInt();
-            rplayers.readInt();
-            if(rplayers.readUTF().equals(username)){
-                rplayers.seek(pos);
-                return rplayers.readInt();
-            }
-        }
-        return 0;
-    }
+    
     //Atributos
     private String username;
     private String password;
     private static RandomAccessFile rplayers;
-    private static boolean activo;
+    private boolean activo;
     private int puntos;
+    public static ArrayList<Player>players=new ArrayList<>();
+    public ArrayList<String>partidas;
     int partidasGanadas=0,WinHeroes=0,WinVillanos=0;
     
     //Variables Global
@@ -55,46 +49,16 @@ public class Player {
         this.WinHeroes=0;
         this.WinVillanos=0;
         this.activo=true;
+        partidas=new ArrayList<>();
        
     }
 
-    
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-    
-    public void setPartidasGanadas(int partidasGanadas) {
-        this.partidasGanadas = partidasGanadas;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setWinHeroes(int WinHeroes) {
-        this.WinHeroes = WinHeroes;
-    }
-
-    public void setWinVillanos(int WinVillanos) {
-        this.WinVillanos = WinVillanos;
-    }
-    public static void creandoFolder(){
-        try{
-            //1- Asegurar que el folder company exista
-            File f = new File("Players");
-            f.mkdir();
-            //2- Instanciar los RAFs dentro de company
-            rplayers = new RandomAccessFile("Players/players.pl", "rw");
-            
-        }
-        catch(IOException e){
-            System.out.println("No deberia de pasar esto");
-        }
-    }
-
-    public int getPartidasGanadas() {
-        return partidasGanadas;
+    public static void add(String user, String pass)throws IOException{   
+        players.add(new Player(user, pass));
+        FileOutputStream fo = new FileOutputStream("player.pl");
+        ObjectOutputStream oo = new ObjectOutputStream(fo);
+        oo.writeObject(players);
+  
     }
 
     public int getWinHeroes() {
@@ -114,17 +78,42 @@ public class Player {
         }
         return c;
     }
-    public static int pActivos()throws IOException{
-        rplayers.seek(0);
-        int c=0;
-        while(rplayers.getFilePointer()<rplayers.length()){
-            rplayers.skipBytes(11);
-            if(rplayers.readBoolean())
-                c++;
-            rplayers.skipBytes(8);
-            rplayers.readUTF();
+    
+    public static Player verificar(String text, String passw) throws IOException, ClassNotFoundException {
+       // FileOutputStream fo = new FileOutputStream("player.pl");
+       // ObjectOutputStream oo = new ObjectOutputStream(fo);
+        //oo.writeObject(players);
+        try{
+            FileInputStream fi = new FileInputStream("player.pl");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            players=(ArrayList<Player>)oi.readObject();
+            for(Player player:players){
+                if (text.equals(player.username)){
+                    if(passw.equals(player.password)){
+                        return player;
+                    }
+                }
+            }return null;     
+        }catch(FileNotFoundException e){
+            FileOutputStream fo = new FileOutputStream("player.pl");
+            ObjectOutputStream oo = new ObjectOutputStream(fo);
+            oo.writeObject(players);
+            return null;
         }
-        return c;
+        
+    }
+    
+    public static int pActivos()throws IOException, ClassNotFoundException{
+        int playerA=0;
+        FileInputStream fi = new FileInputStream("player.pl");
+        ObjectInputStream oi = new ObjectInputStream(fi);
+        players = (ArrayList<Player>)oi.readObject();
+        for(Player p:players){
+            if(p.activo){
+                playerA++;
+            }
+        }
+        return playerA;
     }
     //Funciones
     
@@ -133,6 +122,7 @@ public class Player {
     * 
     * @param user Nombre del Usuario 
     * @param pass Contraseña
+     * @throws java.io.IOException
     */
     /*public static void add(String user, String pass){
         Player newPlayer = new Player(user,pass);
@@ -140,156 +130,37 @@ public class Player {
         players.add(newPlayer);
         
    }*/
-     public static void add(String user, String pass)throws IOException
-    {   
-        Player newPlayer = new Player(user,pass);
-        setLoggedPlayer(newPlayer);
-        //Me aseguro que el puntero este en al final
-        rplayers.seek(rplayers.length());
-        //Password
-        rplayers.writeUTF(pass);
-        //puntos
-        rplayers.writeInt(Player.loggedPlayer.getPuntos());
-        //Activo
-        activo=true;
-        rplayers.writeBoolean(activo);
-        //win Heroes
-        rplayers.writeInt(loggedPlayer.getWinHeroes());
-        //Win Villanos
-        rplayers.writeInt(loggedPlayer.getWinVillanos());
-        
-        //Nombre de usuario
-        rplayers.writeUTF(user);
-       
-    }
-    public static void actualizarDatos(String user)throws IOException{
-        rplayers.seek(posPlayer(user));
-        rplayers.readUTF();
-        loggedPlayer.setPuntos(rplayers.readInt());
-        rplayers.readBoolean();
-        loggedPlayer.setWinHeroes(rplayers.readInt());
-        loggedPlayer.setWinVillanos(rplayers.readInt());
-    }
-    public static long posPlayer(String user)throws IOException{
-        rplayers.seek(0);
-        long pos=0;
-        while(rplayers.getFilePointer()<rplayers.length()){
-            pos = rplayers.getFilePointer();
-            rplayers.skipBytes(20);
-            if(user.equals(rplayers.readUTF()));
-                return pos;
-        }
-        return pos;
-    }
-     
+    
     
 /***
  * 
  * @param user Nombre del Usuario a Buscar
  * @return Retorna el Objeto donde se encuentra el Usuario
      * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
  *
  */
-    public static Player existe(String user)throws IOException{
-        
-        if(rplayers.length()>0){
-        //Me aseguro de este en la primera posicion
-            rplayers.seek(0);
-            //Se hace mientras el puntero sea menor que el tamaño del archivo
-            while(rplayers.getFilePointer()<rplayers.length()){
-                //obtengo la posicion del puntero
-                long pos = rplayers.getFilePointer();
-                /**
-                 * Salto los 20 Bytes segun el formato
-                 * pos 0  pass 7 cantidad_caracteres + 2 (5 caracteres + 2)=7
-                 * pos 7  pts  4
-                 * pos 11 act  1
-                 * pos 12 WinH 4
-                 * pos 16 WinV 4
-                 * pos 20 User Cantidad_caracteres + 2
-                 */
-                rplayers.skipBytes(20);
-                String n = rplayers.readUTF();
-                if(n.equals(user)){
-                    rplayers.seek(pos);
-                    rplayers.skipBytes(11);
-                    if(rplayers.readBoolean()){
-                        rplayers.seek(pos);
-                        Player newPlayer = new Player(user,rplayers.readUTF());
-                        setDatos(newPlayer);
-                        rplayers.readUTF();
-                        return newPlayer;
-                    }
-
-
-                }    
-
-            }
-            
-        }
-        return null;
-        /*for (Player player : players){
+    public static Player existe(String user)throws IOException, ClassNotFoundException{
+        for (Player player : players){
             if (player != null){
-                if (user.equals(player.username)){
+                if (player.activo && user.equals(player.username)){
                     return player;
                 }
             }
         }
-        return null;*/
-    }
-    public static void setDatos(Player newPlayer)throws IOException{
-        newPlayer.setPuntos(rplayers.readInt());
-        newPlayer.setActivo(rplayers.readBoolean());
-        newPlayer.setWinHeroes(rplayers.readInt());
-        newPlayer.setWinVillanos(rplayers.readInt());
-    }
-    
-    public static Player getLoggedPlayer(){
-      return loggedPlayer;
-   }
-    public static void setLoggedPlayer(Player player){
-      loggedPlayer = player;
-   }
-    //Funcion que verifica que los datos del usuario esten correctos
-    
-    public static Player verificar(String user, String pass)throws IOException{
-        //Me aseguro que este en la posicion 0
-        if(rplayers.length()>0){
-            rplayers.seek(0);
-            String pas;
-
-            while(rplayers.getFilePointer()<rplayers.length()){
-                
-                pas=rplayers.readUTF();
-                long pos = rplayers.getFilePointer();
-                rplayers.skipBytes(13);
-               
-                Player newPlayer = new Player(rplayers.readUTF(),pas);
-                if(user.equals(newPlayer.getUsername()) && pass.equals(newPlayer.getPassword())){
-                    rplayers.seek(pos);
-                    setDatos(newPlayer);
-                    if(newPlayer.isActivo()){
-                        return newPlayer;
-                    }
-                    rplayers.readUTF();
-                }
-            }
-        }    
-        return null;    
+        return null;
     }
     
     
     /**
      * FUNCION QUE ADICIONA 3 PUNTOS AL PLAYER GANADOR
+     * @throws java.io.FileNotFoundException
      */
-    public static void addPuntos(String user)throws IOException{
-        rplayers.seek(posPlayer(user));
-        rplayers.readUTF();
-        long pos = rplayers.getFilePointer();
-        int pts= rplayers.readInt();
-        rplayers.seek(pos);
-        rplayers.writeInt(pts+3);
-                
+    public void addPuntos() throws FileNotFoundException, IOException{
+        this.puntos+=3;
+        FileOutputStream fo = new FileOutputStream("player.pl",false);
+        ObjectOutputStream oo = new ObjectOutputStream(fo);
+        oo.writeObject(players);
     }
         
     
@@ -298,36 +169,42 @@ public class Player {
      * FUNCION QUE ELIMINA LA CUENTA DEL USUARIO
      * @param user NOMBRE DEL USUARIO
      * @param pass CONTRASEÑA 
+     * @throws java.io.IOException 
      */
-    public void elimiarCuenta(String user, String pass)throws IOException{
-        if(verificar(user,pass)!=null){
-            rplayers.seek(posPlayer(user));
-            rplayers.readUTF();
-            rplayers.readInt();
-            rplayers.writeBoolean(false);
+    public void elimiarCuenta(String user, String pass)throws IOException, ClassNotFoundException{   
+            FileInputStream fi = new FileInputStream("player.pl");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            players= (ArrayList<Player>)oi.readObject();
+            for(Player p:players){
+                if(p.username.equals(user)&&p.password.equals(pass)){
+                    p.activo=false;
+                }
+            }
+            FileOutputStream fo = new FileOutputStream("player.pl",false);
+            ObjectOutputStream oo = new ObjectOutputStream(fo);
+            oo.writeObject(players);
         }
-       
-        
-    }
-    
-    
+      
     /**
      * FUNCION QUE PERMITE CAMBIAR LA CONTRASEÑA DEL USUARIO
      * @param user  NOMBRE DEL USUARIO
-     * @param pass  CONTRASEÑA ACTUAL
      * @param nuevapass NUEVA CONTRASEÑA
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
+     * }
      */
-    public void cambiarPassword(String user, String nuevapass)throws IOException{
-        rplayers.seek(0);
-        while(rplayers.getFilePointer()<rplayers.length()){
-            long pos = rplayers.getFilePointer();
-            rplayers.skipBytes(20);
-            if(rplayers.readUTF().equals(user)){
-                rplayers.seek(pos);
-                rplayers.writeUTF(nuevapass);
-                break;
+    public void cambiarPassword(String user, String nuevapass)throws IOException, ClassNotFoundException{
+        FileInputStream fi = new FileInputStream("player.pl");
+        ObjectInputStream oi = new ObjectInputStream(fi);
+        players= (ArrayList<Player>)oi.readObject();
+        for(Player player:players){
+            if(player.activo && player.username.equals(user)){
+                player.password=nuevapass;
             }
         }
+        FileOutputStream fo = new FileOutputStream("player.pl",false);
+        ObjectOutputStream oo = new ObjectOutputStream(fo);
+        oo.writeObject(players);
         
         /*for(Player p: players){
             if(p.getUsername().equals(user)){
@@ -347,35 +224,32 @@ public class Player {
      * 
      * Obtiene la fecha actual 
      */
-    public static void ultimasPartidas(TipoFicha m,boolean n, String rival,String ganador)throws IOException{
+    public void ultimasPartidas(TipoFicha m,boolean n, String rival)throws IOException{
         Calendar actual=Calendar.getInstance();
         SimpleDateFormat formato =new SimpleDateFormat("dd-mm-yyyy hh:mm:ss a");
         String resultado="DERROTA";  
         if (n){
             resultado="VICTORIA";
-            rplayers.seek(posPlayer(ganador));
-            rplayers.readUTF();
-            rplayers.skipBytes(5);
-            if (m==TipoFicha.HEROE){
-                long pos = rplayers.getFilePointer();
-                int g= rplayers.readInt();
-                rplayers.seek(pos);
-                rplayers.writeInt(g+1);
-                //WinHeroes++;
+            if (m.equals(TipoFicha.HEROE)){
+            WinHeroes++;
             }else{
-                rplayers.readInt();
-                long pos = rplayers.getFilePointer();
-                int g= rplayers.readInt();
-                rplayers.seek(pos);
-                rplayers.writeInt(g+1);
-                //WinVillanos++;
-            }
-            
+                WinVillanos++;
+            }    
         }
-        String fecha=actual.toString();
-        //partidas.add(fecha+" Rival: "+rival+" Resultado: "+resultado+" Fichas"+m.name());
+        
+        partidas.add(0,actual.getTime()+"  Rival: "+rival.toUpperCase()+" Resultado: "+resultado+" Tipo de Ficha Utilizada: "+m.name()+"S");
+        
+        FileOutputStream fo = new FileOutputStream("player.pl",false);
+        ObjectOutputStream oo = new ObjectOutputStream(fo);
+        oo.writeObject(players);
+        
        
     }
+            
+        
+        
+       
+    
    
     
       
@@ -403,6 +277,19 @@ public class Player {
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
+
+    public static void setLoggedPlayer(Player loggedPlayer) {
+        Player.loggedPlayer = loggedPlayer;
+    }
+
+    public static Player getLoggedPlayer() {
+        return loggedPlayer;
+    }
+    
+    
+    
+    
+    
     
 
     
@@ -443,7 +330,7 @@ public class Player {
             System.out.println(pos+". "+play.username+" "+play.puntos);
         }
         
-    }
+    }*/
     
     public static void rankingPlayers(){
         Player aux;
@@ -457,7 +344,13 @@ public class Player {
             }
         }
     }
-     */     
+    
+  
+
+    public ArrayList<String> getPartidas() {
+        return partidas;
+    }
+        
     
 }
     

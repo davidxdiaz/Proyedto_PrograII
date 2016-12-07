@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -121,8 +123,6 @@ public class LogIn extends javax.swing.JFrame {
                 passw += c;
             }
             try{
-                
-            
                 Player login = Player.verificar(txtName.getText(), passw);
                 if (login != null)
                 {
@@ -138,7 +138,9 @@ public class LogIn extends javax.swing.JFrame {
             }catch(IOException e){
                 System.out.println("Error log in "+e.getMessage()+" ");
                 e.printStackTrace();
-            }
+            } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -5,11 +5,19 @@
  */
 package proyecto_marvel;
 
+import java.awt.BorderLayout;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Miguel Paz
  */
 public class Ultimosjuegos extends javax.swing.JFrame {
+    ArrayList<String>partidas;
 
     /**
      * Creates new form Ultimosjuegos
@@ -17,6 +25,18 @@ public class Ultimosjuegos extends javax.swing.JFrame {
     public Ultimosjuegos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        try{
+        partidas=Player.existe(Player.getLoggedPlayer().getUsername()).partidas;
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Ultimosjuegos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("==========================================\n             MIS ULTIMOS JUEGOS               \n===="
+                + "===============================================");
+        for (String c: partidas){
+            System.out.println(c);
+            System.out.println("====================================================");
+        }
+        lastGame();
     }
 
     /**
@@ -28,29 +48,40 @@ public class Ultimosjuegos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableLastGame = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("¡PRÓXIMAMENTE DISPONIBLE!");
+        tableLastGame.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tableLastGame.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tableLastGame);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -72,26 +103,41 @@ public class Ultimosjuegos extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ultimosjuegos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ultimosjuegos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ultimosjuegos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Ultimosjuegos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ultimosjuegos().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Ultimosjuegos().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tableLastGame;
     // End of variables declaration//GEN-END:variables
+ 
+    private void lastGame(){
+        String columnas[]={"MIS ULTIMOS JUEGOS"};
+        String partida[][]=new String[partidas.size()][1];
+        if(partidas.size()<20){
+            for(int cont=0;cont<partida.length;cont++){
+                partida[cont][0]=partidas.get(cont);
+            }
+        }else{
+            for(int cont=0;cont<20;cont++){
+                partida[cont][0]=partidas.get(cont);
+            }
+                    
+        }
+        DefaultTableModel model=new DefaultTableModel(partida,columnas);
+        tableLastGame.setModel(model);
+        this.setLayout(new BorderLayout());  
+    }
+
 }
+

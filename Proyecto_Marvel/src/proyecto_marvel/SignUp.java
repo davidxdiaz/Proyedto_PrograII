@@ -8,10 +8,11 @@ package proyecto_marvel;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import static proyecto_marvel.Player.setLoggedPlayer;
 
 /**
  *
@@ -126,36 +127,33 @@ public class SignUp extends javax.swing.JFrame {
         
         try{
        
-        
-        if( Player.existe(nomUsuario)==null)//Usuario no existe
-        {
+            FileOutputStream fo = new FileOutputStream("player.pl");
+            ObjectOutputStream oo = new ObjectOutputStream(fo);
+            if(Player.existe(nomUsuario)==null){
+                if(password.length()==5){
+                    System.out.println("Password Válida");
+                    Player.add(nomUsuario,password);
+                    JOptionPane.showMessageDialog(null,"Usuario registrado correctamente");
+                    Player.setLoggedPlayer(Player.existe(nomUsuario));
+                    dispose();
+                    new MenuPrincipal().setVisible(true);
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null,"Password no válido", "ERROR", JOptionPane.ERROR_MESSAGE);       
+                }   
+            }else{
+                JOptionPane.showMessageDialog(null,"Ya existe un usuario con este nombre");
+            }
             
-            if(password.length()==5){
-                System.out.println("Password Válida");
-                Player.add(nomUsuario,password);
-                
-                
-                JOptionPane.showMessageDialog(null,"Usuario registrado correctamente");
-                
-                dispose();
-                new MenuPrincipal().setVisible(true);
-                dispose();
-                
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Password no válido", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-             
-                
-        }
+           
         
-        else{
-            JOptionPane.showMessageDialog(null,"Ya existe un Usuario con este nombre,\n porfavor intente con otro");
-            txtUsername.setText(null);
-            txtPassword.setText(null);
-        }
+   
+        
         }catch(IOException e){
             System.out.println("Error en registro "+e.getMessage());
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
         
         

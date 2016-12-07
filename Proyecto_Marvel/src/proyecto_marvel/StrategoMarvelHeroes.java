@@ -11,6 +11,8 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -112,14 +114,19 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-            
-        
-            if(Player.pActivos()>1){
+            int usariosActivos=0;
+            try {
+                usariosActivos = Player.pActivos();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(StrategoMarvelHeroes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(usariosActivos>1){
                 new Opciones().setVisible(true);
                 this.dispose();
             }else
                 JOptionPane.showMessageDialog(null,"Esta opcion no esta disponible aun", "ERROR", JOptionPane.ERROR_MESSAGE);
         }catch(IOException e){
+            e.printStackTrace();
             System.out.println("Error "+e.getMessage() );
         }
     }//GEN-LAST:event_jButton1ActionPerformed

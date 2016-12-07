@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 import javax.swing.JOptionPane;
@@ -120,7 +122,10 @@ public class Cambiarpass extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Cambiado exitosamente", "Gracias", JOptionPane.CLOSED_OPTION); 
                     dispose();
                 }catch(IOException e){
+                    e.printStackTrace();
                     System.out.println("Error "+e.getMessage());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Cambiarpass.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else

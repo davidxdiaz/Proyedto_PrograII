@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
@@ -295,31 +297,6 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         op=JOptionPane.showConfirmDialog(null, "¿Dese usted redirse?","Rendirse",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         
         if (op==0){
-        try{
-            String user;
-            if (turno==1){
-                JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+"con "+ fichaContraria);
-                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-                user= lblPlayerOne.getText();
-                TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.addPuntos(PLAYER_VILLANO);
-                Player.ultimasPartidas(fich, true, PLAYER_HEROE,PLAYER_VILLANO);
-                Player.ultimasPartidas(fichacontra, false, PLAYER_VILLANO,PLAYER_HEROE);
-            }
-            else{
-                turno=2;
-                JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"con "+fichaContraria);
-                user=lblPlayerTwo.getText();
-                Player.addPuntos(PLAYER_HEROE);
-                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-                Player.ultimasPartidas(fich, true,PLAYER_VILLANO,PLAYER_HEROE);
-                
-                TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.ultimasPartidas(fichacontra, false, PLAYER_HEROE,PLAYER_VILLANO);
-            }
-        }catch(IOException e){
-            System.out.println("Error "+e.getMessage());
-        }
 
             obtenerGanadorRendirse();
 
@@ -390,7 +367,13 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                         if (e.getSource().equals(objeto)) {
                             segundaCasilla=objeto;
                             validarSegundoClic(primerCasilla,segundaCasilla);
-                            fichasDisponibles();
+                            try {
+                                fichasDisponibles();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IOException ex) {
+                                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 }
@@ -853,7 +836,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         lblFichasPerdidaV.setText(""+(MAX_VILLANOS-contV));
     }
 
-    private void fichasDisponibles() {
+    private void fichasDisponibles() throws ClassNotFoundException, IOException {
         int Tierra=0,pconM=0;
         if (turno==1){
             for (CasillasMarvel cas[]:celda){
@@ -1026,61 +1009,61 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     public void obtenerGanadorRendirse(){
         Calendar fecha=Calendar.getInstance();
         if (turno==1){
-            
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
             JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Vencedor usando "+ fichaContraria+
                     "S ha ganado\n ya que "+lblPlayerOne.getText().toUpperCase()+ " usando "+miTipoFicha+"S se ha retirado del juego\n"+fecha.getTime());
                   
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-//            Player.existe(PLAYER_VILLANO).addPuntos();
-            
-        //    Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
-        //    Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+            try{
+                Player.existe(PLAYER_VILLANO).addPuntos();
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, true, PLAYER_HEROE);
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, false, PLAYER_VILLANO);
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
             turno=2;
             JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"Vencedor usando "+fichaContraria+
-                    " ha ganado ya que "+lblPlayerTwo.getText().toUpperCase()+" usando "+miTipoFicha+" se ha retirado del juego\n"+fecha.getTime());
-         //   Player.existe(PLAYER_HEROE).addPuntos();
+                    " ha ganado ya que "+lblPlayerTwo.getText().toUpperCase()+" usando "+miTipoFicha+" se ha retirado del juego\n"+fecha.getTime());   
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-//            Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-//            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+            try{
+                Player.existe(PLAYER_HEROE).addPuntos();
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, true,PLAYER_VILLANO);
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, false, PLAYER_HEROE);
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    public void obtenerGanadorFichasSinMovimientos(){
+    public void obtenerGanadorFichasSinMovimientos() throws IOException, ClassNotFoundException{
         Calendar fecha=Calendar.getInstance();
-        try{
-        String us;
-        if (turno==1){
-            JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Perdedor usando "+miTipoFicha+
+            if (turno==1){
+                JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Perdedor usando "+miTipoFicha+
                     " ha perdido por no tener movimientos validos disponibles ante "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
-            us= lblPlayerOne.getText();
-            Player.existe(PLAYER_VILLANO).addPuntos(us);
-            TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-//            Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true,PLAYER_VILLANO);
-            TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-    //        Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+                
+                TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+                Player.existe(PLAYER_VILLANO).addPuntos();
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+            }
+            else{
+                turno=2;
+                JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"con "+fichaContraria);
+                Player.existe(PLAYER_HEROE).addPuntos();
+                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
+                
+                TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+            }
+            new MenuPrincipal().setVisible(true);
+            this.dispose();
+         }
         
-            
-        }else{
-            turno=2;
-            TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-            JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Perdedor usando "+ miTipoFicha+
-            "S ha perdido\n por no tener movimientos validos ante "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime());
-            us=lblPlayerTwo.getText();  
-            TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-            Player.existe(PLAYER_HEROE).addPuntos(us);
-            
-//            Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true, PLAYER_HEROE);
-//            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
-        }
-        }catch(IOException e){
-            System.out.println("Error "+e.getMessage());
-        }
-        new MenuPrincipal().setVisible(true);
-        this.dispose();
-    }
+    
     
     public void obtenerGanadorTierra(){
         Calendar fecha=Calendar.getInstance();
@@ -1092,17 +1075,25 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             "S ha capturado la Tierra! Venciendo a "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime());
             us = lblPlayerOne.getText();   
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-            Player.existe(PLAYER_VILLANO).addPuntos(us);
-            
+            try {
+                Player.existe(PLAYER_VILLANO).addPuntos();
+                
 //            Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
 //            Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
             turno=2;
             
             JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Vencedor usando "+fichaContraria+
                     " ha salvado la Tierra! Venciendo a "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
             us = lblPlayerTwo.getText();
-            Player.existe(PLAYER_HEROE).addPuntos(us);
+            try {
+                Player.existe(PLAYER_HEROE).addPuntos();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
+            }
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
  //           Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);

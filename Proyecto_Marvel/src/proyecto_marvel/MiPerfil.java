@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -20,17 +22,13 @@ public class MiPerfil extends javax.swing.JFrame {
     /**
      * Creates new form MiPerfil
      */
-    public MiPerfil() {
-        try{
+    public MiPerfil() throws IOException, ClassNotFoundException {
         initComponents();
-        Player.actualizarDatos(Player.getLoggedPlayer().getUsername());
-            System.out.println(Player.getLoggedPlayer().getUsername());
         lblNompERFIL.setText(Player.getLoggedPlayer().getUsername().toUpperCase());
-        int puntos=Player.getLoggedPlayer().getPuntos();
+        int puntos=Player.existe(Player.getLoggedPlayer().getUsername()).getPuntos();
         txtPuntos.setText(""+puntos);
-        int ganoH=Player.getWinHeroes(Player.getLoggedPlayer().getUsername());
-        int ganoV=Player.getLoggedPlayer().getWinVillanos();
-        
+        int ganoV=Player.existe(Player.getLoggedPlayer().getUsername()).WinVillanos;
+        int ganoH=Player.existe(Player.getLoggedPlayer().getUsername()).WinHeroes;
         lblWinHeroes.setText(""+ganoH);
         lblWinVillanos.setText(""+ganoV);
         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Perfil.jpg");
@@ -48,9 +46,7 @@ public class MiPerfil extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setLocation(0,0);
         this.setLocationRelativeTo(null);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+      
       
     }
 
@@ -228,7 +224,13 @@ public class MiPerfil extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MiPerfil().setVisible(true);
+                try {
+                    new MiPerfil().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MiPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MiPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

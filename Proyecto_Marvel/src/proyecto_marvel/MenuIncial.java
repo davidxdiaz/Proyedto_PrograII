@@ -21,7 +21,7 @@ public class MenuIncial extends javax.swing.JFrame {
      */
     public MenuIncial() {
         initComponents();
-        Player.creandoFolder();
+//        Player.creandoFolder();
         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Paraelinicio.jpeg");
         //OBTENER TAMAÑO DEL FRAME
         Toolkit tk= Toolkit.getDefaultToolkit();

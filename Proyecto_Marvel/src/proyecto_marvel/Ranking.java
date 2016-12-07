@@ -5,10 +5,19 @@
  */
 package proyecto_marvel;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,6 +45,25 @@ public class Ranking extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setLocation(0,0);
         this.setLocationRelativeTo(null);
+        
+        FileInputStream fi;
+        ObjectInputStream oi;
+        try {
+            fi = new FileInputStream("player.pl");
+            oi = new ObjectInputStream(fi);
+            Player.players = (ArrayList<Player>)oi.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ranking.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Ranking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rankingPlayer();
+         
+        int pos=0;
+        for(Player play:Player.players){
+            pos+=1;
+            System.out.println(pos+". "+play.getUsername().toUpperCase()+" "+play.getPuntos()+" PUNTOS");
+        }
     }
 
     /**
@@ -47,19 +75,34 @@ public class Ranking extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableRanking = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("¡PRÓXIMAMENTE DISPONIBLE!");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(800, 30, 380, 121);
+        jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setBorder(null);
+
+        tableRanking.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tableRanking.setForeground(new java.awt.Color(0, 153, 153));
+        tableRanking.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tableRanking);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(800, 220, 452, 402);
 
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
@@ -104,7 +147,31 @@ public class Ranking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableRanking;
     // End of variables declaration//GEN-END:variables
+    
+    private void rankingPlayer(){
+        Player.rankingPlayers();
+        String columnas[]={"POS.","PLAYERS", "PUNTOS"};
+        String topPlayer[][]=new String[Player.players.size()][3];
+        if(Player.players.size()<20){
+            for(int cont=0;cont<topPlayer.length;cont++){
+                topPlayer[cont][0]=String.valueOf((cont+1));
+                topPlayer[cont][1]=Player.players.get(cont).getUsername().toUpperCase();
+                topPlayer[cont][2]= String.valueOf(Player.players.get(cont).getPuntos());
+            }
+        }else{
+            for(int cont=0;cont<20;cont++){
+                topPlayer[cont][0]=String.valueOf((cont+1));
+                topPlayer[cont][1]=Player.players.get(cont).getUsername().toUpperCase();
+                topPlayer[cont][2]= String.valueOf(Player.players.get(cont).getPuntos());
+            }
+                    
+        }
+        DefaultTableModel model=new DefaultTableModel(topPlayer,columnas);
+        tableRanking.setModel(model);
+        this.setLayout(new BorderLayout());  
+    }
 }
