@@ -73,7 +73,7 @@ public class Batallas extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CANTIDAD DE USUARIOS ACTIVOS :");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 180, 460, 29);
+        jLabel3.setBounds(30, 140, 460, 29);
 
         txtGV.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtGV.setForeground(new java.awt.Color(255, 255, 255));
@@ -84,43 +84,43 @@ public class Batallas extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("CANTIDAD DE USUARIOS HISTÓRICOS :");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 240, 490, 29);
+        jLabel5.setBounds(30, 190, 490, 29);
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("CANTIDAD DE PARTIDAS JUGADAS :");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(30, 120, 440, 29);
+        jLabel6.setBounds(30, 250, 440, 29);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("GANADAS CON HEROES :");
+        jLabel7.setText("GANADAS CON HÉROES :");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(30, 300, 350, 29);
+        jLabel7.setBounds(160, 300, 350, 29);
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("GANADAS CON VILLANOS :");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(30, 350, 340, 30);
+        jLabel8.setBounds(160, 350, 340, 30);
 
         txtUA.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtUA.setForeground(new java.awt.Color(255, 255, 255));
         txtUA.setText("hola");
         getContentPane().add(txtUA);
-        txtUA.setBounds(550, 180, 110, 20);
+        txtUA.setBounds(550, 140, 110, 20);
 
         txtPJ.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtPJ.setForeground(new java.awt.Color(255, 255, 255));
         txtPJ.setText("jLabel3");
         getContentPane().add(txtPJ);
-        txtPJ.setBounds(550, 120, 83, 29);
+        txtPJ.setBounds(550, 250, 83, 29);
 
         txtUH.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtUH.setForeground(new java.awt.Color(255, 255, 255));
         txtUH.setText("jLabel3");
         getContentPane().add(txtUH);
-        txtUH.setBounds(550, 240, 83, 29);
+        txtUH.setBounds(550, 190, 83, 29);
 
         txtGH.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtGH.setForeground(new java.awt.Color(255, 255, 255));
@@ -128,7 +128,7 @@ public class Batallas extends javax.swing.JFrame {
         getContentPane().add(txtGH);
         txtGH.setBounds(550, 300, 90, 29);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 2, 28)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("BATALLAS");
