@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * @author David
  */
 public class Partidas implements Serializable{
-    private static String fecha;
+    private static Calendar fecha;
     private static SimpleDateFormat date = new SimpleDateFormat("dd/MM/yy hh'H'mm'M'ss's' a");
     private RandomAccessFile rpartidas;
     static ArrayList<Partidas>GamePartidas=new ArrayList<>();
@@ -40,7 +40,7 @@ public class Partidas implements Serializable{
         this.playerOne = playerOne;
         this.PlayerTwo = PlayerTwo;
         this.piezas=cas;
-        this.fecha=date.format(new Date());
+        this.fecha=Calendar.getInstance();
     }
 
     public Partidas() {
@@ -65,7 +65,10 @@ public class Partidas implements Serializable{
         int day=fecha.get(Calendar.DAY_OF_MONTH);
         int month=fecha.get(Calendar.MONTH);
         int year=fecha.get(Calendar.YEAR);
-        String date=day+"-"+month+"-"+year;
+        int hour=fecha.get(Calendar.HOUR);
+        int minute=fecha.get(Calendar.MINUTE);
+        int second=fecha.get(Calendar.SECOND);
+        String date=day+"-"+month+"-"+year+" HH "+hour+".mm "+minute+".ss "+second;
         if(Player.getLoggedPlayer().getUsername().equals(name)){
             //Obtengo la direccion del FolderPlayer logged
             Partidas.crearFolderPlayer(name);

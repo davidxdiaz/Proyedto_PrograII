@@ -5,19 +5,16 @@
  */
 package proyecto_marvel;
 
-import java.net.URL;
-import javax.swing.ImageIcon;
+import java.io.Serializable;
 
 /**
  *
  * @author David
  */
-public abstract class Ficha {
+public abstract class Ficha implements Serializable{
     protected int rango;
     protected TipoFicha ficha;
-    protected ImageIcon imagen;
     String nombreficha;
-    protected String url;
     
     public Ficha(TipoFicha ficha, int rango,String nom){
         this.ficha= ficha;
@@ -31,17 +28,6 @@ public abstract class Ficha {
     public String getNombreficha() {
         return nombreficha;
     }
-    
-   /* public boolean comer(){
-        if(GameStratego.turno==true){
-            //if()
-            GameStratego.turno=false;
-            
-        }else{
-            GameStratego.turno=true;
-        }
-        return true;
-    }*/
 
     public int getRango() {
         return rango;

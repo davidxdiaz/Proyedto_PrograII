@@ -5,14 +5,11 @@
  */
 package proyecto_marvel;
 
-import javax.swing.ImageIcon;
-
 /**
  *
  * @author ANDY ESCOBAR 007
  */
 public class FichasVillanos extends Ficha {
-    private ImageIcon imgocultar;
     public FichasVillanos cardsVillanos[][]= new FichasVillanos[4][10];
     
     public FichasVillanos(int rango,String nombre) {

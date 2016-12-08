@@ -28,7 +28,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
      * Variables Globales
      */    
     String PLAYER_HEROE,PLAYER_VILLANO;
-    CasillasMarvel celda[][]=new CasillasMarvel[10][10];
+    static CasillasMarvel celda[][]=new CasillasMarvel[10][10];
     Ficha heroes[][]=new FichasHeroes[4][10];
     Ficha villanos[][]=new FichasVillanos[4][10];
     CasillasMarvel primerCasilla=null,segundaCasilla=null;
@@ -1026,7 +1026,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 Player.existe(PLAYER_VILLANO).addPuntos();
                 Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, true, PLAYER_HEROE);
                 Player.existe(PLAYER_HEROE).ultimasPartidas(fich, false, PLAYER_VILLANO);
-            } catch (IOException | ClassNotFoundException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
@@ -1039,7 +1039,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 Player.existe(PLAYER_HEROE).addPuntos();
                 Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, true,PLAYER_VILLANO);
                 Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, false, PLAYER_HEROE);
-            } catch (IOException | ClassNotFoundException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -1083,25 +1083,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             "S ha capturado la Tierra! Venciendo a "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime());
             us = lblPlayerOne.getText();   
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-            try {
-                Player.existe(PLAYER_VILLANO).addPuntos();
-                
-//            Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
-//            Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Player.existe(PLAYER_VILLANO).addPuntos();
         }else{
             turno=2;
             
             JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Vencedor usando "+fichaContraria+
                     " ha salvado la Tierra! Venciendo a "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
             us = lblPlayerTwo.getText();
-            try {
-                Player.existe(PLAYER_HEROE).addPuntos();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Player.existe(PLAYER_HEROE).addPuntos();
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
  //           Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
