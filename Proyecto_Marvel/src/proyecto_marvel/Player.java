@@ -231,12 +231,11 @@ public class Player implements Serializable{
         if (n){
             resultado="VICTORIA";
             if (m.equals(TipoFicha.HEROE)){
-            WinHeroes++;
+                WinHeroes++;
             }else{
                 WinVillanos++;
             }    
         }
-        
         partidas.add(0,actual.getTime()+"  Rival: "+rival.toUpperCase()+" Resultado: "+resultado+" Tipo de Ficha Utilizada: "+m.name()+"S");
         
         FileOutputStream fo = new FileOutputStream("player.pl",false);

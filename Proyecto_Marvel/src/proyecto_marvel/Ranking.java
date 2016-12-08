@@ -102,7 +102,7 @@ public class Ranking extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableRanking);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(800, 220, 452, 402);
+        jScrollPane1.setBounds(650, 130, 452, 402);
 
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
