@@ -5,13 +5,14 @@
  */
 package proyecto_marvel;
 
+import java.io.Serializable;
 import javax.swing.JButton;
 
 /**
  *
  * @author ANDY ESCOBAR 007
  */
-public class CasillasMarvel extends JButton{
+public class CasillasMarvel extends JButton implements Serializable{
     
     boolean turnplayerHeroe;
     public int x,y;

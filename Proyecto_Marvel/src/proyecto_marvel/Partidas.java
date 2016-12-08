@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -21,58 +24,95 @@ import java.util.logging.Logger;
  *
  * @author David
  */
-public class Partidas {
+public class Partidas implements Serializable{
+    private static String fecha;
+    private static SimpleDateFormat date = new SimpleDateFormat("dd/MM/yy hh'H'mm'M'ss's' a");
     private RandomAccessFile rpartidas;
+    static ArrayList<Partidas>GamePartidas=new ArrayList<>();
     GameStratego nuevaPartida;
-    
-    public Partidas(){
-        
+    CasillasMarvel [][]piezas;
+    private int turno;
+    private static int cont=0;
+    String playerOne,PlayerTwo;
+
+    public Partidas(String playerOne,int turno, String PlayerTwo,CasillasMarvel[][] cas) {
+        this.turno = turno;
+        this.playerOne = playerOne;
+        this.PlayerTwo = PlayerTwo;
+        this.piezas=cas;
+        this.fecha=date.format(new Date());
     }
+
+    public Partidas() {
+    }
+    
+    
     public GameStratego nuevaPartida(){
         return nuevaPartida = new GameStratego();
     }
-    private String folderPlayer(String name) {
-        return "Players/"+name;
+    private static String folderPlayer(String name) {
+        return "Players//"+name;
     }
     
-    public void crearFolderPlayer(String name)throws IOException{
+    public static void crearFolderPlayer(String name)throws IOException{
         //Creando Folder del Player Logged
-        File player = new File( folderPlayer(name) );
-        player.mkdir();
+        File player = new File(folderPlayer(name) );
+        player.mkdirs();
     }
     
-    public void savePartidaForPlayer(String name,String invitado)throws IOException{
-        //Obtengo la direccion del FolderPlayer logged
-        String dirPadre = folderPlayer(name);
-        //Obtengo la fecha justo en el momento que se crea el archivo
-        Date fecha = Calendar.getInstance().getTime();
-        //Creo la direccion para el RAF
-        String path = dirPadre+"/"+name+"_vs_"+invitado+"_"+fecha+".ps";
-        //rpartidas= new RandomAccessFile(path, "rw");
-        partidaSalvada(path);
+    public static void savePartidaForPlayer(String name,int turn,String invitado,CasillasMarvel[][] c)throws IOException{
+        Calendar fecha= Calendar.getInstance();
+        int day=fecha.get(Calendar.DAY_OF_MONTH);
+        int month=fecha.get(Calendar.MONTH);
+        int year=fecha.get(Calendar.YEAR);
+        String date=day+"-"+month+"-"+year;
+        if(Player.getLoggedPlayer().getUsername().equals(name)){
+            //Obtengo la direccion del FolderPlayer logged
+            Partidas.crearFolderPlayer(name);
+            String dirPadre = folderPlayer(name);
+            //Obtengo la fecha justo en el momento que se crea el archivo
+            
+            
+           // GamePartidas.add(0,new Partidas( name,turn-1, invitado));
+            //Creo la direccion para el RAF
+            cont++;
+            String path = dirPadre+"/"+name+"_vs_"+invitado+" "+date+".ps";
+            //rpartidas= new RandomAccessFile(path, "rw");
+            partidaSalvada(path,name,turn,invitado,c);
+
+        }else{
+            Partidas.crearFolderPlayer(name);
+            String dirPadre = folderPlayer(invitado);
+            //Obtengo la fecha justo en el momento que se crea el archivo
+            //Creo la direccion para el RAF
+            cont++;
+            String path = dirPadre+"/"+name+" vs "+invitado+" "+date+".ps";
+            
+            //rpartidas= new RandomAccessFile(path, "rw");
+         //   GamePartidas.add(0,new Partidas(invitado,turn-1,name));
+            partidaSalvada(path,invitado,turn,name,c);
+        }
+        
     }
-    private void partidaSalvada(String path){
+    private static void partidaSalvada(String path,String p,int n,String s,CasillasMarvel [][]c){
         try {
-            //seriealizar
             FileOutputStream fo = new FileOutputStream(path);
+            GamePartidas.add(new Partidas(p, n, s,c));
             ObjectOutputStream oo = new ObjectOutputStream(fo);
-            oo.writeObject(nuevaPartida);
-            
-            
-            
-        
+            oo.writeObject(GamePartidas);
         } catch (IOException ex) {
+            
             System.out.println("Error: "+ex.getMessage());
-        } 
-        
+            Logger.getLogger(Partidas.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            
+        }
     }
     private void cargarPartida(String path)throws IOException{
         try{
             FileInputStream fi = new FileInputStream(path);
-        
             ObjectInputStream oi = new ObjectInputStream(fi);
-            GameStratego otro = (GameStratego)oi.readObject();
-            otro.setVisible(true);
+            GamePartidas= (ArrayList<Partidas>)oi.readObject();
         }catch (ClassNotFoundException ex) {
             //Logger.getLogger(Serializacion.class.getName()).log(Level.SEVERE, null, ex);
         }

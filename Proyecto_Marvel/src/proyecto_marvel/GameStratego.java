@@ -308,7 +308,15 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{  
-            Game.partida.savePartidaForPlayer(Player.getLoggedPlayer().getUsername(), User2.playerTwo);
+            if(Player.getLoggedPlayer().getUsername().equals(PLAYER_HEROE)&&turno==1){
+                Partidas.savePartidaForPlayer(PLAYER_HEROE, turno, PLAYER_VILLANO,celda);
+                
+            }else if(Player.getLoggedPlayer().getUsername().equals(PLAYER_VILLANO)&&turno==2){
+                Partidas.savePartidaForPlayer(PLAYER_HEROE, turno, PLAYER_VILLANO,celda);
+            }else{
+                JOptionPane.showMessageDialog(null,"Esta funcion no esta permitida para el usuario invitado");
+            }
+            
         }catch(IOException e){
             System.out.println("No se");
         }

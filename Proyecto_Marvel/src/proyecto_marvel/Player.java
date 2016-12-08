@@ -136,11 +136,25 @@ public class Player implements Serializable{
  * 
  * @param user Nombre del Usuario a Buscar
  * @return Retorna el Objeto donde se encuentra el Usuario
+     * @throws java.io.FileNotFoundException
      * @throws java.io.IOException
      * @throws java.lang.ClassNotFoundException
  *
  */
-    public static Player existe(String user)throws IOException, ClassNotFoundException{
+    public static Player existe(String user) throws FileNotFoundException, IOException{
+        try{
+            FileInputStream fi = new FileInputStream("player.pl");
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            players = (ArrayList<Player>)oi.readObject();
+        } catch (FileNotFoundException ex) {
+           
+        } catch (IOException | ClassNotFoundException ex) {
+            FileOutputStream fo= new FileOutputStream("player.pl");
+            ObjectOutputStream oo = new ObjectOutputStream(fo);
+            oo.writeObject(players);
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
         for (Player player : players){
             if (player != null){
                 if (player.activo && user.equals(player.username)){

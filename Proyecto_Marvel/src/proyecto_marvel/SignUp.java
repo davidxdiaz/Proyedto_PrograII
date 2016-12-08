@@ -8,9 +8,12 @@ package proyecto_marvel;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -126,9 +129,6 @@ public class SignUp extends javax.swing.JFrame {
         String password=txtPassword.getText();
         
         try{
-       
-            FileOutputStream fo = new FileOutputStream("player.pl");
-            ObjectOutputStream oo = new ObjectOutputStream(fo);
             if(Player.existe(nomUsuario)==null){
                 if(password.length()==5){
                     System.out.println("Password Válida");
@@ -144,16 +144,14 @@ public class SignUp extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null,"Ya existe un usuario con este nombre");
             }
-            
-           
-        
-   
-        
         }catch(IOException e){
+            try {
+                Player.add(nomUsuario, password);
+            } catch (IOException ex) {
+                Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+            }
             System.out.println("Error en registro "+e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+     
         }
         
         
