@@ -151,13 +151,13 @@ public class MiPerfil extends javax.swing.JFrame {
         lblWinHeroes.setForeground(new java.awt.Color(255, 255, 255));
         lblWinHeroes.setText("jLabel3");
         getContentPane().add(lblWinHeroes);
-        lblWinHeroes.setBounds(350, 550, 70, 22);
+        lblWinHeroes.setBounds(350, 490, 70, 22);
 
         lblWinVillanos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblWinVillanos.setForeground(new java.awt.Color(255, 255, 255));
         lblWinVillanos.setText("jLabel3");
         getContentPane().add(lblWinVillanos);
-        lblWinVillanos.setBounds(350, 490, 80, 17);
+        lblWinVillanos.setBounds(350, 550, 80, 17);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
