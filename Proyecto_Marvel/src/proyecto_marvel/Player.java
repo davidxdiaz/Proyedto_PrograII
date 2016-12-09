@@ -27,6 +27,7 @@ public class Player implements Serializable{
 
     
     //Atributos
+    static ArrayList<Player>rankingPlayers=new ArrayList<>();
     private String username;
     private String password;
     private static RandomAccessFile rplayers;
@@ -89,7 +90,7 @@ public class Player implements Serializable{
             Player.players=(ArrayList<Player>)oi.readObject();
             for(Player player:players){
                 if (text.equals(player.username)){
-                    if(passw.equals(player.password)){
+                    if(passw.equals(player.password)&&player.activo){
                         return player;
                     }
                 }
@@ -185,7 +186,8 @@ public class Player implements Serializable{
      * @param pass CONTRASEÑA 
      * @throws java.io.IOException 
      */
-    public void elimiarCuenta(String user, String pass)throws IOException, ClassNotFoundException{   
+    public static void elimiarCuenta(String user, String pass){   
+        try{
             FileInputStream fi = new FileInputStream("player.pl");
             ObjectInputStream oi = new ObjectInputStream(fi);
             players= (ArrayList<Player>)oi.readObject();
@@ -197,6 +199,9 @@ public class Player implements Serializable{
             FileOutputStream fo = new FileOutputStream("player.pl",false);
             ObjectOutputStream oo = new ObjectOutputStream(fo);
             oo.writeObject(players);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
       
     /**
@@ -298,6 +303,10 @@ public class Player implements Serializable{
     public static Player getLoggedPlayer() {
         return loggedPlayer;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
     
     
     
@@ -346,13 +355,21 @@ public class Player implements Serializable{
     }*/
     
     public static void rankingPlayers(){
+       // int index=1;
+       rankingPlayers.clear();
+        for(Player p:players){
+            if (p.activo){
+                rankingPlayers.add(p);
+               // index++;
+            }
+        }
         Player aux;
-        for(int i=0;i<players.size()-1;i++){
-            for(int j=0;j<players.size()-i-1;j++){
-                if(players.get(j+1).puntos>players.get(j).puntos){
-                    aux=players.get(j+1);
-                    players.set(j+1,players.get(j));
-                    players.set(j,aux);
+        for(int i=0;i<rankingPlayers.size()-1;i++){
+            for(int j=0;j<rankingPlayers.size()-i-1;j++){
+                if(rankingPlayers.get(j+1).puntos>rankingPlayers.get(j).puntos){
+                    aux=rankingPlayers.get(j+1);
+                    rankingPlayers.set(j+1,rankingPlayers.get(j));
+                    rankingPlayers.set(j,aux);
                 }
             }
         }

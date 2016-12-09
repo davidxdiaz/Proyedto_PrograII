@@ -10,7 +10,10 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +42,7 @@ public class EliminarCuenta extends javax.swing.JFrame {
         this.setLocation(0,0);
         this.setLocationRelativeTo(null);
         
-        LblUser.setText(Player.getLoggedPlayer().getUsername().toUpperCase());   
+       LblUser.setText(Player.getLoggedPlayer().getUsername().toUpperCase());   
     }
 
     /**
@@ -55,7 +58,7 @@ public class EliminarCuenta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         LblUser = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jPassConfirm = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -88,9 +91,9 @@ public class EliminarCuenta extends javax.swing.JFrame {
         getContentPane().add(LblUser);
         LblUser.setBounds(1020, 110, 180, 20);
 
-        jPasswordField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(1020, 190, 180, 30);
+        jPassConfirm.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        getContentPane().add(jPassConfirm);
+        jPassConfirm.setBounds(1020, 190, 180, 30);
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton1.setText("Eliminar Cuenta");
@@ -111,7 +114,26 @@ public class EliminarCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       new MenuIncial().setVisible(true);   
+        
+            try {
+                if(jPassConfirm.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Por favor escriba su contraseña");
+                }else if(Player.verificar(Player.getLoggedPlayer().getUsername(), jPassConfirm.getText())!=null){
+                    int op=JOptionPane.showConfirmDialog(null,"¿Estas seguro que deseas eliminar tu cuenta?","Eliminar Cuenta",JOptionPane.YES_NO_OPTION);
+                    if (op==0){
+                        Player.elimiarCuenta(Player.getLoggedPlayer().getUsername(), jPassConfirm.getText());
+                        new MenuIncial().setVisible(true);
+                    }  
+                }else{
+                    JOptionPane.showMessageDialog(null,"Contraseña Incorrecta, Porfavor intente de nuevo");
+                    jPassConfirm.setText(null);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(EliminarCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EliminarCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -156,6 +178,6 @@ public class EliminarCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPassConfirm;
     // End of variables declaration//GEN-END:variables
 }

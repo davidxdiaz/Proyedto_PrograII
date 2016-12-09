@@ -98,7 +98,6 @@ public class User2 extends javax.swing.JFrame {
                 
             }
             try{
-            try {
                 if ((Player.existe(playertwo) != null) && !playertwo.equals(Player.getLoggedPlayer().getUsername())){
                     playerTwo= playertwo;
                     new Game();
@@ -106,9 +105,6 @@ public class User2 extends javax.swing.JFrame {
                 } else{
                     JOptionPane.showMessageDialog(null,"El jugador no existe o ingreselo correctamente", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(User2.class.getName()).log(Level.SEVERE, null, ex);
-            }
             } catch(IOException e){
                 System.out.println("Error"+e.getMessage());
             }

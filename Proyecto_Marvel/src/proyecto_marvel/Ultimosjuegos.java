@@ -27,7 +27,7 @@ public class Ultimosjuegos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         try{
         partidas=Player.existe(Player.getLoggedPlayer().getUsername()).partidas;
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(Ultimosjuegos.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("==========================================\n             MIS ULTIMOS JUEGOS               \n===="

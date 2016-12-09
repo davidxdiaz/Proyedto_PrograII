@@ -155,18 +155,18 @@ public class Ranking extends javax.swing.JFrame {
     private void rankingPlayer(){
         Player.rankingPlayers();
         String columnas[]={"POS.","PLAYERS", "PUNTOS"};
-        String topPlayer[][]=new String[Player.players.size()][3];
-        if(Player.players.size()<20){
+        String topPlayer[][]=new String[Player.rankingPlayers.size()][3];
+        if(Player.rankingPlayers.size()<20){
             for(int cont=0;cont<topPlayer.length;cont++){
                 topPlayer[cont][0]=String.valueOf((cont+1));
-                topPlayer[cont][1]=Player.players.get(cont).getUsername().toUpperCase();
-                topPlayer[cont][2]= String.valueOf(Player.players.get(cont).getPuntos());
+                topPlayer[cont][1]=Player.rankingPlayers.get(cont).getUsername().toUpperCase();
+                topPlayer[cont][2]= String.valueOf(Player.rankingPlayers.get(cont).getPuntos());   
             }
         }else{
             for(int cont=0;cont<20;cont++){
                 topPlayer[cont][0]=String.valueOf((cont+1));
-                topPlayer[cont][1]=Player.players.get(cont).getUsername().toUpperCase();
-                topPlayer[cont][2]= String.valueOf(Player.players.get(cont).getPuntos());
+                topPlayer[cont][1]=Player.rankingPlayers.get(cont).getUsername().toUpperCase();
+                topPlayer[cont][2]= String.valueOf(Player.rankingPlayers.get(cont).getPuntos());
             }
                     
         }

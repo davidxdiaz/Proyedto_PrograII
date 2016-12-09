@@ -113,22 +113,13 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-            int usariosActivos=0;
-            try {
-                usariosActivos = Player.pActivos();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(StrategoMarvelHeroes.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(usariosActivos>1){
-                new Opciones().setVisible(true);
-                this.dispose();
-            }else
-                JOptionPane.showMessageDialog(null,"Esta opcion no esta disponible aun", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }catch(IOException e){
-            e.printStackTrace();
-            System.out.println("Error "+e.getMessage() );
-        }
+        int usariosActivos=0;
+        usariosActivos = Player.playersActivos();
+        if(usariosActivos>1){
+            new Opciones().setVisible(true);
+            this.dispose();
+        }else
+            JOptionPane.showMessageDialog(null,"Esta opcion no esta disponible aun", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
