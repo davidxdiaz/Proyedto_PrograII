@@ -122,7 +122,19 @@ public class EliminarCuenta extends javax.swing.JFrame {
                     int op=JOptionPane.showConfirmDialog(null,"¿Estas seguro que deseas eliminar tu cuenta?","Eliminar Cuenta",JOptionPane.YES_NO_OPTION);
                     if (op==0){
                         Player.elimiarCuenta(Player.getLoggedPlayer().getUsername(), jPassConfirm.getText());
+                        this.dispose();
+                       
                         new MenuIncial().setVisible(true);
+                        
+                        /* 
+                        Por alguna razón cuando sucede esto, sólo vuelve al menú principal y las demás quedan abiertas.
+                        */
+                        
+                        /*Ni esta, ni la otra*/
+                        //new MenuPrincipal().dispose();
+                        //new MiPerfil().dispose();
+                        //new MenuPrincipal().setVisible(false);
+                        //new MiPerfil().setVisible(false);
                     }  
                 }else{
                     JOptionPane.showMessageDialog(null,"Contraseña Incorrecta, Porfavor intente de nuevo");

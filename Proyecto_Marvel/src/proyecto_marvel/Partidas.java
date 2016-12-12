@@ -59,13 +59,13 @@ public class Partidas implements Serializable{
     public GameStratego nuevaPartida(){
         return nuevaPartida = new GameStratego();
     }
-    private static String folderPlayer(String name) {
-        return "Players/"+name;
+    private static String folderPlayer() {
+        return "Players/"+Player.getLoggedPlayer().getUsername();
     }
     
     public static void crearFolderPlayer(String name)throws IOException{
         //Creando Folder del Player Logged
-        File player = new File(folderPlayer(name) );
+        File player = new File(folderPlayer());
         player.mkdirs();
     }
     
@@ -73,7 +73,7 @@ public class Partidas implements Serializable{
         String name=Player.getLoggedPlayer().getUsername();
         String fech= date.format(new Date());
         Partidas.crearFolderPlayer(name);
-        String dirPadre = folderPlayer(name);
+        String dirPadre = folderPlayer();
             //Obtengo la fecha justo en el momento que se crea el archivo     
         String path = dirPadre+"/"+cont+"_vs_"+invitado+" "+fech+".ps";
         partidaSalvada(path,turn,invitado,c);
@@ -110,7 +110,7 @@ public class Partidas implements Serializable{
     public static void eliminarPartida(String path){
         File f=new File(path);
         for (Partidas p:GamePartidas){
-           if(p.dir.equalsIgnoreCase(path)){
+            if(p.dir.equals(path)){
                try {
                    Player.existe(p.PlayerTwo).addPuntos();
                  } catch (IOException ex) {

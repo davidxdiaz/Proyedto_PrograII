@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Calendar;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -74,6 +78,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
        
     public GameStratego() { 
         initComponents();
+        cerrar();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
@@ -149,6 +154,26 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
     }
     
+    public void cerrar(){
+        try{
+           this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+              public void windowClosing(WindowEvent e)  {
+                 confirmarsalida(); 
+            }});
+            this.setVisible(true);
+        }catch(Exception e){
+            System.out.println("No debería pasar esto");
+        }
+    }
+    
+    public void confirmarsalida(){
+        int valor=JOptionPane.showConfirmDialog(this, "¿Está seguro de cerrar el juego?", "Se perderán los cambios no guardados", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (valor==JOptionPane.YES_OPTION){
+            this.dispose();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,11 +217,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         );
 
         lblPlayerOne.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblPlayerOne.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerOne.setText("Player 1");
 
         lblPlayerTwo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblPlayerTwo.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerTwo.setText("Player 2");
 
         lblTurno.setFont(new java.awt.Font("Tahoma", 3, 16)); // NOI18N
@@ -330,13 +353,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int op;
-        op=JOptionPane.showConfirmDialog(null, "¿Dese usted redirse?","Rendirse",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        op=JOptionPane.showConfirmDialog(null, "¿Desea usted redirse?","Rendirse",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         
         if (op==0){
 
             obtenerGanadorRendirse();
-
-            new MenuPrincipal().setVisible(true);
             this.dispose();
         }
        
