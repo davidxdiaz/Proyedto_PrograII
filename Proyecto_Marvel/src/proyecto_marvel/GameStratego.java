@@ -13,7 +13,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Calendar;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +20,6 @@ import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -105,14 +103,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                fichas=partidacargada[0].piezas;
                if(partidacargada[0].turn==0){
                    PLAYER_HEROE=partidacargada[0].playerOne;
-                   lblPlayerOne.setText(PLAYER_HEROE);
+                   lblPlayerOne.setText(PLAYER_HEROE.toUpperCase());
                    PLAYER_VILLANO=partidacargada[0].PlayerTwo;
-                   lblPlayerTwo.setText(PLAYER_VILLANO);
+                   lblPlayerTwo.setText(PLAYER_VILLANO.toUpperCase());
                }else{
                    PLAYER_HEROE=partidacargada[0].PlayerTwo;
-                   lblPlayerOne.setText(PLAYER_HEROE);
+                   lblPlayerOne.setText(PLAYER_HEROE.toUpperCase());
                    PLAYER_VILLANO=partidacargada[0].playerOne;
-                   lblPlayerTwo.setText(PLAYER_VILLANO);
+                   lblPlayerTwo.setText(PLAYER_VILLANO.toUpperCase());
                }
             } catch (IOException ex) {
                 Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
