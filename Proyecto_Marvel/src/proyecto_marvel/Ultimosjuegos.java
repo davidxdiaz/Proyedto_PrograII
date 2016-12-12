@@ -6,10 +6,15 @@
 package proyecto_marvel;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +29,21 @@ public class Ultimosjuegos extends javax.swing.JFrame {
      */
     public Ultimosjuegos() {
         initComponents();
+        ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\BlackWidow.jpg");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel2.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(),Image.SCALE_DEFAULT));
+        jLabel2.setIcon(icono);
+       
+     
         this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
+        
         try{
         partidas=Player.existe(Player.getLoggedPlayer().getUsername()).partidas;
         } catch (IOException ex) {
@@ -50,8 +69,12 @@ public class Ultimosjuegos extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         tableLastGame = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         tableLastGame.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tableLastGame.setModel(new javax.swing.table.DefaultTableModel(
@@ -67,21 +90,19 @@ public class Ultimosjuegos extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tableLastGame);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 61, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(4, 73, 670, 390);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("MIS ÚLTIMAS PARTIDAS");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 20, 680, 50);
+
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 900, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -116,6 +137,8 @@ public class Ultimosjuegos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tableLastGame;
     // End of variables declaration//GEN-END:variables
