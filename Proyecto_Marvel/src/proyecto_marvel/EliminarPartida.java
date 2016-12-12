@@ -6,7 +6,6 @@
 package proyecto_marvel;
 
 import java.io.File;
-import java.util.Calendar;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -16,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author Miguel Paz
  */
 public class EliminarPartida extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form EliminarPartida

@@ -100,7 +100,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         if(CargarPartida.CARGARPARTIDAS==1){
             try {
                partidacargada=Partidas.cargarPartida(CargarPartida.path);
-               fichas=partidacargada[0].piezas;
+               fichas=partidacargada[0].getPiezas();
                if(partidacargada[0].turn==0){
                    PLAYER_HEROE=partidacargada[0].playerOne;
                    lblPlayerOne.setText(PLAYER_HEROE.toUpperCase());
@@ -364,7 +364,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{  
             if(Player.getLoggedPlayer().getUsername().equals(PLAYER_HEROE)&&turno==1){
-                Partidas.savePartidaForPlayer(turno, PLAYER_VILLANO, heroes);
+                Partidas.savePartidaForPlayer(turno, PLAYER_VILLANO, obtenerFichas());
                 
             }else if(Player.getLoggedPlayer().getUsername().equals(PLAYER_VILLANO)&&turno==2){
                 Partidas.savePartidaForPlayer(turno,PLAYER_HEROE,obtenerFichas());
@@ -1098,6 +1098,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     public void obtenerGanadorRendirse(){
         Calendar fecha=Calendar.getInstance();
+        if(CargarPartida.CARGARPARTIDAS==1){
+            Partidas.eliminarPartidaActual(partidacargada[0].dir);
+        }
         if (turno==1){
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
             JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Vencedor usando "+ fichaContraria+
@@ -1129,6 +1132,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     public void obtenerGanadorFichasSinMovimientos() throws IOException, ClassNotFoundException{
         Calendar fecha=Calendar.getInstance();
+        if(CargarPartida.CARGARPARTIDAS==1){
+            Partidas.eliminarPartidaActual(partidacargada[0].dir);
+        }
             if (turno==1){
                 JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Perdedor usando "+miTipoFicha+
                     " ha perdido por no tener movimientos validos disponibles ante "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
@@ -1157,6 +1163,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     
     public void obtenerGanadorTierra(){
         Calendar fecha=Calendar.getInstance();
+        if(CargarPartida.CARGARPARTIDAS==1){
+            Partidas.eliminarPartidaActual(partidacargada[0].dir);
+        }
         try{
         String us;
         if (turno==1){

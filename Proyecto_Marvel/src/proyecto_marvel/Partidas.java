@@ -138,7 +138,15 @@ public class Partidas implements Serializable{
         
        
     }
-                   
+      public static void eliminarPartidaActual(String path){
+          File file=new File(path);
+            if (!file.exists()) System.err.println("ARCHIVO NO EXISTE");
+            if(file.delete()){
+                JOptionPane.showMessageDialog(null,"La partida se elimino correctamente");    
+            }else{
+            JOptionPane.showMessageDialog(null,"Algo salio mal, partida no se elimino correctamente");
+            }
+      }             
   
         
     

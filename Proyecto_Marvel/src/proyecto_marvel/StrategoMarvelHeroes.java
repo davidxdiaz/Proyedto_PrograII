@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,7 +110,11 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       new EliminarPartida().setVisible(true);
+       if(cantPartidasGuardas()>0){
+        new EliminarPartida().setVisible(true);
+       }else{
+          JOptionPane.showMessageDialog(null,"Aun no hay partidas guardadas para abrir esta opción");
+        }    
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -124,7 +129,11 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       new CargarPartida().setVisible(true);
+      if(cantPartidasGuardas()>0){
+        new CargarPartida().setVisible(true);
+      }else{
+          JOptionPane.showMessageDialog(null,"Aun no hay partidas guardadas para abrir esta opción");
+      }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -204,5 +213,22 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
     @Override
     public void windowDeactivated(WindowEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private int cantPartidasGuardas() {
+        int cont=0;
+        String path="Players/"+Player.getLoggedPlayer().getUsername();
+        File file=new File(path);
+        if(file.exists())
+            for(File child : file.listFiles()){
+                if(!child.isHidden()){
+                    cont++;
+                }
+            }
+        else{
+            file.mkdirs();
+            cont=0;
+        }
+        return cont;   
     }
 }
