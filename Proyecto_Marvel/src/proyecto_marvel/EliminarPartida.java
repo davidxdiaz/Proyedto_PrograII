@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import static proyecto_marvel.CargarPartida.path;
 
 /**
  *
@@ -84,16 +83,19 @@ public class EliminarPartida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         try{
         int index=jlistEliminar.getSelectedIndex();
         String dir=jlistEliminar.getModel().getElementAt(index);
-        Partidas.eliminarPartida(getpathPartida(dir));
+        String path=getpathPartidaEliminar(dir);
+        System.out.println(path);
+        
+        Partidas.eliminarPartida(path);  
         }catch(IndexOutOfBoundsException e){
-            JOptionPane.showMessageDialog(null,"Porfavor seleciona la partida ha eliminar");
+            JOptionPane.showMessageDialog(null,"Porfavor seleccione un elemento a eliminar");
         }
         
         mostrarPartidas();
-        JOptionPane.showMessageDialog(null, "La partida se ha eliminado correctamente");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -138,28 +140,27 @@ public class EliminarPartida extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
         public void mostrarPartidas(){
-            DefaultListModel<String>model1=new DefaultListModel<>();
-            jlistEliminar.setModel(model1);
+            DefaultListModel<String>model2=new DefaultListModel<>();
+            jlistEliminar.setModel(model2);
             File file=new File("Players/"+Player.getLoggedPlayer().getUsername());
             for(File child : file.listFiles()){
                 if(!child.isHidden()){
                 //Ultima modif
                     Date ultima = new Date(child.lastModified());
-                    String dir=ultima+"   "+child.getName();
-                    System.out.print(ultima+"   "+child.getName());
-                    model1.addElement(dir);
+                    String dir=child.getName();
+                    System.out.println(ultima+"   "+child.getName());
+                    model2.addElement(dir);
 
                 }
             }
         }
         
-        public String getpathPartida(String url){
-        String dir ="";
-        Calendar f=Calendar.getInstance();
-        for(int cont=31;cont<url.length();cont++){
-            dir=dir+url.charAt(cont);
-        }
-        return "Players/"+Player.getLoggedPlayer().getUsername()+"/"+dir;
-        }
+    public String getpathPartidaEliminar(String url){
+       // String dir ="";
+       // for(int cont=31;cont<url.length();cont++){
+       //     dir=dir+url.charAt(cont);
+      //  }
+        return "Players/"+Player.getLoggedPlayer().getUsername()+"/"+url;
+    }
       
     }

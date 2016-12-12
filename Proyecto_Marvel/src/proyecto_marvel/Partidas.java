@@ -108,19 +108,29 @@ public class Partidas implements Serializable{
     }
     
     public static void eliminarPartida(String path){
-        File f=new File(path);
-        for (Partidas p:GamePartidas){
-            if(p.dir.equals(path)){
-               try {
-                   Player.existe(p.PlayerTwo).addPuntos();
-                 } catch (IOException ex) {
-                   Logger.getLogger(Partidas.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
-                   
+        try{
+            
+            FileInputStream fi = new FileInputStream(path);
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            GamePartidas= (Partidas[])oi.readObject();
+            Player.existe(GamePartidas[0].PlayerTwo).addPuntos();
+            File file=new File(path);
+            if(file.delete()){
+                JOptionPane.showMessageDialog(null,"La partida se elimino correctamente");    
+            }
+            JOptionPane.showMessageDialog(null,"Algo salio mal, partida no se elimino correctamente");
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } catch (IOException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        f.delete();
+        
+       
     }
+                   
+  
+        
+    
         
        
     
