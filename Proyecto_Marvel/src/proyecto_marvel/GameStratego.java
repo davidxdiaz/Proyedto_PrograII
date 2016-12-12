@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,8 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     /**
      * Variables Globales
      */    
+    public static Partidas partidacargada[];
+    public Ficha[][] fichas=new Ficha[10][10]; 
     String PLAYER_HEROE,PLAYER_VILLANO;
     static CasillasMarvel celda[][]=new CasillasMarvel[10][10];
     Ficha heroes[][]=new FichasHeroes[4][10];
@@ -91,6 +94,39 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
    * FUNCION QUE IMPLEMENTA LAS CASILLAS DE TABLERO
    */  
     public void tablero(){
+        if(CargarPartida.CARGARPARTIDAS==1){
+            try {
+               partidacargada=Partidas.cargarPartida(CargarPartida.path);
+               fichas=partidacargada[0].piezas;
+               if(partidacargada[0].turn==0){
+                   PLAYER_HEROE=partidacargada[0].playerOne;
+                   lblPlayerOne.setText(PLAYER_HEROE);
+                   PLAYER_VILLANO=partidacargada[0].PlayerTwo;
+                   lblPlayerTwo.setText(PLAYER_VILLANO);
+               }else{
+                   PLAYER_HEROE=partidacargada[0].PlayerTwo;
+                   lblPlayerOne.setText(PLAYER_HEROE);
+                   PLAYER_VILLANO=partidacargada[0].playerOne;
+                   lblPlayerTwo.setText(PLAYER_VILLANO);
+               }
+            } catch (IOException ex) {
+                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            panelTablero.setLayout(new GridLayout(10,10));
+            for (int i=0;i<celda.length;i++ ){
+                for (int e=0;e<celda[i].length;e++){
+                    if (fichas[i][e] instanceof FichasHeroes || fichas[i][e] instanceof FichasVillanos){
+                        celda[i][e]=new CasillasMarvel(i,e,fichas[i][e]);
+                        celda[i][e].setIcon(obtenerImagen(fichas[i][e]));
+                    }else{
+                        celda[i][e]=new CasillasMarvel(i, e,null);
+                    }
+                    celda[i][e].setName(i+""+e);
+                    celda[i][e].addActionListener(this);
+                    panelTablero.add(celda[i][e]);
+                }
+            }   
+        }else{
         panelTablero.setLayout(new GridLayout(10,10));
         for (int i=0;i<celda.length;i++ ){
             for (int e=0;e<celda[i].length;e++){
@@ -108,9 +144,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 celda[i][e].setName(i+""+e);
                 celda[i][e].addActionListener(this);
                 panelTablero.add(celda[i][e]);
-        
             }
         }
+    }
     }
     
     /**
@@ -309,10 +345,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{  
             if(Player.getLoggedPlayer().getUsername().equals(PLAYER_HEROE)&&turno==1){
-                Partidas.savePartidaForPlayer(PLAYER_HEROE, turno, PLAYER_VILLANO,celda);
+                Partidas.savePartidaForPlayer(turno, PLAYER_VILLANO, heroes);
                 
             }else if(Player.getLoggedPlayer().getUsername().equals(PLAYER_VILLANO)&&turno==2){
-                Partidas.savePartidaForPlayer(PLAYER_HEROE, turno, PLAYER_VILLANO,celda);
+                Partidas.savePartidaForPlayer(turno,PLAYER_HEROE,obtenerFichas());
             }else{
                 JOptionPane.showMessageDialog(null,"Esta funcion no esta permitida para el usuario invitado");
             }
@@ -377,9 +413,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             validarSegundoClic(primerCasilla,segundaCasilla);
                             try {
                                 fichasDisponibles();
-                            } catch (ClassNotFoundException ex) {
-                                Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (IOException ex) {
+                            } catch (ClassNotFoundException | IOException ex) {
                                 Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
@@ -428,6 +462,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 int cmin=columMin(primerCasilla);
                 if (pos<=cmax&& pos>=cmin){
                     if(segundaCasilla.ficha!=null){
+                        primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
                         iniciarBatalla(primerCasilla,segundaCasilla);
                     }else{
                         segundaCasilla.ficha=primerCasilla.ficha;
@@ -447,6 +482,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 int fMin=filaMin(primerCasilla);
                 if(segundaCasilla.x<=fMax && segundaCasilla.x>=fMin){
                     if(segundaCasilla.ficha!=null){
+                        primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
                         iniciarBatalla(primerCasilla, segundaCasilla);
                     }else{
                     segundaCasilla.ficha=primerCasilla.ficha;
@@ -469,6 +505,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             int s=segundaCasilla.y;
             if ((s+1)>=pos &&(s-1)<=pos){
                 if(segundaCasilla.ficha!=null){
+                    primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
                     iniciarBatalla(primerCasilla, segundaCasilla);
                 }else{
                 segundaCasilla.ficha=primerCasilla.ficha;
@@ -489,6 +526,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             int s=segundaCasilla.x;
             if ((s+1)>=h &&(s-1)<=h){
                 if(segundaCasilla.ficha!=null){
+                    primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
                     iniciarBatalla(primerCasilla, segundaCasilla);
                 }else{
                 segundaCasilla.ficha=primerCasilla.ficha;
@@ -527,18 +565,15 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         if(primerCasilla.ficha.ficha==fichaContraria){
             JOptionPane.showMessageDialog(null, "Selecione una ficha tuya por favor");        
         }else if(primerCasilla.ficha.rango<=0){
-            primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
             JOptionPane.showMessageDialog(null, "Esta ficha no posee movimiento");
-            ocultarFichas();
         }
         else if(primerCasilla.ficha!=null && primerCasilla.ficha.ficha==miTipoFicha){
             primerclic=true;
             System.out.println("Primer Clic");
-            primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
             System.out.println("fila:"+primerCasilla.x+" columna"+primerCasilla.y+" "+infoTipoFicha(primerCasilla));
                                     
-            }
-        else {
+        }
+        else{
             System.out.println(primerCasilla.x+""+primerCasilla.y+" "+infoTipoFicha(primerCasilla));
             JOptionPane.showMessageDialog(null, "Selecione una ficha tuya por favor");
         }
@@ -764,7 +799,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     }
 
     private void ocultarFichas() {
-        if(MODO_JUEGO!=0){
+        if(MODO_JUEGO==0){
             if (turno==1){
                 ImageIcon imgOcultaVillanos=new ImageIcon("src/Imagenes/cardsVillain.png");
                 Icon icoVillano=new ImageIcon(imgOcultaVillanos.getImage().getScaledInstance(53,60,Image.SCALE_SMOOTH));
@@ -790,7 +825,22 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                     }
                 }
             }
+        }else{
+            ImageIcon imgOcultaVillanos=new ImageIcon("src/Imagenes/cardsVillain.png");
+            ImageIcon imgOcultaHeroe=new ImageIcon("src/Imagenes/cardsHeroes.png");
+            Icon icoHeroe= new ImageIcon(imgOcultaHeroe.getImage().getScaledInstance(53,60,Image.SCALE_SMOOTH));
+            Icon icoVillano=new ImageIcon(imgOcultaVillanos.getImage().getScaledInstance(53,60,Image.SCALE_SMOOTH));
+            for(CasillasMarvel[] tipo:celda){
+                for(CasillasMarvel fic:tipo){
+                    if(fic.ficha instanceof FichasVillanos){
+                        fic.setIcon(icoVillano);
+                    }else if(fic.ficha instanceof FichasHeroes){
+                        fic.setIcon(icoHeroe);
+                    }                    
+                }
+            }
         }
+            
     }
 
     private int filaMax(CasillasMarvel posicion) {
@@ -883,6 +933,19 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     private void mostrarBatalla(CasillasMarvel primerCasilla, CasillasMarvel segundaCasilla) {
         primerCasilla.setIcon(obtenerImagen(primerCasilla.ficha));
         segundaCasilla.setIcon(obtenerImagen(segundaCasilla.ficha));
+    }
+
+    private Ficha[][] obtenerFichas() {
+        for(int cont=0;cont<celda.length;cont++){
+            for(int cont2=0;cont2<celda[cont].length;cont2++){
+                if (celda[cont][cont2].ficha instanceof FichasHeroes ||celda[cont][cont2].ficha instanceof FichasVillanos){
+                    fichas[cont][cont2]=celda[cont][cont2].ficha;
+                }else{
+                    fichas[cont][cont2]=null; 
+                }
+            }
+        }
+        return fichas;
     }
 
    

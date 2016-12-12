@@ -19,7 +19,7 @@ public class Configuracion extends javax.swing.JFrame {
     /**
      * Creates new form Configuracion
      */
-     static int modojuego=0;
+     static int modojuego=1;
     public Configuracion() {
         initComponents();
         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Rabata.png");
@@ -37,7 +37,7 @@ public class Configuracion extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setLocation(0,0);
         this.setLocationRelativeTo(null);
-        jRadioButton1.setSelected(true);
+        jRadioButton2.setSelected(true);
         
        
     }

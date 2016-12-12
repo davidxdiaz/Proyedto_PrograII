@@ -6,8 +6,6 @@
 package proyecto_marvel;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -100,7 +98,7 @@ public class User2 extends javax.swing.JFrame {
             try{
                 if ((Player.existe(playertwo) != null) && !playertwo.equals(Player.getLoggedPlayer().getUsername())){
                     playerTwo= playertwo;
-                    new Game();
+                    new GameStratego().setVisible(true);
                     this.dispose();
                 } else{
                     JOptionPane.showMessageDialog(null,"El jugador no existe o ingreselo correctamente", "ERROR", JOptionPane.ERROR_MESSAGE);

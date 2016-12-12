@@ -5,6 +5,7 @@
  */
 package proyecto_marvel;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -194,6 +195,8 @@ public class Player implements Serializable{
             for(Player p:players){
                 if(p.username.equals(user)&&p.password.equals(pass)){
                     p.activo=false;
+                    File f=new File("Players/"+user);
+                    borrarCarpeta(f);
                 }
             }
             FileOutputStream fo = new FileOutputStream("player.pl",false);
@@ -306,6 +309,13 @@ public class Player implements Serializable{
 
     public boolean isActivo() {
         return activo;
+    }
+     private static boolean borrarCarpeta(File f){
+        if(f.isDirectory()){
+            for(File child : f.listFiles())
+                borrarCarpeta(child);
+        }
+        return f.delete();
     }
     
     

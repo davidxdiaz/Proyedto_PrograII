@@ -5,6 +5,13 @@
  */
 package proyecto_marvel;
 
+import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import static proyecto_marvel.CargarPartida.path;
+
 /**
  *
  * @author Miguel Paz
@@ -17,6 +24,7 @@ public class EliminarPartida extends javax.swing.JFrame {
     public EliminarPartida() {
         initComponents();
         this.setLocationRelativeTo(null);
+        mostrarPartidas();
     }
 
     /**
@@ -28,33 +36,65 @@ public class EliminarPartida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jlistEliminar = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("¡PRÓXIMAMENTE DISPONIBLE!");
+        jButton1.setText("Eliminar Partida");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jlistEliminar.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jlistEliminar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(47, 47, 47))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+        int index=jlistEliminar.getSelectedIndex();
+        String dir=jlistEliminar.getModel().getElementAt(index);
+        Partidas.eliminarPartida(getpathPartida(dir));
+        }catch(IndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null,"Porfavor seleciona la partida ha eliminar");
+        }
+        
+        mostrarPartidas();
+        JOptionPane.showMessageDialog(null, "La partida se ha eliminado correctamente");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -92,6 +132,34 @@ public class EliminarPartida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> jlistEliminar;
     // End of variables declaration//GEN-END:variables
-}
+
+        public void mostrarPartidas(){
+            DefaultListModel<String>model1=new DefaultListModel<>();
+            jlistEliminar.setModel(model1);
+            File file=new File("Players/"+Player.getLoggedPlayer().getUsername());
+            for(File child : file.listFiles()){
+                if(!child.isHidden()){
+                //Ultima modif
+                    Date ultima = new Date(child.lastModified());
+                    String dir=ultima+"   "+child.getName();
+                    System.out.print(ultima+"   "+child.getName());
+                    model1.addElement(dir);
+
+                }
+            }
+        }
+        
+        public String getpathPartida(String url){
+        String dir ="";
+        Calendar f=Calendar.getInstance();
+        for(int cont=31;cont<url.length();cont++){
+            dir=dir+url.charAt(cont);
+        }
+        return "Players/"+Player.getLoggedPlayer().getUsername()+"/"+dir;
+        }
+      
+    }

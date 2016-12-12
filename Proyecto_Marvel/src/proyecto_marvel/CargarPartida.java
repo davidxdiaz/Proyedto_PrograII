@@ -5,17 +5,25 @@
  */
 package proyecto_marvel;
 
+import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Miguel Paz
  */
-public class CargarPartida extends javax.swing.JFrame {
-    private String path;
+public class CargarPartida extends javax.swing.JFrame{
+    static int CARGARPARTIDAS=0;
+    public static String path="";
     /**
      * Creates new form CargarPartida
      */
     public CargarPartida() {
         initComponents();
+        mostrarPartidas();
          this.setLocationRelativeTo(null);
     }
 
@@ -30,6 +38,8 @@ public class CargarPartida extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jlistCargarPartidas = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -42,6 +52,8 @@ public class CargarPartida extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setViewportView(jlistCargarPartidas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -51,25 +63,50 @@ public class CargarPartida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addComponent(jLabel2))
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addGap(78, 78, 78)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
-                .addGap(35, 35, 35)
-                .addComponent(jButton1)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        path="";
+        try{
+            CARGARPARTIDAS=1;
+            int index=jlistCargarPartidas.getSelectedIndex();
+            String dir=jlistCargarPartidas.getModel().getElementAt(index);
+            path=getpathPartida(dir);
+            System.out.println(getpathPartida(dir));
+        }catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null,"Por favor se leccione una partida");       
+        }
+        new GameStratego().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public String getpathPartida(String url){
+        String dir ="";
+        Calendar f=Calendar.getInstance();
+        for(int cont=31;cont<url.length();cont++){
+            dir=dir+url.charAt(cont);
+        }
+        return "Players/"+Player.getLoggedPlayer().getUsername()+"/"+dir;
+    }
     /**
      * @param args the command line arguments
      */
@@ -108,5 +145,27 @@ public class CargarPartida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> jlistCargarPartidas;
     // End of variables declaration//GEN-END:variables
+
+    public void mostrarPartidas(){
+        DefaultListModel<String>model1=new DefaultListModel<>();
+        jlistCargarPartidas.setModel(model1);
+        File file=new File("Players/"+Player.getLoggedPlayer().getUsername());
+        for(File child : file.listFiles()){
+            if(!child.isHidden()){
+            //Ultima modif
+                Date ultima = new Date(child.lastModified());
+                String dir=ultima+"   "+child.getName();
+                System.out.print(ultima+"   "+child.getName());
+                model1.addElement(dir);
+              
+            }
+        }
+      
+    }
+
+   
 }
+  

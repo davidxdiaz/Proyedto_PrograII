@@ -12,7 +12,7 @@ package proyecto_marvel;
 public class Game {
     public static Partidas partida;
     public Game(){
-        partida= new Partidas();
+     //   partida= new Partidas;
         partida.nuevaPartida().setVisible(true);
     }
     
