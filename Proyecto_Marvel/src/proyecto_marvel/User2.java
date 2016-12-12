@@ -10,12 +10,9 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
->>>>>>> origin/master
 import javax.swing.JOptionPane;
 
 /**

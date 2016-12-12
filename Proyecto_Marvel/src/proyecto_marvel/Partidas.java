@@ -87,6 +87,8 @@ public class Partidas implements Serializable{
             GamePartidas[0]=new Partidas(path,turno-1, s,c);
             ObjectOutputStream oo = new ObjectOutputStream(fo);
             oo.writeObject(GamePartidas);
+            fo.close();
+            oo.close();
         } catch (IOException ex) {
             
             System.out.println("Error: "+ex.getMessage());
@@ -101,6 +103,8 @@ public class Partidas implements Serializable{
             FileInputStream fi = new FileInputStream(path);
             ObjectInputStream oi = new ObjectInputStream(fi);
             GamePartidas= (Partidas[])oi.readObject();
+            fi.close();
+            oi.close();
         }catch (ClassNotFoundException ex) {
             return null;
         }
@@ -114,15 +118,22 @@ public class Partidas implements Serializable{
             ObjectInputStream oi = new ObjectInputStream(fi);
             GamePartidas= (Partidas[])oi.readObject();
             Player.existe(GamePartidas[0].PlayerTwo).addPuntos();
+            fi.close();
+            oi.close();
             File file=new File(path);
+            if (!file.exists()) System.err.println("ARCHIVO NO EXISTE");
             if(file.delete()){
                 JOptionPane.showMessageDialog(null,"La partida se elimino correctamente");    
-            }
+            }else{
             JOptionPane.showMessageDialog(null,"Algo salio mal, partida no se elimino correctamente");
+            }
+            
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } catch (IOException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
         }
         
        

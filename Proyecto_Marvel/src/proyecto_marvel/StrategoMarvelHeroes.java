@@ -116,6 +116,7 @@ public class StrategoMarvelHeroes extends javax.swing.JFrame implements WindowLi
         int usariosActivos=0;
         usariosActivos = Player.playersActivos();
         if(usariosActivos>1){
+            CargarPartida.CARGARPARTIDAS=0;
             new Opciones().setVisible(true);
             this.dispose();
         }else

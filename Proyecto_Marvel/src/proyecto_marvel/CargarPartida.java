@@ -153,18 +153,23 @@ public class CargarPartida extends javax.swing.JFrame{
         DefaultListModel<String>model1=new DefaultListModel<>();
         jlistCargarPartidas.setModel(model1);
         File file=new File("Players/"+Player.getLoggedPlayer().getUsername());
-        for(File child : file.listFiles()){
-            if(!child.isHidden()){
-            //Ultima modif
-                Date ultima = new Date(child.lastModified());
-                String dir=ultima+"   "+child.getName();
-                System.out.print(ultima+"   "+child.getName());
-                model1.addElement(dir);
+        try{
+            for(File child : file.listFiles()){
+                if(!child.isHidden()){
+                //Ultima modif
+                    Date ultima = new Date(child.lastModified());
+                    String dir=ultima+"   "+child.getName();
+                    System.out.print(ultima+"   "+child.getName());
+                    model1.addElement(dir);
+                }
               
             }
+        }catch(NullPointerException r){
+            JOptionPane.showMessageDialog(null,"No hay partida disponibles para cargar");
+        }
         }
       
-    }
+    
 
    
 }
