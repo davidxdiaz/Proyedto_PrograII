@@ -131,7 +131,7 @@ public class MiPerfil extends javax.swing.JFrame {
         txtPuntos.setForeground(new java.awt.Color(255, 255, 255));
         txtPuntos.setText("...");
         getContentPane().add(txtPuntos);
-        txtPuntos.setBounds(390, 400, 18, 22);
+        txtPuntos.setBounds(390, 400, 70, 22);
 
         lblwinH.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblwinH.setForeground(new java.awt.Color(255, 255, 255));

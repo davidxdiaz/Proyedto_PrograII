@@ -75,7 +75,7 @@ public class User2 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtUser);
-        txtUser.setBounds(720, 160, 210, 30);
+        txtUser.setBounds(720, 160, 210, 40);
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +84,7 @@ public class User2 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(730, 210, 180, 23);
+        jButton1.setBounds(730, 220, 180, 30);
 
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);

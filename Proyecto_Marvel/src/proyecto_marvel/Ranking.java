@@ -77,6 +77,7 @@ public class Ranking extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableRanking = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -102,11 +103,18 @@ public class Ranking extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableRanking);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(650, 130, 452, 402);
+        jScrollPane1.setBounds(770, 130, 452, 402);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("RÁNKING DE JUGADORES");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(770, 90, 450, 20);
 
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1210, 500);
+        jLabel2.setBounds(0, 0, 1280, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -147,6 +155,7 @@ public class Ranking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableRanking;

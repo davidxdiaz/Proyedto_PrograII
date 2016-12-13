@@ -5,9 +5,14 @@
  */
 package proyecto_marvel;
 
+import java.awt.Dimension;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,8 +27,23 @@ public class EliminarPartida extends javax.swing.JFrame {
      */
     public EliminarPartida() {
         initComponents();
-        this.setLocationRelativeTo(null);
+       
         mostrarPartidas();
+        
+         ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Hulk.jpg");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel1.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(),Image.SCALE_DEFAULT));
+        jLabel1.setIcon(icono);
+       
+     
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
     }
 
     /**
@@ -38,15 +58,22 @@ public class EliminarPartida extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlistEliminar = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
+        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton1.setText("Eliminar Partida");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(270, 300, 330, 30);
 
         jlistEliminar.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -55,29 +82,19 @@ public class EliminarPartida extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jlistEliminar);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(47, 47, 47))
-        );
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(270, 120, 330, 160);
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("SELECCIONA LA PARTIDA QUE QUIERES ELIMINAR");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(210, 90, 480, 22);
+
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 840, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,6 +152,8 @@ public class EliminarPartida extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> jlistEliminar;
     // End of variables declaration//GEN-END:variables
