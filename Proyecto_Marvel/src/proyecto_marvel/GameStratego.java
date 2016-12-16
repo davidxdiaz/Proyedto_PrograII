@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Calendar;
 import java.io.IOException;
 import java.util.Random;
@@ -80,15 +82,17 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
-       // this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
        
-        panelTablero.setSize(500, 700);
+       // panelTablero.setSize(500, 700);
+        panelTablero.setLocation(this.getHeight()/2,this.getWidth()/2);
         formularioInicial();
         modoJuego();
         obtenerHeroes();
         obtenerVillanos();
         tablero(); //IMPLEMENTA EL TABLERO EN PANTALLA\
+        generarAchivosdeTexto();
         pintarZonaSegura();
         cambiarTurno();
     }
@@ -968,6 +972,49 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             }
         }
         return fichas;
+    }
+
+    private void generarAchivosdeTexto() {
+        File t=new File("Players/"+PLAYER_HEROE);
+        t.mkdirs();
+        try(FileWriter gH=new FileWriter("Players/"+PLAYER_HEROE+"/posicionespiezas.txt")){
+            String data="1          2          3          4          5          6          7          8          9          10";
+            for(int cont=0;cont<celda.length;cont++){
+                for (int cont2=0;cont2<celda[cont].length;cont2++){
+                    if(celda[cont][cont2].ficha instanceof FichasHeroes){
+                        data=data+"||"+celda[cont][cont2].ficha.rango+"-"+celda[cont][cont2].ficha.nombreficha+"||  ";
+                    }else{
+                        data=data+"||"+"             "+"||   ";
+                    }
+                }
+                data=(cont+1)+"  "+data+"\n";
+            }
+            gH.write(data);
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+            File f=new File("Players/"+PLAYER_VILLANO);
+            f.mkdirs();
+        try(FileWriter gV=new FileWriter("Players/"+PLAYER_VILLANO+"/posicionespiezas.txt")){
+            String data="";
+            for(int cont=0;cont<celda.length;cont++){
+                for (int cont2=0;cont2<celda[cont].length;cont2++){
+                   if(celda[cont][cont2].ficha instanceof FichasVillanos){
+                        data=data+"||"+celda[cont][cont2].ficha.rango+"-"+celda[cont][cont2].ficha.nombreficha+"||  ";
+                    }else{
+                        data=data+"||"+"             "+"||  ";
+                    }
+                }
+                data=data+"\n";
+            }
+            gV.write(data);
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        
     }
 
    
