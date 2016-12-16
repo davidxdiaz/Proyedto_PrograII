@@ -32,12 +32,7 @@ public class Player implements Serializable{
 
    
 
-    private static int sumaDown(ArrayList<Player> players, int i) {
-        if (i<players.size()){
-            return sumaDown(players, i+1)+1;
-        }
-        return 0;
-    }
+    
 
     private String username;
     private String password;
@@ -469,7 +464,10 @@ public class Player implements Serializable{
         return contA;
     }
     
-    
+    /**
+     * Funcion que cuenta la cantidad de partidas juegadas
+     * @return Retorna la cantida de partidas Jugadas
+     */
     public static int obtenerpartidasJugadas(){
         int contA=0;
         try {
@@ -487,6 +485,20 @@ public class Player implements Serializable{
           
         }
         return contA;
+    
+    }
+    
+    /**
+     * 
+     * @param players
+     * @param i
+     * @return RFuncion recursiva que retorna la cantidad de usuarios Historicos 
+     */
+    private static int sumaDown(ArrayList<Player> players, int i) {
+        if (i<players.size()){
+            return sumaDown(players, i+1)+1;
+        }
+        return 0;
     }
      
 
