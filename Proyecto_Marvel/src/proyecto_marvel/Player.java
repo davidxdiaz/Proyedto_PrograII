@@ -29,6 +29,16 @@ public class Player implements Serializable{
     
     //Atributos
     static ArrayList<Player>rankingPlayers=new ArrayList<>();
+
+   
+
+    private static int sumaDown(ArrayList<Player> players, int i) {
+        if (i<players.size()){
+            return sumaDown(players, i+1)+1;
+        }
+        return 0;
+    }
+
     private String username;
     private String password;
     private static RandomAccessFile rplayers;
@@ -397,10 +407,11 @@ public class Player implements Serializable{
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(Player p:players){
-            conH++;
-        }
-        return conH;
+        return sumaDown(players,0);
+      //  for(Player p:players){
+      //     conH++;
+       // }
+      // return conH;
     }
     
     public static int playersActivos(){
@@ -418,7 +429,7 @@ public class Player implements Serializable{
             if(p.activo){
                 contA++;
             }
-        }
+         }
         return contA;
     }
     
