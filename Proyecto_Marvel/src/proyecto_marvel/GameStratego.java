@@ -86,7 +86,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         
        
        // panelTablero.setSize(500, 700);
-        panelTablero.setLocation(this.getHeight()/2,this.getWidth()/2);
+        panelTablero.setLocation(this.getHeight()/2,this.getWidth()/2+200);
         formularioInicial();
         modoJuego();
         obtenerHeroes();
@@ -205,7 +205,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         setSize(new java.awt.Dimension(1080, 680));
 
         panelTablero.setName("panelTablero"); // NOI18N
-        panelTablero.setPreferredSize(new java.awt.Dimension(530, 530));
+        panelTablero.setPreferredSize(new java.awt.Dimension(530, 720));
 
         javax.swing.GroupLayout panelTableroLayout = new javax.swing.GroupLayout(panelTablero);
         panelTablero.setLayout(panelTableroLayout);
@@ -219,9 +219,11 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         );
 
         lblPlayerOne.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblPlayerOne.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerOne.setText("Player 1");
 
         lblPlayerTwo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblPlayerTwo.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerTwo.setText("Player 2");
 
         lblTurno.setFont(new java.awt.Font("Tahoma", 3, 16)); // NOI18N
@@ -298,24 +300,31 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(lblFichasPerdidaV)))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(131, 131, 131))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(98, 98, 98)
+                .addGap(94, 94, 94)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
+                .addGap(114, 114, 114)
                 .addComponent(jButton1)
                 .addGap(398, 398, 398))
             .addGroup(layout.createSequentialGroup()
@@ -340,7 +349,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblFichasPerdidaV)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGap(65, 65, 65)
                         .addComponent(panelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -987,7 +996,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                         data=data+"||"+"             "+"||   ";
                     }
                 }
-                data=(cont+1)+"  "+data+"\n";
+                data=data+"\n";
             }
             gH.write(data);
             
@@ -997,7 +1006,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             File f=new File("Players/"+PLAYER_VILLANO);
             f.mkdirs();
         try(FileWriter gV=new FileWriter("Players/"+PLAYER_VILLANO+"/posicionespiezas.txt")){
-            String data="";
+            String data="1          2          3          4          5          6          7          8          9          10";
             for(int cont=0;cont<celda.length;cont++){
                 for (int cont2=0;cont2<celda[cont].length;cont2++){
                    if(celda[cont][cont2].ficha instanceof FichasVillanos){
