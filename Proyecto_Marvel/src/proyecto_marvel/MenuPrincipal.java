@@ -19,6 +19,10 @@ import javax.swing.JOptionPane;
  * @author David  Miguel
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+    
+    
+    
+    static boolean CONECTED_TWITTER;
 
     /**
      * Creates new form MenuPrincipal
@@ -142,6 +146,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         if (n==JOptionPane.YES_OPTION){
             Player.setLoggedPlayer(null);
+            MenuPrincipal.CONECTED_TWITTER=false;
             dispose();
             new MenuIncial().setVisible(true);
         }else{
