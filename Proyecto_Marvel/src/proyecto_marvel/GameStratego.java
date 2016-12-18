@@ -1226,19 +1226,22 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             Partidas.eliminarPartidaActual(partidacargada[0].dir);
         }
         try{
-        String us;
+        String us,msj;
         if (turno==1){
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-            JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Vencedor usando "+ fichaContraria+
-            "S ha capturado la Tierra! Venciendo a "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime());
+            msj = lblPlayerTwo.getText().toUpperCase()+" Vencedor usando "+ fichaContraria+
+            "S ha capturado la Tierra! Venciendo a "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime();
+            JOptionPane.showMessageDialog(null,msj);
+            MenuPrincipal.setMessage(msj);
             us = lblPlayerOne.getText();   
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
             Player.existe(PLAYER_VILLANO).addPuntos();
         }else{
             turno=2;
-            
-            JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Vencedor usando "+fichaContraria+
-                    " ha salvado la Tierra! Venciendo a "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
+            msj = lblPlayerOne.getText().toUpperCase()+" Vencedor usando "+fichaContraria+
+                    " ha salvado la Tierra! Venciendo a "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime();
+            JOptionPane.showMessageDialog(null,msj);
+            MenuPrincipal.setMessage(msj);
             us = lblPlayerTwo.getText();
             Player.existe(PLAYER_HEROE).addPuntos();
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);

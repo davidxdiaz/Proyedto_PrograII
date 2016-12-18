@@ -124,7 +124,8 @@ public class EliminarCuenta extends javax.swing.JFrame {
                         Player.elimiarCuenta(Player.getLoggedPlayer().getUsername(), jPassConfirm.getText());
                         this.dispose();
                        
-                        new MenuIncial().setVisible(true);
+                
+                        
                         
                         /* 
                         Por alguna razón cuando sucede esto, sólo vuelve al menú principal y las demás quedan abiertas.
