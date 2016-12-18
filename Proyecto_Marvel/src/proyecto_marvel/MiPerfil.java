@@ -76,6 +76,11 @@ public class MiPerfil extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jButton1.setText("LOG DE MIS ULTIMOS JUEGOS");
@@ -177,8 +182,13 @@ public class MiPerfil extends javax.swing.JFrame {
                 jLabel4MouseExited(evt);
             }
         });
+        jLabel4.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jLabel4ComponentHidden(evt);
+            }
+        });
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 920, 650);
+        jLabel4.setBounds(0, 0, 910, 650);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -200,10 +210,20 @@ public class MiPerfil extends javax.swing.JFrame {
        new ConectarTwitter().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jLabel4ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel4ComponentHidden
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jLabel4ComponentHidden
+
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
-    
+
     }//GEN-LAST:event_jLabel4MouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        new MenuPrincipal().setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
