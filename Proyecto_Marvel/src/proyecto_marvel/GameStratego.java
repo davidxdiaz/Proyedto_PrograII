@@ -1232,7 +1232,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, false, PLAYER_HEROE);
             }
             eliminarReportes(PLAYER_HEROE,PLAYER_VILLANO);
-            //new MenuPrincipal().setVisible(true);
+            
             this.dispose();
          }
         
