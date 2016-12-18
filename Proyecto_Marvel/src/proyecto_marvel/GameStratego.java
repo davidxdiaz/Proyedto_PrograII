@@ -205,6 +205,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 680));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         panelTablero.setName("panelTablero"); // NOI18N
         panelTablero.setPreferredSize(new java.awt.Dimension(530, 720));
@@ -221,11 +229,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         );
 
         lblPlayerOne.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblPlayerOne.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerOne.setText("Player 1");
 
         lblPlayerTwo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblPlayerTwo.setForeground(java.awt.SystemColor.textHighlight);
         lblPlayerTwo.setText("Player 2");
 
         lblTurno.setFont(new java.awt.Font("Tahoma", 3, 16)); // NOI18N
@@ -399,6 +405,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         
        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

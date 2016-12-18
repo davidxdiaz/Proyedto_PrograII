@@ -63,6 +63,11 @@ public class EliminarPartida extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -94,26 +99,37 @@ public class EliminarPartida extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 840, 490);
+        jLabel1.setBounds(0, 30, 830, 460);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         try{
         int index=jlistEliminar.getSelectedIndex();
         String dir=jlistEliminar.getModel().getElementAt(index);
         String path=getpathPartidaEliminar(dir);
         System.out.println(path);
-        
-        Partidas.eliminarPartida(path);  
+        int op;
+        op=JOptionPane.showConfirmDialog(null, "Estas seguro que deseas elminar la Partida?","Partida",JOptionPane.OK_CANCEL_OPTION);
+        if(op==0){
+            Partidas.eliminarPartida(path); 
+        }else{
+            
+        }
+         
         }catch(IndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(null,"Porfavor seleccione un elemento a eliminar");
         }
         
         mostrarPartidas();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+        
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
