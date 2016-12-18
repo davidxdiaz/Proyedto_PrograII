@@ -99,7 +99,7 @@ public class EliminarPartida extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 30, 830, 460);
+        jLabel1.setBounds(0, 0, 840, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

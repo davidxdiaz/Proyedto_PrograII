@@ -5,8 +5,8 @@
  */
 package proyecto_marvel;
 
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
+
+
 
 
 
@@ -23,14 +23,14 @@ public class StrategoTwitter extends javax.swing.JFrame {
      */
     public StrategoTwitter() {
         initComponents();
-        try {
+        /*try {
            
             mi_twitter = new Twitter(txtUser, txtPass) ;    
             mi_twitter.verifyCredentials();
             } catch (TwitterException ex) {             
               System.out.println("Error: "+ex.getMessage());   
             } 
-        
+     */   
     }
 
     /**

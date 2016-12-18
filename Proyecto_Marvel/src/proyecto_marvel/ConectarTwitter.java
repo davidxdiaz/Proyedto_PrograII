@@ -5,6 +5,11 @@
  */
 package proyecto_marvel;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Miguel Paz
@@ -16,7 +21,19 @@ public class ConectarTwitter extends javax.swing.JFrame {
      */
     public ConectarTwitter() {
         initComponents();
+        ImageIcon imagen= new ImageIcon("src\\Imagenes\\Para Frames\\Triste.png");
+        //OBTENER TAMAÑO DEL FRAME
+        Toolkit tk= Toolkit.getDefaultToolkit();
+        Dimension tamaño= tk.getScreenSize();
+        //Se le asigna el tamaño del frame al label
+        jLabel2.setSize(tamaño);
+     
+        ImageIcon icono= new ImageIcon(imagen.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(),Image.SCALE_DEFAULT));
+        jLabel2.setIcon(icono);
+        
         this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setLocation(0,0);
     }
 
     /**
@@ -29,29 +46,22 @@ public class ConectarTwitter extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("¡PRÓXIMAMENTE DISPONIBLE!");
+        jLabel1.setText("DISPONIBLE EN VERSIONES FUTURAS");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(360, 290, 636, 121);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
-        );
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 900, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -93,5 +103,6 @@ public class ConectarTwitter extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
