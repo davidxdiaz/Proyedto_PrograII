@@ -122,6 +122,7 @@ public class EliminarCuenta extends javax.swing.JFrame {
                     int op=JOptionPane.showConfirmDialog(null,"¿Estas seguro que deseas eliminar tu cuenta?","Eliminar Cuenta",JOptionPane.YES_NO_OPTION);
                     if (op==0){
                         Player.elimiarCuenta(Player.getLoggedPlayer().getUsername(), jPassConfirm.getText());
+                        MenuPrincipal.cerrarMenuPrincipal();
                         this.dispose();
                        
                 

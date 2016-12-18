@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 public class MenuPrincipal extends javax.swing.JFrame {
     
     
+
    
     static boolean CONECTED_TWITTER;
     static String twitter;
@@ -29,6 +30,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public static void setMessage(String message){
         twitter = message;
     }
+
+    
+    static boolean DISABLE_USER=false;
+
 
     /**
      * Creates new form MenuPrincipal
@@ -226,4 +231,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
+ 
+    public static void cerrarMenuPrincipal(){
+        new MenuPrincipal().dispose();
+    }
 }
+

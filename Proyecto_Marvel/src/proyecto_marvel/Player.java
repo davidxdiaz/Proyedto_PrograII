@@ -390,7 +390,7 @@ public class Player implements Serializable{
         }
     }
     
-    public static int playersHistoricos(){
+    public static final int playersHistoricos(){
         int conH=0;
         try {
            FileInputStream fi = new FileInputStream("player.pl");

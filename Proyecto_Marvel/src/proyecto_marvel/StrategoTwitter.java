@@ -5,6 +5,8 @@
  */
 package proyecto_marvel;
 
+
+
 /**
  *
  * @author ANDY ESCOBAR 007
@@ -16,6 +18,7 @@ public class StrategoTwitter extends javax.swing.JFrame {
      */
     public StrategoTwitter() {
         initComponents();
+        
     }
 
     /**
