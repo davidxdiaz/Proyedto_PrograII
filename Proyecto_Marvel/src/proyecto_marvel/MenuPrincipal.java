@@ -159,7 +159,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             Player.setLoggedPlayer(null);
             MenuPrincipal.CONECTED_TWITTER=false;
             dispose();
-            new MenuIncial().setVisible(true);
+            
         }else{
            
         }
