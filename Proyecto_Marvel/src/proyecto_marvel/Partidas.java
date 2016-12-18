@@ -12,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.RandomAccessFile;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -158,7 +157,7 @@ public class Partidas implements Serializable{
         return cont;
     }
 
-    public void aumenCont() {
+    public final void aumenCont() {
         this.cont ++;
     }
 

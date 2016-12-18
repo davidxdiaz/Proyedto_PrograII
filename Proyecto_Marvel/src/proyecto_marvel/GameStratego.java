@@ -105,12 +105,13 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             try {
                partidacargada=Partidas.cargarPartida(CargarPartida.path);
                fichas=partidacargada[0].getPiezas();
+               turno=partidacargada[0].turn;
                if(partidacargada[0].turn==0){
                    PLAYER_HEROE=partidacargada[0].playerOne;
                    lblPlayerOne.setText(PLAYER_HEROE.toUpperCase());
                    PLAYER_VILLANO=partidacargada[0].PlayerTwo;
                    lblPlayerTwo.setText(PLAYER_VILLANO.toUpperCase());
-               }else{
+               }else if(partidacargada[0].turn==1){
                    PLAYER_HEROE=partidacargada[0].PlayerTwo;
                    lblPlayerOne.setText(PLAYER_HEROE.toUpperCase());
                    PLAYER_VILLANO=partidacargada[0].playerOne;
@@ -988,7 +989,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         return fichas;
     }
 
-    private final void generarAchivosdeTexto() {
+    private void generarAchivosdeTexto() {
         File t=new File("Players/"+PLAYER_HEROE);
         t.mkdirs();
         try(FileWriter gH=new FileWriter("Players/"+PLAYER_HEROE+"/posicionespiezas.txt")){
@@ -1245,7 +1246,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         String us;
         if (turno==1){
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-            JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Vencedor usando "+ fichaContraria+
+            JOptionPane.showMessageDialog(null,PLAYER_VILLANO.toUpperCase()+" Vencedor usando "+ fichaContraria+
             "S ha capturado la Tierra! Venciendo a "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime());
             us = lblPlayerOne.getText();
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
@@ -1256,14 +1257,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }else{
             turno=2;
             
-            JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Vencedor usando "+miTipoFicha+
+            JOptionPane.showMessageDialog(null,PLAYER_HEROE.toUpperCase()+" Vencedor usando "+fichaContraria+
                     " ha salvado la Tierra! Venciendo a "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
             us = lblPlayerTwo.getText();
             Player.existe(PLAYER_HEROE).addPuntos();
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-            Player.existe(PLAYER_HEROE).ultimasPartidas(miTipoFicha, true,PLAYER_VILLANO);
+            Player.existe(PLAYER_HEROE).ultimasPartidas(fichaContraria, true,PLAYER_VILLANO);
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichaContraria, false, PLAYER_HEROE);
+            Player.existe(PLAYER_VILLANO).ultimasPartidas(miTipoFicha, false, PLAYER_HEROE);
         }
         }catch(IOException e){
             System.out.println("Error "+e.getMessage());
@@ -1293,16 +1294,21 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 sC.setIcon(pC.getIcon());
                 pC.setIcon(null);
                 pC.ficha=null;
+            }else{
+                pC.setText(null);
+                pC.setIcon(null);
+                pC.ficha=null;
+                
             }
         }else if(sC.ficha.rango==0){
             if(pC.ficha.rango!=3){
                 pC.ficha=null;
-            pC.setText(null);
-            pC.setIcon(null);
+                pC.setText(null);
+                pC.setIcon(null);
             
-            sC.ficha=null;
-            sC.setText(null);
-            sC.setIcon(null);      
+                sC.ficha=null;
+                sC.setText(null);
+                sC.setIcon(null);      
             }else{
                 sC.ficha=pC.ficha;
                 sC.setText(pC.getText());
@@ -1312,6 +1318,10 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 pC.setIcon(null);
                 pC.ficha=null;
             }
+        }else if(pC.ficha.rango==10&&sC.ficha.rango==1){
+            pC.setText(null);
+            pC.setIcon(null);
+            pC.ficha=null;
         }else if(pC.ficha.rango>sC.ficha.rango){
             sC.ficha=pC.ficha;
                 sC.setText(pC.getText());
