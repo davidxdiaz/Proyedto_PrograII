@@ -1217,18 +1217,19 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
                 Player.existe(PLAYER_VILLANO).addPuntos();
-                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, true, PLAYER_HEROE);
-                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, false, PLAYER_VILLANO);
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, true, PLAYER_HEROE);
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, false, PLAYER_VILLANO);
             }
             else{
                 turno=2;
-                JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+"con "+fichaContraria);
-                Player.existe(PLAYER_HEROE).addPuntos();
-                TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-                Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
-                
+                 TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-                Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+     
+                JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Perdedor usando "+fich+
+                    " ha perdido por no tener movimientos validos disponibles ante "+lblPlayerOne.getText().toUpperCase()+"\n"+fecha.getTime());
+                Player.existe(PLAYER_HEROE).addPuntos();
+                Player.existe(PLAYER_HEROE).ultimasPartidas(fichacontra, true,PLAYER_VILLANO);
+                Player.existe(PLAYER_VILLANO).ultimasPartidas(fich, false, PLAYER_HEROE);
             }
             eliminarReportes(PLAYER_HEROE,PLAYER_VILLANO);
             //new MenuPrincipal().setVisible(true);
