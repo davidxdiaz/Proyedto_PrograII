@@ -116,7 +116,7 @@ public class EliminarPartida extends javax.swing.JFrame {
         if(op==0){
             Partidas.eliminarPartida(path); 
         }else{
-            
+            dispose();
         }
          
         }catch(IndexOutOfBoundsException e){
