@@ -172,6 +172,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
     public void confirmarsalida(){
         int valor=JOptionPane.showConfirmDialog(this, "¿Está seguro de cerrar el juego?", "Se perderán los cambios no guardados", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (valor==JOptionPane.YES_OPTION){
+            eliminarReportes(PLAYER_HEROE, PLAYER_VILLANO);
             this.dispose();
         }
     }
@@ -371,6 +372,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             obtenerGanadorRendirse();
             this.dispose();
         }
+        
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -391,6 +393,9 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }catch(IOException e){
             System.out.println("No se");
         }
+        
+        eliminarReportes(PLAYER_HEROE, PLAYER_VILLANO);
+        
        
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -987,13 +992,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         File t=new File("Players/"+PLAYER_HEROE);
         t.mkdirs();
         try(FileWriter gH=new FileWriter("Players/"+PLAYER_HEROE+"/posicionespiezas.txt")){
-            String data="1          2          3          4          5          6          7          8          9          10";
+            String data="";//1                                    2                                    3                                    4                                    5"
+                    //+ "                                    6                                    7                                    8                                    9                                    10";
             for(int cont=0;cont<celda.length;cont++){
                 for (int cont2=0;cont2<celda[cont].length;cont2++){
                     if(celda[cont][cont2].ficha instanceof FichasHeroes){
-                        data=data+"||"+celda[cont][cont2].ficha.rango+"-"+celda[cont][cont2].ficha.nombreficha+"||  ";
+                        data=data+"||pos:"+(celda[cont][cont2].x+1)+","+(celda[cont][cont2].y+1)+"  -Rango: "+celda[cont][cont2].ficha.rango+"-Nombre: "+celda[cont][cont2].ficha.nombreficha+"||  ";
                     }else{
-                        data=data+"||"+"             "+"||   ";
+                        data=data+"||"+"                                    "+"||   ";
                     }
                 }
                 data=data+"\n";
@@ -1006,13 +1012,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             File f=new File("Players/"+PLAYER_VILLANO);
             f.mkdirs();
         try(FileWriter gV=new FileWriter("Players/"+PLAYER_VILLANO+"/posicionespiezas.txt")){
-            String data="1          2          3          4          5          6          7          8          9          10";
+            String data="";//1                                    2                                    3                                    4                                    5                                    6"
+                   // + "                                    7                                    8                                    9                                    10";
             for(int cont=0;cont<celda.length;cont++){
                 for (int cont2=0;cont2<celda[cont].length;cont2++){
                    if(celda[cont][cont2].ficha instanceof FichasVillanos){
-                        data=data+"||"+celda[cont][cont2].ficha.rango+"-"+celda[cont][cont2].ficha.nombreficha+"||  ";
+                        data=data+"||pos:"+(celda[cont][cont2].x+1)+","+(celda[cont][cont2].y+1)+"  -Rango: "+celda[cont][cont2].ficha.rango+"-Nombre: "+celda[cont][cont2].ficha.nombreficha+"||  ";
                     }else{
-                        data=data+"||"+"             "+"||  ";
+                        data=data+"||"+"                                    "+"||  ";
                     }
                 }
                 data=data+"\n";
@@ -1024,6 +1031,13 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         }
         
         
+    }
+
+    private void eliminarReportes(String h, String v) {
+       File r =new File("Players/"+h+"/posicionespiezas.txt");
+       File rt =new File("Players/"+v+"/posicionespiezas.txt");
+       r.delete();
+       rt.delete();
     }
 
    
@@ -1187,6 +1201,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 Logger.getLogger(GameStratego.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        eliminarReportes(PLAYER_HEROE,PLAYER_VILLANO);
     }
     
     public void obtenerGanadorFichasSinMovimientos() throws IOException, ClassNotFoundException{
@@ -1214,6 +1229,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
                 Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
             }
+            eliminarReportes(PLAYER_HEROE,PLAYER_VILLANO);
             new MenuPrincipal().setVisible(true);
             this.dispose();
          }
@@ -1231,9 +1247,12 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
             JOptionPane.showMessageDialog(null,lblPlayerTwo.getText().toUpperCase()+" Vencedor usando "+ fichaContraria+
             "S ha capturado la Tierra! Venciendo a "+lblPlayerOne.getText().toUpperCase()+ "\n"+fecha.getTime());
-            us = lblPlayerOne.getText();   
+            us = lblPlayerOne.getText();
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
             Player.existe(PLAYER_VILLANO).addPuntos();
+            Player.existe(PLAYER_VILLANO).ultimasPartidas(miTipoFicha, true,PLAYER_HEROE);
+            Player.existe(PLAYER_HEROE).ultimasPartidas(fichaContraria, false,PLAYER_VILLANO);
+            
         }else{
             turno=2;
             
@@ -1242,13 +1261,14 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             us = lblPlayerTwo.getText();
             Player.existe(PLAYER_HEROE).addPuntos();
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
- //           Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
+            Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-  //          Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
         }
         }catch(IOException e){
             System.out.println("Error "+e.getMessage());
         }
+        eliminarReportes(PLAYER_HEROE,PLAYER_VILLANO);
         new MenuPrincipal().setVisible(true);
         this.dispose();
     }
