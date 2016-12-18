@@ -988,7 +988,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
         return fichas;
     }
 
-    private void generarAchivosdeTexto() {
+    private final void generarAchivosdeTexto() {
         File t=new File("Players/"+PLAYER_HEROE);
         t.mkdirs();
         try(FileWriter gH=new FileWriter("Players/"+PLAYER_HEROE+"/posicionespiezas.txt")){
@@ -1230,7 +1230,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
                 Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
             }
             eliminarReportes(PLAYER_HEROE,PLAYER_VILLANO);
-            new MenuPrincipal().setVisible(true);
+            //new MenuPrincipal().setVisible(true);
             this.dispose();
          }
         
@@ -1269,7 +1269,7 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             System.out.println("Error "+e.getMessage());
         }
         eliminarReportes(PLAYER_HEROE,PLAYER_VILLANO);
-        new MenuPrincipal().setVisible(true);
+       // new MenuPrincipal().setVisible(true);
         this.dispose();
     }
     
