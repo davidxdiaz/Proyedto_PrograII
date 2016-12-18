@@ -22,7 +22,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     
     
-    static boolean CONECTED_TWITTER;
+    static boolean CONECTED_TWITTER,DISABLE_USER=false;
 
     /**
      * Creates new form MenuPrincipal
@@ -218,4 +218,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
+ 
+    public static void cerrarMenuPrincipal(){
+        new MenuPrincipal().dispose();
+    }
 }
+
