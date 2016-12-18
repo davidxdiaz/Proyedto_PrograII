@@ -5,6 +5,9 @@
  */
 package proyecto_marvel;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+
 
 
 /**
@@ -12,7 +15,7 @@ package proyecto_marvel;
  * @author ANDY ESCOBAR 007
  */
 public class StrategoTwitter extends javax.swing.JFrame {
-
+   // private Twitter mi_twier;
     /**
      * Creates new form StrategoTwitter
      */
@@ -50,6 +53,11 @@ public class StrategoTwitter extends javax.swing.JFrame {
         txtPass.setText("   ");
 
         jButton1.setText("Iniciar Sesion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +113,18 @@ public class StrategoTwitter extends javax.swing.JFrame {
         new MenuPrincipal().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            // TODO add your handling code here:
+            try {
+           
+            Twitter mi_twitter = new Twitter(txtUser, txtPass) ;    
+            mi_twitter.verifyCredentials();
+            } catch (TwitterException ex) {             
+              System.out.println("Error: "+ex.getMessage());   
+            } 
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

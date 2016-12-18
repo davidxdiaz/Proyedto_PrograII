@@ -21,8 +21,19 @@ import javax.swing.JOptionPane;
 public class MenuPrincipal extends javax.swing.JFrame {
     
     
+
+   
+    static boolean CONECTED_TWITTER;
+    static String twitter;
     
-    static boolean CONECTED_TWITTER,DISABLE_USER=false;
+    //Funcion que cambia el mensaje que se publicara en twitter
+    public static void setMessage(String message){
+        twitter = message;
+    }
+
+    
+    static boolean DISABLE_USER=false;
+
 
     /**
      * Creates new form MenuPrincipal
@@ -161,11 +172,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         try {
+            dispose();
             new MiPerfil().setVisible(true);
+           
         } catch (IOException ex) {
             ex.printStackTrace();
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+       } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

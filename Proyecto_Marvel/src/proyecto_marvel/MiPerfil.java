@@ -76,6 +76,11 @@ public class MiPerfil extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jButton1.setText("LOG DE MIS ULTIMOS JUEGOS");
@@ -172,13 +177,24 @@ public class MiPerfil extends javax.swing.JFrame {
         jLabel5.setBounds(10, 370, 140, 22);
 
         jLabel4.setText("jLabel3");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
+        });
+        jLabel4.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jLabel4ComponentHidden(evt);
+            }
+        });
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 920, 650);
+        jLabel4.setBounds(0, 0, 910, 650);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dispose();
         new EliminarCuenta().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -193,6 +209,21 @@ public class MiPerfil extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        new ConectarTwitter().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jLabel4ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel4ComponentHidden
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jLabel4ComponentHidden
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jLabel4MouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        new MenuPrincipal().setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
