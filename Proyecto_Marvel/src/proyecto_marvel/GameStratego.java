@@ -1250,20 +1250,20 @@ public final class GameStratego extends javax.swing.JFrame implements ActionList
             us = lblPlayerOne.getText();
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
             Player.existe(PLAYER_VILLANO).addPuntos();
-            Player.existe(PLAYER_VILLANO).ultimasPartidas(miTipoFicha, true,PLAYER_HEROE);
-            Player.existe(PLAYER_HEROE).ultimasPartidas(fichaContraria, false,PLAYER_VILLANO);
+            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichaContraria, true,PLAYER_HEROE);
+            Player.existe(PLAYER_HEROE).ultimasPartidas(miTipoFicha, false,PLAYER_VILLANO);
             
         }else{
             turno=2;
             
-            JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Vencedor usando "+fichaContraria+
+            JOptionPane.showMessageDialog(null,lblPlayerOne.getText().toUpperCase()+" Vencedor usando "+miTipoFicha+
                     " ha salvado la Tierra! Venciendo a "+lblPlayerTwo.getText().toUpperCase()+"\n"+fecha.getTime());
             us = lblPlayerTwo.getText();
             Player.existe(PLAYER_HEROE).addPuntos();
             TipoFicha fich=(turno==1?TipoFicha.HEROE:TipoFicha.VILLANO);
-            Player.existe(PLAYER_HEROE).ultimasPartidas(fich, true,PLAYER_VILLANO);
+            Player.existe(PLAYER_HEROE).ultimasPartidas(miTipoFicha, true,PLAYER_VILLANO);
             TipoFicha fichacontra=(turno==1?TipoFicha.VILLANO:TipoFicha.HEROE);
-            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichacontra, false, PLAYER_HEROE);
+            Player.existe(PLAYER_VILLANO).ultimasPartidas(fichaContraria, false, PLAYER_HEROE);
         }
         }catch(IOException e){
             System.out.println("Error "+e.getMessage());
