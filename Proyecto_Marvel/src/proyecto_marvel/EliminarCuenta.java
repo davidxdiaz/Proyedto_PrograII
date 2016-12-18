@@ -64,6 +64,11 @@ public class EliminarCuenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
@@ -108,7 +113,7 @@ public class EliminarCuenta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 2, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, -10, 1350, 490);
+        jLabel1.setBounds(10, 10, 1340, 470);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -149,6 +154,17 @@ public class EliminarCuenta extends javax.swing.JFrame {
             }
        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        try{
+            new MiPerfil().setVisible(true);
+        }catch(IOException e){
+            e.getMessage();
+        }catch(ClassNotFoundException e){
+            e.getMessage();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

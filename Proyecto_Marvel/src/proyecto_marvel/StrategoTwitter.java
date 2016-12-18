@@ -5,6 +5,9 @@
  */
 package proyecto_marvel;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+
 
 
 /**
@@ -113,14 +116,14 @@ public class StrategoTwitter extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             // TODO add your handling code here:
-            /*try {
+            try {
            
-            Twitter mi_twitter = new Twitter(txtUser, txtPass);    
-            mi_twitter.verifyCredentials(); 
+            Twitter mi_twitter = new Twitter(txtUser, txtPass) ;    
+            mi_twitter.verifyCredentials();
             } catch (TwitterException ex) {             
               System.out.println("Error: "+ex.getMessage());   
             } 
-        */
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
